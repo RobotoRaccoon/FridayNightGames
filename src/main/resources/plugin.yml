@@ -1,0 +1,25 @@
+name: FridayNightGames
+version: ${project.version}-b${build.number}
+description: Chat moderation for Minecraft Australia
+
+author: RobotoRaccoon
+main: org.mcau.robotoraccoon.fridaynightgames.mMain
+website: http://mcau.org
+
+permissions:
+  fng.player:
+    default: true
+    description: Ability to use basic commands.
+  fng.host:
+    default: op
+    description: Ability to use the game commands.
+  fng.operator:
+    default: op
+    description: Ability to use all commands.
+
+commands:
+   fng:
+      description: Allows you to view reload the config.
+      aliases: fridaynightgames
+      usage: |
+        /<command> help : Shows the help section.

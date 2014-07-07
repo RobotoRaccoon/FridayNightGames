@@ -1,0 +1,19 @@
+types:
+  unknown: mg
+  bh: bh
+  ctf: mg
+  ffa: mg
+  infect: mg
+  lms: mg
+  lts: mg
+  tdm: mg
+commands:
+  unknown:
+    join: mg join
+    quit: mg quit
+  mg:
+    join: mg join
+    quit: mg quit
+  bh:
+    join: bh join
+    quit: bh leave
