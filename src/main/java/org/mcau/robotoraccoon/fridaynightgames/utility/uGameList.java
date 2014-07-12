@@ -1,11 +1,8 @@
 package org.mcau.robotoraccoon.fridaynightgames.utility;
 
-import com.pauldavdesign.mineauz.minigames.minigame.Minigame;
-import org.bukkit.Bukkit;
 import org.mcau.robotoraccoon.fridaynightgames.mConfig;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class uGameList {

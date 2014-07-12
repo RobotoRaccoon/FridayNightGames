@@ -29,17 +29,15 @@ public class cEnabled {
 
             mMain.fngEnabled = true;
             uPlayerList.clearList();
-            uBroadcast.global(mCommands.getPrefix() + "Has been " + ChatColor.GREEN +
-                    "Enabled" + ChatColor.YELLOW + " by " + ChatColor.DARK_PURPLE + sender.getName());
-            uBroadcast.global(mCommands.getPrefix() + "Use `/FNG Join` to play in the games!");
+            uBroadcast.global(mCommands.getPrefix() + "Has been &aEnabled &eby &5" + sender.getName());
+            uBroadcast.global(mCommands.getPrefix() + "Use &5/FNG Join&e to play in the games!");
 
         }
         else {
 
             mMain.fngEnabled = false;
             uPlayerList.clearList();
-            uBroadcast.global(mCommands.getPrefix() + "Has been " + ChatColor.RED +
-                    "Disabled" + ChatColor.YELLOW + " by " + ChatColor.DARK_PURPLE + sender.getName());
+            uBroadcast.global(mCommands.getPrefix() + "Has been &cDisabled &eby &5" + sender.getName());
 
         }
     }

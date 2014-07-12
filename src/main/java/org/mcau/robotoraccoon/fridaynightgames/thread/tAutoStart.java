@@ -17,15 +17,20 @@ public class tAutoStart extends Thread {
 
     public void run() {
 
-        uBroadcast.global(mCommands.getPrefix() + ChatColor.LIGHT_PURPLE + "The next Minigame will begin in: 60 seconds");
-        uBroadcast.joined(mCommands.getPrefix() + ChatColor.LIGHT_PURPLE + "Make sure you use `/FNG List` and `/FNG Vote <Map>`");
-        uBroadcast.notJoined(mCommands.getPrefix() + ChatColor.LIGHT_PURPLE + "Make sure you use `/FNG Join` to join the fun!");
+        uBroadcast.global(mCommands.getPrefix() + "&dThe next Minigame will begin in: &560 seconds");
+        uBroadcast.joined(mCommands.getPrefix() + "&dMake sure you use &5/FNG List&d and &5/FNG Vote <Map>");
+        uBroadcast.notJoined(mCommands.getPrefix() + "&dMake sure you use &5/FNG Join&d to join the fun!");
 
         try {
             Thread.sleep(60000);
         }
         catch (Exception e) {
             uBroadcast.host(mCommands.getPrefix() + "An error occurred when trying to AutoStart FNG - please start the game manually.");
+        }
+
+        // Cancel if FNG is no longer enabled.
+        if( !mMain.fngEnabled ) {
+            return;
         }
 
         List<String> mostVoted = uVoting.getMostVoted();

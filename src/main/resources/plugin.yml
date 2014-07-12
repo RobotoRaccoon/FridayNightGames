@@ -6,6 +6,9 @@ author: RobotoRaccoon
 main: org.mcau.robotoraccoon.fridaynightgames.mMain
 website: http://mcau.org
 
+depend: [Minigames]
+softdepend: [Vault]
+
 permissions:
   fng.player:
     default: true

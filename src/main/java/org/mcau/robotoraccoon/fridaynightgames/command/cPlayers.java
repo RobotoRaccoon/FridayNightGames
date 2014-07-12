@@ -6,11 +6,6 @@ import org.mcau.robotoraccoon.fridaynightgames.mCommands;
 import org.mcau.robotoraccoon.fridaynightgames.mMain;
 import org.mcau.robotoraccoon.fridaynightgames.utility.uPlayerList;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.UUID;
-
 public class cPlayers {
 
     public static void players(CommandSender sender, String[] args) {
@@ -50,7 +45,7 @@ public class cPlayers {
                     String listMessage = String.format("%SCurrent players: %s%s",
                             mCommands.getPrefix(),
                             ChatColor.RED,
-                            uPlayerList.getValues()
+                            uPlayerList.getPlayerNames()
                     );
                     sender.sendMessage(listMessage);
                     break;
@@ -65,7 +60,7 @@ public class cPlayers {
                     String randomMessage = String.format("%SRandom player: %s%s",
                             mCommands.getPrefix(),
                             ChatColor.RED,
-                            uPlayerList.getRandomValue()
+                            uPlayerList.getRandomPlayer().getName()
                     );
                     sender.sendMessage(randomMessage);
                     break;

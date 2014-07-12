@@ -24,7 +24,7 @@ public class cJoin {
         if( mMain.playerList.containsKey( player.getUniqueId() ) ) {
             player.sendMessage(mCommands.getError() + "You have already joined the games.");
         } else {
-            mMain.playerList.put( player.getUniqueId(), player.getName() );
+            mMain.playerList.put( player.getUniqueId(), player );
             player.sendMessage(mCommands.getPrefix() + "You have joined the games! You'll join with the next available lobby!");
         }
 

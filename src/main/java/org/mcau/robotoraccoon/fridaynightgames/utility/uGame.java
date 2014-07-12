@@ -33,6 +33,6 @@ public class uGame {
             uRunAs.asPlayer(command, pUUID);
         }
 
-        uBroadcast.global(mCommands.getPrefix() + "Ending Game: " + ChatColor.RED + gameName);
+        uBroadcast.global(mCommands.getPrefix() + "Ending Game: " + ChatColor.RED + gameName.toUpperCase());
     }
 }
