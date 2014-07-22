@@ -64,7 +64,7 @@ public class cGame {
                     else {
                         mConfig.getGamesConfig().set("games." + args[2].toLowerCase(), null);
                         mConfig.saveConfigs();
-                        sender.sendMessage( mCommands.getPrefix() + "");
+                        sender.sendMessage( mCommands.getPrefix() + "Game successfully removed.");
                     }
                     break;
 

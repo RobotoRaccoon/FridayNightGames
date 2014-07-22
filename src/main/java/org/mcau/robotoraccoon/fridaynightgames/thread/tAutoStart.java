@@ -1,6 +1,5 @@
 package org.mcau.robotoraccoon.fridaynightgames.thread;
 
-
 import org.bukkit.ChatColor;
 import org.mcau.robotoraccoon.fridaynightgames.mCommands;
 import org.mcau.robotoraccoon.fridaynightgames.mMain;
@@ -17,12 +16,16 @@ public class tAutoStart extends Thread {
 
     public void run() {
 
-        uBroadcast.global(mCommands.getPrefix() + "&dThe next Minigame will begin in: &560 seconds");
-        uBroadcast.joined(mCommands.getPrefix() + "&dMake sure you use &5/FNG List&d and &5/FNG Vote <Map>");
-        uBroadcast.notJoined(mCommands.getPrefix() + "&dMake sure you use &5/FNG Join&d to join the fun!");
-
         try {
+
+            Thread.sleep(1000);
+
+            uBroadcast.global(mCommands.getPrefix() + "&dThe next Minigame will begin in: &560 seconds");
+            uBroadcast.joined(mCommands.getPrefix() + "&dMake sure you use &5/FNG List&d and &5/FNG Vote <Map>");
+            uBroadcast.notJoined(mCommands.getPrefix() + "&dMake sure you use &5/FNG Join&d to join the fun!");
+
             Thread.sleep(60000);
+
         }
         catch (Exception e) {
             uBroadcast.host(mCommands.getPrefix() + "An error occurred when trying to AutoStart FNG - please start the game manually.");

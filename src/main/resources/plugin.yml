@@ -7,7 +7,7 @@ main: org.mcau.robotoraccoon.fridaynightgames.mMain
 website: http://mcau.org
 
 depend: [Minigames]
-softdepend: [Vault]
+softdepend: [BlockHunt, Vault]
 
 permissions:
   fng.player:

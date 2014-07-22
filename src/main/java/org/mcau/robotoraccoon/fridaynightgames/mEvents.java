@@ -1,6 +1,7 @@
 package org.mcau.robotoraccoon.fridaynightgames;
 
-import com.pauldavdesign.mineauz.minigames.events.EndMinigameEvent;
+import au.com.mineauz.minigames.events.EndMinigameEvent;
+import nl.Steffion.BlockHunt.Events.eArenaEnd;
 
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
@@ -13,31 +14,45 @@ import org.mcau.robotoraccoon.fridaynightgames.utility.uMoney;
 public class mEvents implements Listener {
 
     @EventHandler
-    public void onMinigameEnd( final EndMinigameEvent event ) {
+    public void onMinigameEnd(final EndMinigameEvent event) {
 
         try {
-            if( event.getMinigame().getName(false).equalsIgnoreCase(mMain.fngPlayedGames.get(0)) && mMain.fngEnabled ) {
+            if (event.getMinigame().getName(false).equalsIgnoreCase(mMain.fngPlayedGames.get(0)) && mMain.fngEnabled) {
 
                 new tAutoStart().start();
                 uMoney.awardPrizeMoney();
             }
-        } catch (Exception e) {}
-    }
-
-    @EventHandler
-    public void onPlayerJoin( final PlayerJoinEvent event ) {
-
-        if( mMain.fngEnabled ) {
-            event.getPlayer().sendMessage( mCommands.getPrefix() + "FNG is running! Use " + ChatColor.DARK_PURPLE +
-                                           "/FNG Join" + ChatColor.YELLOW + " to be in the next game." );
+        } catch (Exception e) {
         }
     }
 
     @EventHandler
-    public void onPlayerQuit( final PlayerQuitEvent event ) {
+    public void onBlockHuntArenaEnd(final eArenaEnd event) {
 
-        if( mMain.fngEnabled && mMain.playerList.containsKey( event.getPlayer().getUniqueId() ) ) {
-            mMain.playerList.remove( event.getPlayer().getUniqueId() );
+        try {
+            if (event.getArenaName().equalsIgnoreCase(mMain.fngPlayedGames.get(0)) && mMain.fngEnabled) {
+
+                new tAutoStart().start();
+                uMoney.awardPrizeMoney();
+            }
+        } catch (Exception e) {
+        }
+    }
+
+    @EventHandler
+    public void onPlayerJoin(final PlayerJoinEvent event) {
+
+        if (mMain.fngEnabled) {
+            event.getPlayer().sendMessage(mCommands.getPrefix() + "FNG is running! Use " + ChatColor.DARK_PURPLE +
+                    "/FNG Join" + ChatColor.YELLOW + " to be in the next game.");
+        }
+    }
+
+    @EventHandler
+    public void onPlayerQuit(final PlayerQuitEvent event) {
+
+        if (mMain.fngEnabled && mMain.playerList.containsKey(event.getPlayer().getUniqueId())) {
+            mMain.playerList.remove(event.getPlayer().getUniqueId());
         }
     }
 
