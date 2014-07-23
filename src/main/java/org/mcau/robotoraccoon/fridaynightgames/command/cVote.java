@@ -1,11 +1,13 @@
 package org.mcau.robotoraccoon.fridaynightgames.command;
 
+import org.apache.commons.lang.StringUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.mcau.robotoraccoon.fridaynightgames.mCommands;
 import org.mcau.robotoraccoon.fridaynightgames.mMain;
 import org.mcau.robotoraccoon.fridaynightgames.utility.uGameList;
+import org.mcau.robotoraccoon.fridaynightgames.utility.uVoting;
 
 public class cVote {
 
@@ -22,22 +24,25 @@ public class cVote {
         }
 
         if( args.length < 2 ) {
-            sender.sendMessage( mCommands.getError() + "You need to specify a map. Look at maps using /FNG List" );
+            uVoting.printList(sender);
+            return;
         }
-        else {
 
-            String gameKey = args[1].toLowerCase();
-
-            if( !uGameList.getKeys().contains(gameKey) ) {
-                sender.sendMessage( mCommands.getError() + "This map does not exist. Look at maps using /FNG List" );
-                return;
-            }
-
-            Player player = (Player) sender;
-            mMain.voteList.put(player.getUniqueId(), gameKey);
-            player.sendMessage( mCommands.getPrefix() + "You have successfully voted for " + ChatColor.DARK_PURPLE + uGameList.getGameName(gameKey) );
-
+        // Only players from here onwards.
+        if( !(sender instanceof Player) ) {
+            sender.sendMessage(mCommands.getNoConsole());
+            return;
         }
+
+        Integer index = null;
+        try {
+            index = Integer.valueOf( args[1] ) - 1;
+        } catch(Exception e) {
+            sender.sendMessage( mCommands.getError() + "You must specify a number, not the map name." );
+            return;
+        }
+
+        uVoting.vote(sender, index);
 
     }
 

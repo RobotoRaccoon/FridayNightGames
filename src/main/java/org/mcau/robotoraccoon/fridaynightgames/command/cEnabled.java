@@ -6,6 +6,7 @@ import org.mcau.robotoraccoon.fridaynightgames.mCommands;
 import org.mcau.robotoraccoon.fridaynightgames.mMain;
 import org.mcau.robotoraccoon.fridaynightgames.utility.uBroadcast;
 import org.mcau.robotoraccoon.fridaynightgames.utility.uPlayerList;
+import org.mcau.robotoraccoon.fridaynightgames.utility.uVoting;
 
 public class cEnabled {
 
@@ -29,6 +30,8 @@ public class cEnabled {
 
             mMain.fngEnabled = true;
             uPlayerList.clearList();
+            uVoting.generateList(5);
+
             uBroadcast.global(mCommands.getPrefix() + "Has been &aEnabled &eby &5" + sender.getName());
             uBroadcast.global(mCommands.getPrefix() + "Use &5/FNG Join&e to play in the games!");
 
@@ -37,6 +40,7 @@ public class cEnabled {
 
             mMain.fngEnabled = false;
             uPlayerList.clearList();
+
             uBroadcast.global(mCommands.getPrefix() + "Has been &cDisabled &eby &5" + sender.getName());
 
         }

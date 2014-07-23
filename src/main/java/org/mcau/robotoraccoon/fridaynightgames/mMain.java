@@ -18,10 +18,10 @@ public class mMain extends JavaPlugin {
     private static Plugin plugin;
 
     // FNG
-    public static Boolean fngEnabled;
+    public static Boolean fngEnabled = false;
+    public static Boolean autoStartEnabled = false;
     public static final List<String> fngPlayedGames = new ArrayList<>();
     public static final HashMap<UUID, Player> playerList = new HashMap<>();
-    public static final HashMap<UUID, String> voteList = new HashMap<>();
 
     // Vault
     public static Economy econ = null;
@@ -30,7 +30,6 @@ public class mMain extends JavaPlugin {
     public void onEnable() {
 
         plugin = this;
-        fngEnabled = false;
 
         // Vault
         setupEconomy();

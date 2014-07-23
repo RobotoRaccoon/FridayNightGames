@@ -17,7 +17,7 @@ public class mEvents implements Listener {
     public void onMinigameEnd(final EndMinigameEvent event) {
 
         try {
-            if (event.getMinigame().getName(false).equalsIgnoreCase(mMain.fngPlayedGames.get(0)) && mMain.fngEnabled) {
+            if( event.getMinigame().getName(false).equalsIgnoreCase(mMain.fngPlayedGames.get(0)) && mMain.fngEnabled ) {
 
                 new tAutoStart().start();
                 uMoney.awardPrizeMoney();
@@ -30,7 +30,7 @@ public class mEvents implements Listener {
     public void onBlockHuntArenaEnd(final eArenaEnd event) {
 
         try {
-            if (event.getArenaName().equalsIgnoreCase(mMain.fngPlayedGames.get(0)) && mMain.fngEnabled) {
+            if( event.getArenaName().equalsIgnoreCase(mMain.fngPlayedGames.get(0)) && mMain.fngEnabled ) {
 
                 new tAutoStart().start();
                 uMoney.awardPrizeMoney();
@@ -42,7 +42,7 @@ public class mEvents implements Listener {
     @EventHandler
     public void onPlayerJoin(final PlayerJoinEvent event) {
 
-        if (mMain.fngEnabled) {
+        if( mMain.fngEnabled ) {
             event.getPlayer().sendMessage(mCommands.getPrefix() + "FNG is running! Use " + ChatColor.DARK_PURPLE +
                     "/FNG Join" + ChatColor.YELLOW + " to be in the next game.");
         }
@@ -51,7 +51,7 @@ public class mEvents implements Listener {
     @EventHandler
     public void onPlayerQuit(final PlayerQuitEvent event) {
 
-        if (mMain.fngEnabled && mMain.playerList.containsKey(event.getPlayer().getUniqueId())) {
+        if( mMain.fngEnabled && mMain.playerList.containsKey( event.getPlayer().getUniqueId() ) ) {
             mMain.playerList.remove(event.getPlayer().getUniqueId());
         }
     }

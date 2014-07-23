@@ -16,6 +16,8 @@ public class tAutoStart extends Thread {
 
     public void run() {
 
+        mMain.autoStartEnabled = true;
+
         try {
 
             Thread.sleep(1000);
@@ -31,8 +33,8 @@ public class tAutoStart extends Thread {
             uBroadcast.host(mCommands.getPrefix() + "An error occurred when trying to AutoStart FNG - please start the game manually.");
         }
 
-        // Cancel if FNG is no longer enabled.
-        if( !mMain.fngEnabled ) {
+        // Cancel if FNG is no longer enabled, or the timer was stopped.
+        if( !mMain.fngEnabled || !mMain.autoStartEnabled ) {
             return;
         }
 

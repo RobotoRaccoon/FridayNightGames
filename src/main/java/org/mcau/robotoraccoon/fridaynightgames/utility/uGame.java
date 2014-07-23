@@ -18,8 +18,9 @@ public class uGame {
             uRunAs.asPlayer(command, pUUID);
         }
 
+        mMain.autoStartEnabled = false;
         mMain.fngPlayedGames.add(0, gameName);
-        mMain.voteList.clear();
+        uVoting.generateList(5);
         uBroadcast.global(mCommands.getPrefix() + "Starting Game: " + ChatColor.RED + gameName.toUpperCase());
     }
 

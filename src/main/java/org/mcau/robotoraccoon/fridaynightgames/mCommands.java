@@ -11,8 +11,6 @@ public class mCommands implements CommandExecutor {
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 
-        String commandNoConsole = commandError + "You may not run this command from console.";
-
         if( cmd.getName().equalsIgnoreCase("fng") || cmd.getName().equalsIgnoreCase("fridaynightgames") ) {
 
             if( args.length == 0 ) {
@@ -67,11 +65,7 @@ public class mCommands implements CommandExecutor {
                         break;
 
                     case VOTE:
-                        if( !(sender instanceof Player) ) {
-                            sender.sendMessage(commandNoConsole);
-                        } else {
-                            cVote.vote(sender, args);
-                        }
+                        cVote.vote(sender, args);
                         break;
                 }
 
@@ -92,11 +86,13 @@ public class mCommands implements CommandExecutor {
     private static String commandError = commandPrefix + ChatColor.DARK_RED + "Error: " + ChatColor.RED;
     private static String commandDenied = getError() + "You do not have permission to run this command.";
     private static String commandDisabled = commandError + "FNG is not running at this time.";
+    private static String commandNoConsole = commandError + "You may not run this command from console.";
 
-    public static String getPrefix()   { return commandPrefix;   }
-    public static String getError()    { return commandError;    }
-    public static String getDenied()   { return commandDenied;   }
-    public static String getDisabled() { return commandDisabled; }
+    public static String getPrefix()    { return commandPrefix;    }
+    public static String getError()     { return commandError;     }
+    public static String getDenied()    { return commandDenied;    }
+    public static String getDisabled()  { return commandDisabled;  }
+    public static String getNoConsole() { return commandNoConsole; }
 
     public static void playersHelp(CommandSender sender) {
         if( sender.hasPermission( cEnabled.getPermission() ))
