@@ -9,6 +9,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.mcau.robotoraccoon.fridaynightgames.thread.tAutoStart;
+import org.mcau.robotoraccoon.fridaynightgames.utility.uBroadcast;
 import org.mcau.robotoraccoon.fridaynightgames.utility.uMoney;
 
 public class mEvents implements Listener {
@@ -43,8 +44,7 @@ public class mEvents implements Listener {
     public void onPlayerJoin(final PlayerJoinEvent event) {
 
         if( mMain.fngEnabled ) {
-            event.getPlayer().sendMessage(mCommands.getPrefix() + "FNG is running! Use " + ChatColor.DARK_PURPLE +
-                    "/FNG Join" + ChatColor.YELLOW + " to be in the next game.");
+            uBroadcast.colour(event.getPlayer(), mCommands.getPrefix() + "FNG is running! Use &5/FNG Join &eto be in the next game.");
         }
     }
 

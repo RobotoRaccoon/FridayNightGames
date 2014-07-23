@@ -23,7 +23,7 @@ public class tAutoStart extends Thread {
             Thread.sleep(1000);
 
             uBroadcast.global(mCommands.getPrefix() + "&dThe next Minigame will begin in: &560 seconds");
-            uBroadcast.joined(mCommands.getPrefix() + "&dMake sure you use &5/FNG List&d and &5/FNG Vote <Map>");
+            uBroadcast.joined(mCommands.getPrefix() + "&dMake sure you use &5/FNG Vote&d and &5/FNG Vote <Number>");
             uBroadcast.notJoined(mCommands.getPrefix() + "&dMake sure you use &5/FNG Join&d to join the fun!");
 
             Thread.sleep(60000);

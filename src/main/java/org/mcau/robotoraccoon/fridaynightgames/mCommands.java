@@ -6,6 +6,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.mcau.robotoraccoon.fridaynightgames.command.*;
+import org.mcau.robotoraccoon.fridaynightgames.utility.uBroadcast;
 
 public class mCommands implements CommandExecutor {
 
@@ -96,25 +97,25 @@ public class mCommands implements CommandExecutor {
 
     public static void playersHelp(CommandSender sender) {
         if( sender.hasPermission( cEnabled.getPermission() ))
-            sender.sendMessage(ChatColor.DARK_PURPLE + "Enabled [T|F]" + ChatColor.WHITE + " > " + ChatColor.LIGHT_PURPLE + "Look at or change the status.");
+            uBroadcast.colour(sender, "&5Enabled [T|F] &f> &dLook at or change the status.");
         if( sender.hasPermission( cGame.getPermission() ))
-            sender.sendMessage(ChatColor.DARK_PURPLE + "Game" + ChatColor.WHITE + " > " + ChatColor.LIGHT_PURPLE + "Start, End, Add, and Remove games.");
+            uBroadcast.colour(sender, "&5Game &f> &dStart, End, Add, and Remove games.");
         if( sender.hasPermission( cJoin.getPermission() ))
-            sender.sendMessage(ChatColor.DARK_PURPLE + "Join" + ChatColor.WHITE + " > " + ChatColor.LIGHT_PURPLE + "Join in on the fun.");
+            uBroadcast.colour(sender, "&5Join &f> &dJoin in on the fun.");
         if( sender.hasPermission( cList.getPermission() ))
-            sender.sendMessage(ChatColor.DARK_PURPLE + "List" + ChatColor.WHITE + " > " + ChatColor.LIGHT_PURPLE + "Look at the available maps.");
+            uBroadcast.colour(sender, "&5List &f> &dLook at the available maps.");
         if( sender.hasPermission( cPlayers.getPermission() ))
-            sender.sendMessage(ChatColor.DARK_PURPLE + "Players" + ChatColor.WHITE + " > " + ChatColor.LIGHT_PURPLE + "See who's joined.");
+            uBroadcast.colour(sender, "&5Players &f> &dSee who's joined.");
         if( sender.hasPermission( cQuit.getPermission() ))
-            sender.sendMessage(ChatColor.DARK_PURPLE + "Quit" + ChatColor.WHITE + " > " + ChatColor.LIGHT_PURPLE + "Quit having fun.");
+            uBroadcast.colour(sender, "&5Quit &f> &dQuit having fun.");
         if( sender.hasPermission( cReload.getPermission() ))
-            sender.sendMessage(ChatColor.DARK_PURPLE + "Reload" + ChatColor.WHITE + " > " + ChatColor.LIGHT_PURPLE + "Reload the config.");
+            uBroadcast.colour(sender, "&5Reload &f> &dReload the config.");
         if( sender.hasPermission( cResults.getPermission() ))
-            sender.sendMessage(ChatColor.DARK_PURPLE + "Results" + ChatColor.WHITE + " > " + ChatColor.LIGHT_PURPLE + "View the vote results.");
+            uBroadcast.colour(sender, "&5Results &f> &dView the vote results.");
         //if( sender.hasPermission( cType.getPermission() ))
-        //    sender.sendMessage(ChatColor.DARK_PURPLE + "Type" + ChatColor.WHITE + " > " + ChatColor.LIGHT_PURPLE + "List, Add, and Remove types.");
+        //    uBroadcast.colour(sender, "&5Type" &f> &dList, Add, and Remove types.");
         if( sender.hasPermission( cVote.getPermission() ))
-            sender.sendMessage(ChatColor.DARK_PURPLE + "Vote" + ChatColor.WHITE + " > " + ChatColor.LIGHT_PURPLE + "Vote for a map.");
+            uBroadcast.colour(sender, "&5Vote &f> &dVote for a map.");
     }
 
 }

@@ -4,7 +4,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.mcau.robotoraccoon.fridaynightgames.mCommands;
-import org.mcau.robotoraccoon.fridaynightgames.mMain;
 
 import java.util.*;
 
@@ -38,15 +37,15 @@ public class uVoting {
 
     public static void printList( CommandSender sender ) {
 
-        sender.sendMessage( ChatColor.GRAY + " ===== " + ChatColor.DARK_PURPLE + "Available Maps" + ChatColor.GRAY + " ===== ");
+        sender.sendMessage( ChatColor.GRAY + " ======= " + ChatColor.DARK_PURPLE + "Available Maps" + ChatColor.GRAY + " ======= ");
 
         for( Integer i = 0; i < mapList.size(); i++ ) {
             String pos = String.valueOf(i + 1);
-            sender.sendMessage( ChatColor.DARK_PURPLE + pos + ": " + ChatColor.LIGHT_PURPLE + uGameList.getGameName(mapList.get(i))
-                    + ChatColor.GRAY + ChatColor.ITALIC + " (" + uGameList.getGameType(mapList.get(i)) + ")");
+            uBroadcast.colour(sender, "&5" + pos + ": &d" + uGameList.getGameName(mapList.get(i))
+                    + " &7&o(" + uGameList.getGameType(mapList.get(i)) + ")");
         }
 
-        sender.sendMessage( mCommands.getPrefix() + "To vote for a map, do: " + ChatColor.DARK_PURPLE + "/FNG Vote <Number>" );
+        uBroadcast.colour(sender, mCommands.getPrefix() + "To vote for a map, do: &5/FNG Vote <Number>");
 
     }
 
@@ -54,7 +53,7 @@ public class uVoting {
     public static void vote( CommandSender sender, Integer index ) {
 
         if( index >= mapList.size() || index < 0 ) {
-            sender.sendMessage( mCommands.getError() + "This number does not exist!" );
+            uBroadcast.colour(sender, mCommands.getError() + "This number does not exist!");
             printList(sender);
             return;
         }
@@ -62,7 +61,7 @@ public class uVoting {
         String gameKey = mapList.get(index);
         Player player = (Player) sender;
         voteList.put(player.getUniqueId(), gameKey);
-        player.sendMessage( mCommands.getPrefix() + "You have successfully voted for " + ChatColor.DARK_PURPLE + uGameList.getGameName(gameKey) );
+        uBroadcast.colour(sender, mCommands.getPrefix() + "You have successfully voted for &5" + uGameList.getGameName(gameKey));
 
     }
 

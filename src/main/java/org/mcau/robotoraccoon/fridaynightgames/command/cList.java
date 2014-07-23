@@ -1,9 +1,8 @@
 package org.mcau.robotoraccoon.fridaynightgames.command;
 
-import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.mcau.robotoraccoon.fridaynightgames.mCommands;
-import org.mcau.robotoraccoon.fridaynightgames.mMain;
+import org.mcau.robotoraccoon.fridaynightgames.utility.uBroadcast;
 import org.mcau.robotoraccoon.fridaynightgames.utility.uGameList;
 import org.mcau.robotoraccoon.fridaynightgames.utility.uTypeList;
 
@@ -17,7 +16,7 @@ public class cList {
     public static void list( CommandSender sender, String[] args ) {
 
         if( !sender.hasPermission( getPermission() ) ) {
-            sender.sendMessage(mCommands.getDenied());
+            uBroadcast.colour(sender, mCommands.getDenied());
             return;
         }
 
@@ -40,14 +39,14 @@ public class cList {
 
             // Print the games under their respective heading
             for (String type : sortedGames.keySet()) {
-                sender.sendMessage(ChatColor.DARK_PURPLE + type + ": " + ChatColor.YELLOW + sortedGames.get(type).toString());
+                uBroadcast.colour(sender, "&5" + type + ": &e" + sortedGames.get(type).toString());
             }
         }
         else {
-            sender.sendMessage( ChatColor.DARK_PURPLE + "Name: " + ChatColor.YELLOW + uGameList.getGameName(args[1]));
-            sender.sendMessage( ChatColor.DARK_PURPLE + "Type: " + ChatColor.YELLOW + uGameList.getGameType(args[1]));
-            sender.sendMessage( ChatColor.DARK_PURPLE + "Join Command: " + ChatColor.YELLOW + uTypeList.getJoinCommand(uGameList.getGameType(args[1])));
-            sender.sendMessage( ChatColor.DARK_PURPLE + "Quit Command: " + ChatColor.YELLOW + uTypeList.getQuitCommand(uGameList.getGameType(args[1])));
+            uBroadcast.colour(sender, "&5Name: &e" + uGameList.getGameName(args[1]));
+            uBroadcast.colour(sender, "&5Type: &e" + uGameList.getGameType(args[1]));
+            uBroadcast.colour(sender, "&5Join Command: &e" + uTypeList.getJoinCommand(uGameList.getGameType(args[1])));
+            uBroadcast.colour(sender, "&5Quit Command: &e" + uTypeList.getQuitCommand(uGameList.getGameType(args[1])));
         }
 
     }

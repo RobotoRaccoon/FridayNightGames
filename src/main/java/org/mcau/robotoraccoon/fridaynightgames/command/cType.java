@@ -1,9 +1,9 @@
 package org.mcau.robotoraccoon.fridaynightgames.command;
 
-import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.mcau.robotoraccoon.fridaynightgames.mCommands;
 import org.mcau.robotoraccoon.fridaynightgames.mConfig;
+import org.mcau.robotoraccoon.fridaynightgames.utility.uBroadcast;
 import org.mcau.robotoraccoon.fridaynightgames.utility.uTypeList;
 
 public class cType {
@@ -11,7 +11,7 @@ public class cType {
     public static void type( CommandSender sender, String[] args ) {
 
         if( !sender.hasPermission( getPermission() ) ) {
-            sender.sendMessage(mCommands.getDenied());
+            uBroadcast.colour(sender, mCommands.getDenied());
             return;
         }
 
@@ -23,36 +23,36 @@ public class cType {
 
                 case ADD:
                     if( args.length < 4 ) {
-                        sender.sendMessage( mCommands.getError() + "/FNG Type Add <Type> <Plugin>" );
+                        uBroadcast.colour(sender, mCommands.getError() + "/FNG Type Add <Type> <Plugin>");
                     }
                     else if( uTypeList.getTypes().contains( args[2].toLowerCase() ) ){
-                        sender.sendMessage( mCommands.getError() + "This type already exists." );
+                        uBroadcast.colour(sender, mCommands.getError() + "This type already exists.");
                     }
                     else if( !uTypeList.getPluginKeys().contains( args[3].toLowerCase() ) ) {
-                        sender.sendMessage( mCommands.getError() + "Plugin not defined. Available plugins: " + uTypeList.getPluginKeys() );
+                        uBroadcast.colour(sender, mCommands.getError() + "Plugin not defined. Available plugins: " + uTypeList.getPluginKeys());
                     }
                     else {
                         mConfig.getConfig().set("types." + args[2].toLowerCase(), args[3].toLowerCase());
                         mConfig.saveConfigs();
-                        sender.sendMessage( mCommands.getPrefix() + "Successfully added: " + ChatColor.RED + args[2].toLowerCase() + "|" + args[3].toLowerCase());
+                        uBroadcast.colour(sender, mCommands.getPrefix() + "Successfully added: &c" + args[2].toLowerCase() + "|" + args[3].toLowerCase());
                     }
                     break;
 
                 case LIST:
-                        sender.sendMessage( mCommands.getPrefix() +  "Available types: " + ChatColor.RED + uTypeList.getTypes() );
+                    uBroadcast.colour(sender, mCommands.getPrefix() + "Available types: &c" + uTypeList.getTypes());
                     break;
 
                 case REMOVE:
                     if( args.length < 3 ) {
-                        sender.sendMessage( mCommands.getError() + "/FNG Type Remove <Type>" );
+                        uBroadcast.colour(sender, mCommands.getError() + "/FNG Type Remove <Type>");
                     }
                     else if( !uTypeList.getTypes().contains( args[2].toLowerCase() ) ){
-                        sender.sendMessage( mCommands.getError() + "This type does not exist." );
+                        uBroadcast.colour(sender, mCommands.getError() + "This type does not exist.");
                     }
                     else {
                         mConfig.getConfig().set("types." + args[2].toLowerCase(), null);
                         mConfig.saveConfigs();
-                        sender.sendMessage( mCommands.getPrefix() + "Successfully removed: " + ChatColor.RED + args[2].toLowerCase());
+                        uBroadcast.colour(sender, mCommands.getPrefix() + "Successfully removed: &c" + args[2].toLowerCase());
                     }
                     break;
 
@@ -65,9 +65,9 @@ public class cType {
     }
 
     public static void playersHelp(CommandSender sender) {
-        sender.sendMessage(ChatColor.DARK_PURPLE + "Type List"  + ChatColor.WHITE + " > " + ChatColor.LIGHT_PURPLE + "List all available types.");
-        sender.sendMessage(ChatColor.DARK_PURPLE + "Type Add"   + ChatColor.WHITE + " > " + ChatColor.LIGHT_PURPLE + "Adds a new type with join command.");
-        sender.sendMessage(ChatColor.DARK_PURPLE + "Type Remove"+ ChatColor.WHITE + " > " + ChatColor.LIGHT_PURPLE + "Removes an added type.");
+        uBroadcast.colour(sender, "&5Type List &f> &dList all available types.");
+        uBroadcast.colour(sender, "&5Type Add &f> &dAdds a new type with join command.");
+        uBroadcast.colour(sender, "&5Type Remove &f> &dRemoves an added type.");
     }
 
     private enum switchCommands {

@@ -18,7 +18,7 @@ public class uMoney {
 
         for( Player player : uPlayerList.getPlayers() ) {
             mMain.econ.depositPlayer( player, amount );
-            player.sendMessage( mCommands.getPrefix() + "An extra $" + amount + " has been added to your account for playing in FNG!" );
+            uBroadcast.colour(player, mCommands.getPrefix() + "An extra $" + amount + " has been added to your account for playing in FNG!" );
         }
 
     }

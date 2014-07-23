@@ -1,6 +1,5 @@
 package org.mcau.robotoraccoon.fridaynightgames.command;
 
-import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.mcau.robotoraccoon.fridaynightgames.mCommands;
 import org.mcau.robotoraccoon.fridaynightgames.mMain;
@@ -20,9 +19,9 @@ public class cEnabled {
         if( args.length < 2 ) {
 
             if( mMain.fngEnabled ) {
-                sender.sendMessage(mCommands.getPrefix() + "Status: " + ChatColor.GREEN + "Enabled");
+                uBroadcast.colour(sender, mCommands.getPrefix() + "Status: &aEnabled");
             } else {
-                sender.sendMessage(mCommands.getPrefix() + "Status: " + ChatColor.RED + "Disabled");
+                uBroadcast.colour(sender, mCommands.getPrefix() + "Status: &cDisabled");
             }
 
         }
