@@ -11,8 +11,14 @@ public class uRunAs {
     }
 
     public static void asPlayer(String command, UUID player) {
-        if (Bukkit.getServer().getPlayer(player) != null) {
-            Bukkit.getServer().getPlayer(player).performCommand(command);
+
+        try {
+            if (Bukkit.getServer().getPlayer(player) != null) {
+                Bukkit.getServer().getPlayer(player).performCommand(command);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Bukkit.getLogger().warning("Failed  to perform command: " + command);
         }
 
     }

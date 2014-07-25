@@ -28,12 +28,7 @@ public class cPlayers {
             switch( switchCommands.valueOf( args[1].toUpperCase() ) ) {
 
                 case COUNT:
-                    String countMessage = String.format("%SCurrent players: %s%s",
-                            mCommands.getPrefix(),
-                            ChatColor.RED,
-                            uPlayerList.getSize()
-                    );
-                    uBroadcast.colour(sender, countMessage);
+                    uBroadcast.colour(sender, mCommands.getPrefix() + "Current players: &c" + uPlayerList.getSize());
                     break;
 
                 case LIST:
@@ -43,12 +38,7 @@ public class cPlayers {
                         break;
                     }
 
-                    String listMessage = String.format("%SCurrent players: %s%s",
-                            mCommands.getPrefix(),
-                            ChatColor.RED,
-                            uPlayerList.getPlayerNames()
-                    );
-                    uBroadcast.colour(sender, listMessage);
+                    uBroadcast.colour(sender, mCommands.getPrefix() + "Current players: &c" + uPlayerList.getPlayerNames());
                     break;
 
                 case RANDOM:
@@ -58,12 +48,7 @@ public class cPlayers {
                         break;
                     }
 
-                    String randomMessage = String.format("%SRandom player: %s%s",
-                            mCommands.getPrefix(),
-                            ChatColor.RED,
-                            uPlayerList.getRandomPlayer().getName()
-                    );
-                    uBroadcast.colour(sender, randomMessage);
+                    uBroadcast.colour(sender, mCommands.getPrefix() + "Random player: &c" + uPlayerList.getRandomPlayer().getName());
                     break;
             }
 

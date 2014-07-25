@@ -20,6 +20,19 @@ public class cResults {
             return;
         }
 
+        if( args[1].equalsIgnoreCase("reset") ) {
+
+            if( !sender.hasPermission("fng.host") ) {
+                uBroadcast.colour(sender, mCommands.getDenied() );
+                return;
+            }
+
+            uVoting.generateList(5);
+            uBroadcast.colour(sender, mCommands.getPrefix() + "The results have been reset and a new voting list has been generated.");
+            return;
+
+        }
+
         uBroadcast.colour(sender, mCommands.getPrefix() + "The most voted maps: &c" + uVoting.getMostVoted().toString());
 
     }
