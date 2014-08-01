@@ -20,7 +20,11 @@ public class cResults {
             return;
         }
 
-        if( args[1].equalsIgnoreCase("reset") ) {
+        if( args.length < 2 ) {
+            uBroadcast.colour(sender, mCommands.getPrefix() + "The most voted maps: &c" + uVoting.getMostVoted().toString());
+            return;
+        }
+        else if( args[1].equalsIgnoreCase("reset") ) {
 
             if( !sender.hasPermission("fng.host") ) {
                 uBroadcast.colour(sender, mCommands.getDenied() );
@@ -32,8 +36,6 @@ public class cResults {
             return;
 
         }
-
-        uBroadcast.colour(sender, mCommands.getPrefix() + "The most voted maps: &c" + uVoting.getMostVoted().toString());
 
     }
 

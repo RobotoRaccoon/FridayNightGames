@@ -1,7 +1,7 @@
 package org.mcau.robotoraccoon.fridaynightgames;
 
 import au.com.mineauz.minigames.events.EndMinigameEvent;
-import nl.Steffion.BlockHunt.Events.eArenaEnd;
+import nl.Steffion.BlockHunt.Events.EndArenaEvent;
 
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
@@ -28,10 +28,10 @@ public class mEvents implements Listener {
     }
 
     @EventHandler
-    public void onBlockHuntArenaEnd(final eArenaEnd event) {
+    public void onBlockHuntArenaEnd(final EndArenaEvent event) {
 
         try {
-            if( event.getArenaName().equalsIgnoreCase(mMain.fngPlayedGames.get(0)) && mMain.fngEnabled ) {
+            if( event.getArena().arenaName.equalsIgnoreCase(mMain.fngPlayedGames.get(0)) && mMain.fngEnabled ) {
 
                 new tAutoStart().start();
                 uMoney.awardPrizeMoney();
