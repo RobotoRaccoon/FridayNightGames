@@ -1,6 +1,6 @@
 name: FridayNightGames
 version: ${project.version}-b${build.number}
-description: Chat moderation for Minecraft Australia
+description: Minigames Wrapper for Minecraft Australia
 
 author: RobotoRaccoon
 main: org.mcau.robotoraccoon.fridaynightgames.mMain
