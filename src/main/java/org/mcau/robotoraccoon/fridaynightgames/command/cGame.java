@@ -39,6 +39,15 @@ public class cGame {
                     }
                     break;
 
+                case COUNT:
+                    if( !mMain.fngEnabled ) {
+                        uBroadcast.colour(sender, mCommands.getDisabled());
+                        return;
+                    }
+
+                    uBroadcast.colour(sender, mCommands.getPrefix() + "Amount of games started in this session: &c" + mMain.fngPlayedGames.size());
+                    break;
+
                 case END:
                     if( !mMain.fngEnabled ) {
                         uBroadcast.colour(sender, mCommands.getDisabled());
@@ -90,14 +99,16 @@ public class cGame {
     }
 
     public static void playersHelp(CommandSender sender) {
-        uBroadcast.colour(sender, "&5Game Start &f> &dStarts the specified game.");
-        uBroadcast.colour(sender, "&5Game End &f> &dForces everyone to quit.");
+        uBroadcast.colour(sender, " &7===== &5Options &7=====");
         uBroadcast.colour(sender, "&5Game Add &f> &dAdds a new game.");
+        uBroadcast.colour(sender, "&5Game Count &f> &dView how many games have been played.");
+        uBroadcast.colour(sender, "&5Game End &f> &dForces everyone to quit.");
         uBroadcast.colour(sender, "&5Game Remove &f> &dRemoves an added game.");
+        uBroadcast.colour(sender, "&5Game Start &f> &dStarts the specified game.");
     }
 
     private enum switchCommands {
-        ADD, END, REMOVE, START
+        ADD, COUNT, END, REMOVE, START
     }
 
     public static String getPermission() { return "fng.host"; }

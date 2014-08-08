@@ -96,6 +96,7 @@ public class mCommands implements CommandExecutor {
     public static String getNoConsole() { return commandNoConsole; }
 
     public static void playersHelp(CommandSender sender) {
+        uBroadcast.colour(sender, " &7===== &5Options &7=====");
         if( sender.hasPermission( cEnabled.getPermission() ))
             uBroadcast.colour(sender, "&5Enabled [T|F] &f> &dLook at or change the status.");
         if( sender.hasPermission( cGame.getPermission() ))
