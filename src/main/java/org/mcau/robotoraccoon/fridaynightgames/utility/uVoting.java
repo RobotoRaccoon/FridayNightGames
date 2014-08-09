@@ -13,6 +13,10 @@ public class uVoting {
     public static final List<String> mapList = new ArrayList<>();
 
     // Picks an amount of random maps to let people vote for.
+    public static void generateList() {
+        generateList(5);
+    }
+
     public static void generateList( Integer mapCount ) {
 
         voteList.clear();
@@ -60,8 +64,15 @@ public class uVoting {
 
         String gameKey = mapList.get(index);
         Player player = (Player) sender;
+
+        if( voteList.containsKey(player.getUniqueId()) ) {
+            uBroadcast.colour(sender, mCommands.getPrefix() + "You have changed your vote to &5" + uGameList.getGameName(gameKey));
+        }
+        else {
+            uBroadcast.colour(sender, mCommands.getPrefix() + "You have successfully voted for &5" + uGameList.getGameName(gameKey));
+        }
+
         voteList.put(player.getUniqueId(), gameKey);
-        uBroadcast.colour(sender, mCommands.getPrefix() + "You have successfully voted for &5" + uGameList.getGameName(gameKey));
 
     }
 

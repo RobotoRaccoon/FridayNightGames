@@ -43,7 +43,7 @@ public class tAutoStart extends Thread {
         Random random = new Random();
 
         if( mostVoted.size() < 1 ) {
-            List<String> keys = new ArrayList<>(uGameList.getKeys());
+            List<String> keys = new ArrayList<>(uVoting.mapList);
             gameName = keys.get( random.nextInt( keys.size()) );
         }
         else {

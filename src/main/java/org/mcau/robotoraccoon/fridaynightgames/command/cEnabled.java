@@ -29,7 +29,7 @@ public class cEnabled {
 
             mMain.fngEnabled = true;
             uPlayerList.clearList();
-            uVoting.generateList(5);
+            uVoting.generateList();
 
             uBroadcast.global(mCommands.getPrefix() + "Has been &aEnabled &eby &5" + sender.getName());
             uBroadcast.global(mCommands.getPrefix() + "Use &5/FNG Join&e to play in the games!");

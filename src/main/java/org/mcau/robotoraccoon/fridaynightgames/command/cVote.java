@@ -32,11 +32,12 @@ public class cVote {
             return;
         }
 
-        Integer index = null;
+        Integer index;
         try {
             index = Integer.valueOf( args[1] ) - 1;
         } catch(Exception e) {
             uBroadcast.colour(sender, mCommands.getError() + "You must specify a number, not the map name.");
+            uVoting.printList(sender);
             return;
         }
 

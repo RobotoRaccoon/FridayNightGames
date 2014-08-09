@@ -21,7 +21,7 @@ public class uGame {
 
         mMain.autoStartEnabled = false;
         mMain.fngPlayedGames.add(0, gameName);
-        uVoting.generateList(5);
+        uVoting.generateList();
         addPlayCount(gameName);
 
         uBroadcast.global(mCommands.getPrefix() + "Starting Game: " + ChatColor.RED + gameName.toUpperCase());
