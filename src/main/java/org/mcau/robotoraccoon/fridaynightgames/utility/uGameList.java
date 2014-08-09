@@ -23,12 +23,11 @@ public class uGameList {
 
         key = key.toLowerCase();
 
-        if( getKeys().contains( key )) {
+        if( mConfig.getGamesConfig().contains("games." + key + ".name") ) {
             return mConfig.getGamesConfig().getString("games." + key + ".name");
         }
-        else {
-            return key; //Unknown
-        }
+
+        return key; //Unknown
     }
 
     // Get the game type
@@ -36,12 +35,11 @@ public class uGameList {
 
         key = key.toLowerCase();
 
-        if( getKeys().contains( key )) {
+        if( mConfig.getGamesConfig().contains("games." + key + ".type") ) {
             return mConfig.getGamesConfig().getString("games." + key + ".type");
         }
-        else {
-            return "unknown"; //Unknown
-        }
+
+        return "unknown"; //Unknown
     }
 
 }

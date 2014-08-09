@@ -29,11 +29,12 @@ public class uTypeList {
         String plugin = getPlugin(type);
 
         if( getPluginKeys().contains(plugin) ) {
-            return mConfig.getConfig().getString("commands." + plugin + ".join");
+            try {
+                return mConfig.getConfig().getString("commands." + plugin + ".join");
+            } catch (Exception e) {}
         }
-        else {
-            return mConfig.getConfig().getString("commands.unknown.join");
-        }
+
+        return mConfig.getConfig().getString("commands.unknown.join");
     }
 
     // Get the quit command from a type
@@ -43,11 +44,12 @@ public class uTypeList {
         String plugin = getPlugin(type);
 
         if( getPluginKeys().contains(plugin) ) {
-            return mConfig.getConfig().getString("commands." + plugin + ".quit");
+            try{
+                return mConfig.getConfig().getString("commands." + plugin + ".quit");
+            } catch (Exception e) {}
         }
-        else {
-            return mConfig.getConfig().getString("commands.unknown.quit");
-        }
+
+        return mConfig.getConfig().getString("commands.unknown.quit");
     }
 
 }

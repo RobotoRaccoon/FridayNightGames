@@ -34,6 +34,7 @@ public class cGame {
                     else {
                         mConfig.getGamesConfig().set("games." + args[2].toLowerCase() + ".name", args[2]);
                         mConfig.getGamesConfig().set("games." + args[2].toLowerCase() + ".type", args[3].toLowerCase());
+                        mConfig.getGamesConfig().set("games." + args[2].toLowerCase() + ".plays", 0);
                         mConfig.saveConfigs();
                         uBroadcast.colour(sender, mCommands.getPrefix() + "Added the minigame: &c" + args[2] + "|" + args[3].toLowerCase());
                     }

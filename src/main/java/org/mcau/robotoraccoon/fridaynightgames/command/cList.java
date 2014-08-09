@@ -2,6 +2,7 @@ package org.mcau.robotoraccoon.fridaynightgames.command;
 
 import org.bukkit.command.CommandSender;
 import org.mcau.robotoraccoon.fridaynightgames.mCommands;
+import org.mcau.robotoraccoon.fridaynightgames.mConfig;
 import org.mcau.robotoraccoon.fridaynightgames.utility.uBroadcast;
 import org.mcau.robotoraccoon.fridaynightgames.utility.uGameList;
 import org.mcau.robotoraccoon.fridaynightgames.utility.uTypeList;
@@ -43,10 +44,13 @@ public class cList {
             }
         }
         else {
-            uBroadcast.colour(sender, "&5Name: &e" + uGameList.getGameName(args[1]));
-            uBroadcast.colour(sender, "&5Type: &e" + uGameList.getGameType(args[1]));
-            uBroadcast.colour(sender, "&5Join Command: &e" + uTypeList.getJoinCommand(uGameList.getGameType(args[1])));
-            uBroadcast.colour(sender, "&5Quit Command: &e" + uTypeList.getQuitCommand(uGameList.getGameType(args[1])));
+            String gameKey = args[1].toLowerCase();
+
+            uBroadcast.colour(sender, "&5Name: &e" + uGameList.getGameName(gameKey));
+            uBroadcast.colour(sender, "&5Type: &e" + uGameList.getGameType(gameKey));
+            uBroadcast.colour(sender, "&5Join Command: &e" + uTypeList.getJoinCommand(uGameList.getGameType(gameKey)));
+            uBroadcast.colour(sender, "&5Quit Command: &e" + uTypeList.getQuitCommand(uGameList.getGameType(gameKey)));
+            uBroadcast.colour(sender, "&5Total Plays: &e" + mConfig.getGamesConfig().getInt("games." + gameKey + ".plays"));
         }
 
     }
