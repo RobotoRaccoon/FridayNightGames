@@ -8,16 +8,16 @@
     <artifactId>fridaynightgames</artifactId>
 
     <name>FridayNightGames</name>
-    <description>Minigames wrapper</description>
+    <description>Minigames Wrapper for Minecraft Australia</description>
     <version>2.0.2</version>
 
     <properties>
-        <build.number>12</build.number>
+        <build.number>13</build.number>
     </properties>
 
     <organization>
         <name>MCAU</name>
-        <url>mcau.org</url>
+        <url>http://mcau.org</url>
     </organization>
 
     <build>

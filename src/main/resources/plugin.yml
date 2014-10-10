@@ -1,10 +1,10 @@
-name: FridayNightGames
+name: ${project.name}
 version: ${project.version}-b${build.number}
-description: Minigames Wrapper for Minecraft Australia
+description: ${project.description}
 
 author: RobotoRaccoon
-main: org.mcau.robotoraccoon.fridaynightgames.mMain
-website: http://mcau.org
+main: ${project.groupId}.${project.artifactId}.mMain
+website: ${organization.url}
 
 depend: [Minigames]
 softdepend: [BlockHunt, Vault]
