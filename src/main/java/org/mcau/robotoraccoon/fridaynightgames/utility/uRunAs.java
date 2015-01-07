@@ -18,7 +18,8 @@ public class uRunAs {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            Bukkit.getLogger().warning("Failed  to perform command: " + command);
+            Bukkit.getLogger().warning("Failed to perform command on " +
+                    Bukkit.getServer().getPlayer(player).getPlayerListName() + ": " + command);
         }
 
     }

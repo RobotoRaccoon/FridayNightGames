@@ -3,12 +3,13 @@ package org.mcau.robotoraccoon.fridaynightgames;
 import au.com.mineauz.minigames.events.EndMinigameEvent;
 import nl.Steffion.BlockHunt.Events.EndArenaEvent;
 
-import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-import org.mcau.robotoraccoon.fridaynightgames.thread.tAutoStart;
+import org.bukkit.scheduler.BukkitTask;
+import org.mcau.robotoraccoon.fridaynightgames.thread.tAutoStartRunnable;
+import org.mcau.robotoraccoon.fridaynightgames.thread.tAutoStartText;
 import org.mcau.robotoraccoon.fridaynightgames.utility.uBroadcast;
 import org.mcau.robotoraccoon.fridaynightgames.utility.uMoney;
 
@@ -20,7 +21,8 @@ public class mEvents implements Listener {
         try {
             if( event.getMinigame().getName(false).equalsIgnoreCase(mMain.fngPlayedGames.get(0)) && mMain.fngEnabled ) {
 
-                new tAutoStart().start();
+                new tAutoStartText().start();
+                BukkitTask task = new tAutoStartRunnable().runTaskLater(mMain.getPlugin(), 1220); //61 seconds
                 uMoney.awardPrizeMoney();
             }
         } catch (Exception e) {
@@ -33,7 +35,8 @@ public class mEvents implements Listener {
         try {
             if( event.getArena().arenaName.equalsIgnoreCase(mMain.fngPlayedGames.get(0)) && mMain.fngEnabled ) {
 
-                new tAutoStart().start();
+                new tAutoStartText().start();
+                BukkitTask task = new tAutoStartRunnable().runTaskLater(mMain.getPlugin(), 1220); //61 seconds
                 uMoney.awardPrizeMoney();
             }
         } catch (Exception e) {
