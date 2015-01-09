@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.mcau.robotoraccoon.fridaynightgames.mCommands;
+import org.mcau.robotoraccoon.fridaynightgames.mMain;
 
 import java.util.*;
 
@@ -25,8 +26,16 @@ public class uVoting {
         List<String> keys = new ArrayList<>();
         keys.addAll(uGameList.getKeys());
 
-        for( Integer i = 0; i < mapCount; i++ ) {
+        // Remove last played maps whilst not shortening the list to less than 5.
+        if( keys.size() > 5 ) {
+            int maxLoops = Math.min(5, Math.min(keys.size() - 5, mMain.fngPlayedGames.size()));
+            for( Integer i = 0; i < maxLoops; i++ ) {
+                keys.remove( keys.indexOf(mMain.fngPlayedGames.get(i)) );
+            }
+        }
 
+        // Generate list.
+        for( Integer i = 0; i < mapCount; i++ ) {
             if( keys.size() != 0 ) {
                 Random random = new Random();
                 String randomKey = keys.get(random.nextInt(keys.size()));
@@ -34,7 +43,6 @@ public class uVoting {
                 mapList.add(randomKey);
                 keys.remove(randomKey);
             }
-
         }
 
     }

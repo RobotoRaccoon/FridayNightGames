@@ -22,7 +22,7 @@ public class mEvents implements Listener {
             if( event.getMinigame().getName(false).equalsIgnoreCase(mMain.fngPlayedGames.get(0)) && mMain.fngEnabled ) {
 
                 new tAutoStartText().start();
-                BukkitTask task = new tAutoStartRunnable().runTaskLater(mMain.getPlugin(), 1220); //61 seconds
+                new tAutoStartRunnable().runTaskLater(mMain.getPlugin(), 1220); //61 seconds
                 uMoney.awardPrizeMoney();
             }
         } catch (Exception e) {
@@ -36,7 +36,7 @@ public class mEvents implements Listener {
             if( event.getArena().arenaName.equalsIgnoreCase(mMain.fngPlayedGames.get(0)) && mMain.fngEnabled ) {
 
                 new tAutoStartText().start();
-                BukkitTask task = new tAutoStartRunnable().runTaskLater(mMain.getPlugin(), 1220); //61 seconds
+                new tAutoStartRunnable().runTaskLater(mMain.getPlugin(), 1220); //61 seconds
                 uMoney.awardPrizeMoney();
             }
         } catch (Exception e) {

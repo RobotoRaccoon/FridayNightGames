@@ -29,7 +29,7 @@ public class tAutoStartText extends Thread {
 
         }
         catch (Exception e) {
-            uBroadcast.host(mCommands.getPrefix() + "An error occurred when trying to AutoStart FNG - please start the game manually.");
+            //uBroadcast.host(mCommands.getPrefix() + "An error occurred when trying to AutoStart FNG - please start the game manually.");
         }
 
     }
