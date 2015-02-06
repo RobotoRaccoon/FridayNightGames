@@ -18,6 +18,14 @@ public class uGameList {
         return keys;
     }
 
+    // If the game exists in the config
+    public static Boolean gameExists(String key) {
+        if( mConfig.getGamesConfig().contains("games." + key) ) {
+            return true;
+        }
+        return false;
+    }
+
     // Correct capitalisation of the name
     public static String getGameName(String key) {
 

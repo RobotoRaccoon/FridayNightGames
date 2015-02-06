@@ -10,34 +10,34 @@ import java.util.UUID;
 public class uGame {
 
     //Start a specified game
-    public static void start(String gameName) {
+    public static void start(String gameKey) {
 
-        gameName = gameName.toLowerCase();
-        String command = uTypeList.getJoinCommand(uGameList.getGameType(gameName)) + " " + gameName;
+        gameKey = gameKey.toLowerCase();
+        String command = uTypeList.getJoinCommand(uGameList.getGameType(gameKey)) + " " + gameKey;
 
         for( final UUID pUUID : uPlayerList.getKeys() ) {
             uRunAs.asPlayer(command, pUUID);
         }
 
         mMain.autoStartEnabled = false;
-        mMain.fngPlayedGames.add(0, gameName);
+        mMain.fngPlayedGames.add(0, gameKey);
         uVoting.generateList();
-        addPlayCount(gameName);
+        addPlayCount(gameKey);
 
-        uBroadcast.global(mCommands.getPrefix() + "Starting Game: " + ChatColor.RED + gameName.toUpperCase());
+        uBroadcast.global(mCommands.getPrefix() + "Starting Game: " + ChatColor.RED + gameKey.toUpperCase());
     }
 
     //Forces all users to quit their game
-    public static void end(String gameName) {
+    public static void end(String gameKey) {
 
-        gameName = gameName.toLowerCase();
-        String command = uTypeList.getQuitCommand(uGameList.getGameType(gameName.toLowerCase()));
+        gameKey = gameKey.toLowerCase();
+        String command = uTypeList.getQuitCommand(uGameList.getGameType(gameKey));
 
         for( final UUID pUUID : uPlayerList.getKeys() ) {
             uRunAs.asPlayer(command, pUUID);
         }
 
-        uBroadcast.global(mCommands.getPrefix() + "Ending Game: " + ChatColor.RED + gameName.toUpperCase());
+        uBroadcast.global(mCommands.getPrefix() + "Ending Game: " + ChatColor.RED + gameKey.toUpperCase());
     }
 
     //Add plays to the games total play count for every FNG

@@ -25,7 +25,7 @@ public class cGame {
                     if( args.length < 4 ) {
                         uBroadcast.colour(sender, mCommands.getError() + "/FNG Game Add <Name> <Type>");
                     }
-                    else if( uGameList.getKeys().contains( args[2].toLowerCase() ) ) {
+                    else if( uGameList.gameExists(args[2].toLowerCase()) ) {
                         uBroadcast.colour(sender, mCommands.getError() + "This minigame already exists.");
                     }
                     else if( !uTypeList.getTypes().contains( args[3].toLowerCase() ) ) {
@@ -58,6 +58,9 @@ public class cGame {
                     if( args.length < 3 ) {
                         uBroadcast.colour(sender, mCommands.getError() + "/FNG Game End <Name>");
                     }
+                    else if( !uGameList.gameExists( args[2].toLowerCase() ) ) {
+                        uBroadcast.colour(sender, mCommands.getError() + "This minigame does not exist.");
+                    }
                     else {
                         uGame.end(args[2]);
                     }
@@ -67,7 +70,7 @@ public class cGame {
                     if( args.length < 3 ) {
                         uBroadcast.colour(sender, mCommands.getError() + "/FNG Game Remove <Name>");
                     }
-                    else if( !uGameList.getKeys().contains( args[2].toLowerCase() ) ) {
+                    else if( !uGameList.gameExists( args[2].toLowerCase() ) ) {
                         uBroadcast.colour(sender, mCommands.getError() + "This minigame does not exist.");
                     }
                     else {
@@ -85,6 +88,9 @@ public class cGame {
 
                     if( args.length < 3 ) {
                         uBroadcast.colour(sender, mCommands.getError() + "/FNG Game Start <Name>");
+                    }
+                    else if( !uGameList.gameExists( args[2].toLowerCase() ) ) {
+                        uBroadcast.colour(sender, mCommands.getError() + "This minigame does not exist.");
                     }
                     else {
                         uGame.start(args[2]);
