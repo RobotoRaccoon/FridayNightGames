@@ -27,12 +27,12 @@ public class uVoting {
         keys.addAll(uGameList.getKeys());
 
         // Remove last played maps whilst not shortening the list to less than 5.
-        if( keys.size() > 5 ) {
-            int maxLoops = Math.min(5, Math.min(keys.size() - 5, mMain.fngPlayedGames.size()));
-            for( Integer i = 0; i < maxLoops; i++ ) {
-                keys.remove( keys.indexOf(mMain.fngPlayedGames.get(i)) );
-            }
-        }
+        //if( keys.size() > 5 ) {
+        //    int maxLoops = Math.min(10, Math.min(keys.size() - 5, mMain.fngPlayedGames.size()));
+        //    for( Integer i = maxLoops - 1; i >= 0; i-- ) {
+        //        keys.remove( keys.indexOf(mMain.fngPlayedGames.get(i)) );
+        //    }
+        //}
 
         // Generate list.
         for( Integer i = 0; i < mapCount; i++ ) {
@@ -49,7 +49,7 @@ public class uVoting {
 
     public static void printList( CommandSender sender ) {
 
-        sender.sendMessage( ChatColor.GRAY + " ======= " + ChatColor.DARK_PURPLE + "Available Maps" + ChatColor.GRAY + " ======= ");
+        uBroadcast.colour(sender, " &7======= &5Available Maps &7======= ");
 
         for( Integer i = 0; i < mapList.size(); i++ ) {
             String pos = String.valueOf(i + 1);
