@@ -7,22 +7,21 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.scheduler.BukkitTask;
 import org.mcau.robotoraccoon.fridaynightgames.thread.tAutoStartRunnable;
 import org.mcau.robotoraccoon.fridaynightgames.thread.tAutoStartText;
 import org.mcau.robotoraccoon.fridaynightgames.utility.uBroadcast;
 import org.mcau.robotoraccoon.fridaynightgames.utility.uMoney;
 
-public class mEvents implements Listener {
+public class Events implements Listener {
 
     @EventHandler
     public void onMinigameEnd(final EndMinigameEvent event) {
 
         try {
-            if( event.getMinigame().getName(false).equalsIgnoreCase(mMain.fngPlayedGames.get(0)) && mMain.fngEnabled ) {
+            if( event.getMinigame().getName(false).equalsIgnoreCase(Main.fngPlayedGames.get(0)) && Main.fngEnabled ) {
 
                 new tAutoStartText().start();
-                new tAutoStartRunnable().runTaskLater(mMain.getPlugin(), 1220); //61 seconds
+                new tAutoStartRunnable().runTaskLater(Main.getPlugin(), 1220); //61 seconds
                 uMoney.awardPrizeMoney();
             }
         } catch (Exception e) {
@@ -33,10 +32,10 @@ public class mEvents implements Listener {
     public void onBlockHuntArenaEnd(final EndArenaEvent event) {
 
         try {
-            if( event.getArena().arenaName.equalsIgnoreCase(mMain.fngPlayedGames.get(0)) && mMain.fngEnabled ) {
+            if( event.getArena().arenaName.equalsIgnoreCase(Main.fngPlayedGames.get(0)) && Main.fngEnabled ) {
 
                 new tAutoStartText().start();
-                new tAutoStartRunnable().runTaskLater(mMain.getPlugin(), 1220); //61 seconds
+                new tAutoStartRunnable().runTaskLater(Main.getPlugin(), 1220); //61 seconds
                 uMoney.awardPrizeMoney();
             }
         } catch (Exception e) {
@@ -46,16 +45,16 @@ public class mEvents implements Listener {
     @EventHandler
     public void onPlayerJoin(final PlayerJoinEvent event) {
 
-        if( mMain.fngEnabled ) {
-            uBroadcast.colour(event.getPlayer(), mCommands.getPrefix() + "FNG is running! Use &5/FNG Join &eto be in the next game.");
+        if( Main.fngEnabled ) {
+            uBroadcast.colour(event.getPlayer(), Commands.getPrefix() + "FNG is running! Use &5/FNG Join &eto be in the next game.");
         }
     }
 
     @EventHandler
     public void onPlayerQuit(final PlayerQuitEvent event) {
 
-        if( mMain.fngEnabled && mMain.playerList.containsKey( event.getPlayer().getUniqueId() ) ) {
-            mMain.playerList.remove(event.getPlayer().getUniqueId());
+        if( Main.fngEnabled && Main.playerList.containsKey( event.getPlayer().getUniqueId() ) ) {
+            Main.playerList.remove(event.getPlayer().getUniqueId());
         }
     }
 

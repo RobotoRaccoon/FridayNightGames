@@ -1,6 +1,6 @@
 package org.mcau.robotoraccoon.fridaynightgames.utility;
 
-import org.mcau.robotoraccoon.fridaynightgames.mConfig;
+import org.mcau.robotoraccoon.fridaynightgames.Config;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -12,7 +12,7 @@ public class uGameList {
 
         Set<String> keys = new HashSet<>();
         try {
-            keys = mConfig.getGamesConfig().getConfigurationSection("games").getKeys(false);
+            keys = Config.getGamesConfig().getConfigurationSection("games").getKeys(false);
         } catch (Exception e) {}
 
         return keys;
@@ -20,10 +20,7 @@ public class uGameList {
 
     // If the game exists in the config
     public static Boolean gameExists(String key) {
-        if( mConfig.getGamesConfig().contains("games." + key) ) {
-            return true;
-        }
-        return false;
+         return( Config.getGamesConfig().contains("games." + key) );
     }
 
     // Correct capitalisation of the name
@@ -31,8 +28,8 @@ public class uGameList {
 
         key = key.toLowerCase();
 
-        if( mConfig.getGamesConfig().contains("games." + key + ".name") ) {
-            return mConfig.getGamesConfig().getString("games." + key + ".name");
+        if( Config.getGamesConfig().contains("games." + key + ".name") ) {
+            return Config.getGamesConfig().getString("games." + key + ".name");
         }
 
         return key; //Unknown
@@ -43,8 +40,8 @@ public class uGameList {
 
         key = key.toLowerCase();
 
-        if( mConfig.getGamesConfig().contains("games." + key + ".type") ) {
-            return mConfig.getGamesConfig().getString("games." + key + ".type");
+        if( Config.getGamesConfig().contains("games." + key + ".type") ) {
+            return Config.getGamesConfig().getString("games." + key + ".type");
         }
 
         return "unknown"; //Unknown

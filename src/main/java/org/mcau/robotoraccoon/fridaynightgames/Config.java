@@ -6,7 +6,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import java.io.File;
 import java.io.IOException;
 
-public class mConfig {
+public class Config {
 
     private static File configFile;
     private static File gamesFile;
@@ -17,10 +17,10 @@ public class mConfig {
     public static FileConfiguration getConfig(){ return config; }
     public static FileConfiguration getGamesConfig(){ return gamesConfig; }
 
-    public mConfig(){
+    public Config(){
 
-        configFile = new File( mMain.getPlugin().getDataFolder(), "config.yml" );
-        gamesFile = new File( mMain.getPlugin().getDataFolder(), "games.yml" );
+        configFile = new File( Main.getPlugin().getDataFolder(), "config.yml" );
+        gamesFile = new File( Main.getPlugin().getDataFolder(), "games.yml" );
 
         config = YamlConfiguration.loadConfiguration(configFile);
         gamesConfig = YamlConfiguration.loadConfiguration( gamesFile );
@@ -30,10 +30,10 @@ public class mConfig {
     public static void createAllFiles(){
 
         if( !configFile.exists() ) {
-            mMain.getPlugin().saveResource("config.yml", true);
+            Main.getPlugin().saveResource("config.yml", true);
         }
         if( !gamesFile.exists() ) {
-            mMain.getPlugin().saveResource("games.yml", true);
+            Main.getPlugin().saveResource("games.yml", true);
         }
 
         loadConfigs();
@@ -44,10 +44,10 @@ public class mConfig {
 
         try{
 
-            config = YamlConfiguration.loadConfiguration( new File( mMain.getPlugin().getDataFolder(), "config.yml" ) );
-            gamesConfig = YamlConfiguration.loadConfiguration( new File( mMain.getPlugin().getDataFolder(), "games.yml" ) );
+            config = YamlConfiguration.loadConfiguration( new File( Main.getPlugin().getDataFolder(), "config.yml" ) );
+            gamesConfig = YamlConfiguration.loadConfiguration( new File( Main.getPlugin().getDataFolder(), "games.yml" ) );
 
-            mMain.getPlugin().reloadConfig();
+            Main.getPlugin().reloadConfig();
             return true;
 
         } catch (Exception e){

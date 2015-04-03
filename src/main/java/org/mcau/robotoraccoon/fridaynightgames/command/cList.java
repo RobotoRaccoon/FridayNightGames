@@ -1,8 +1,8 @@
 package org.mcau.robotoraccoon.fridaynightgames.command;
 
 import org.bukkit.command.CommandSender;
-import org.mcau.robotoraccoon.fridaynightgames.mCommands;
-import org.mcau.robotoraccoon.fridaynightgames.mConfig;
+import org.mcau.robotoraccoon.fridaynightgames.Commands;
+import org.mcau.robotoraccoon.fridaynightgames.Config;
 import org.mcau.robotoraccoon.fridaynightgames.utility.uBroadcast;
 import org.mcau.robotoraccoon.fridaynightgames.utility.uGameList;
 import org.mcau.robotoraccoon.fridaynightgames.utility.uTypeList;
@@ -17,7 +17,7 @@ public class cList {
     public static void list( CommandSender sender, String[] args ) {
 
         if( !sender.hasPermission( getPermission() ) ) {
-            uBroadcast.colour(sender, mCommands.getDenied());
+            uBroadcast.colour(sender, Commands.getDenied());
             return;
         }
 
@@ -50,7 +50,7 @@ public class cList {
             uBroadcast.colour(sender, "&5Type: &e" + uGameList.getGameType(gameKey));
             uBroadcast.colour(sender, "&5Join Command: &e" + uTypeList.getJoinCommand(uGameList.getGameType(gameKey)));
             uBroadcast.colour(sender, "&5Quit Command: &e" + uTypeList.getQuitCommand(uGameList.getGameType(gameKey)));
-            uBroadcast.colour(sender, "&5Total Plays: &e" + mConfig.getGamesConfig().getInt("games." + gameKey + ".plays"));
+            uBroadcast.colour(sender, "&5Total Plays: &e" + Config.getGamesConfig().getInt("games." + gameKey + ".plays"));
         }
 
     }

@@ -1,9 +1,9 @@
 package org.mcau.robotoraccoon.fridaynightgames.utility;
 
 import org.bukkit.ChatColor;
-import org.mcau.robotoraccoon.fridaynightgames.mCommands;
-import org.mcau.robotoraccoon.fridaynightgames.mConfig;
-import org.mcau.robotoraccoon.fridaynightgames.mMain;
+import org.mcau.robotoraccoon.fridaynightgames.Commands;
+import org.mcau.robotoraccoon.fridaynightgames.Config;
+import org.mcau.robotoraccoon.fridaynightgames.Main;
 
 import java.util.UUID;
 
@@ -19,12 +19,12 @@ public class uGame {
             uRunAs.asPlayer(command, pUUID);
         }
 
-        mMain.autoStartEnabled = false;
-        mMain.fngPlayedGames.add(0, gameKey);
+        Main.autoStartEnabled = false;
+        Main.fngPlayedGames.add(0, gameKey);
         uVoting.generateList();
         addPlayCount(gameKey);
 
-        uBroadcast.global(mCommands.getPrefix() + "Starting Game: " + ChatColor.RED + gameKey.toUpperCase());
+        uBroadcast.global(Commands.getPrefix() + "Starting Game: " + ChatColor.RED + gameKey.toUpperCase());
     }
 
     //Forces all users to quit their game
@@ -37,7 +37,7 @@ public class uGame {
             uRunAs.asPlayer(command, pUUID);
         }
 
-        uBroadcast.global(mCommands.getPrefix() + "Ending Game: " + ChatColor.RED + gameKey.toUpperCase());
+        uBroadcast.global(Commands.getPrefix() + "Ending Game: " + ChatColor.RED + gameKey.toUpperCase());
     }
 
     //Add plays to the games total play count for every FNG
@@ -49,11 +49,11 @@ public class uGame {
         gameKey = gameKey.toLowerCase();
         Integer gamePlays = 0;
 
-        if( mConfig.getGamesConfig().contains("games." + gameKey + ".plays") ) {
-            gamePlays = mConfig.getGamesConfig().getInt("games." + gameKey + ".plays");
+        if( Config.getGamesConfig().contains("games." + gameKey + ".plays") ) {
+            gamePlays = Config.getGamesConfig().getInt("games." + gameKey + ".plays");
         }
 
-        mConfig.getGamesConfig().set("games." + gameKey + ".plays", gamePlays + amount);
-        mConfig.saveConfigs();
+        Config.getGamesConfig().set("games." + gameKey + ".plays", gamePlays + amount);
+        Config.saveConfigs();
     }
 }

@@ -1,8 +1,8 @@
 package org.mcau.robotoraccoon.fridaynightgames.command;
 
 import org.bukkit.command.CommandSender;
-import org.mcau.robotoraccoon.fridaynightgames.mCommands;
-import org.mcau.robotoraccoon.fridaynightgames.mConfig;
+import org.mcau.robotoraccoon.fridaynightgames.Commands;
+import org.mcau.robotoraccoon.fridaynightgames.Config;
 import org.mcau.robotoraccoon.fridaynightgames.utility.uBroadcast;
 
 public class cReload {
@@ -10,12 +10,12 @@ public class cReload {
     public static void reload(CommandSender sender, String[] args) {
 
         if( !sender.hasPermission( getPermission() ) ) {
-            uBroadcast.colour(sender, mCommands.getDenied());
+            uBroadcast.colour(sender, Commands.getDenied());
             return;
         }
 
-        mConfig.loadConfigs();
-        uBroadcast.colour(sender, mCommands.getPrefix() + "&aSuccessfully reloaded the config file!");
+        Config.loadConfigs();
+        uBroadcast.colour(sender, Commands.getPrefix() + "&aSuccessfully reloaded the config file!");
 
     }
 

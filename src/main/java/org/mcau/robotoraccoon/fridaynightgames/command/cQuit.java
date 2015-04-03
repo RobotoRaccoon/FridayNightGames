@@ -2,8 +2,8 @@ package org.mcau.robotoraccoon.fridaynightgames.command;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.mcau.robotoraccoon.fridaynightgames.mCommands;
-import org.mcau.robotoraccoon.fridaynightgames.mMain;
+import org.mcau.robotoraccoon.fridaynightgames.Commands;
+import org.mcau.robotoraccoon.fridaynightgames.Main;
 import org.mcau.robotoraccoon.fridaynightgames.utility.uBroadcast;
 
 public class cQuit {
@@ -11,22 +11,21 @@ public class cQuit {
     public static void quit(CommandSender sender, String[] args) {
 
         if( !sender.hasPermission( getPermission() ) ) {
-            uBroadcast.colour(sender, mCommands.getDenied());
+            uBroadcast.colour(sender, Commands.getDenied());
             return;
         }
 
-        if( !mMain.fngEnabled ) {
-            uBroadcast.colour(sender, mCommands.getDisabled());
+        if( !Main.fngEnabled ) {
+            uBroadcast.colour(sender, Commands.getDisabled());
             return;
         }
 
         Player player = (Player) sender;
-
-        if( mMain.playerList.containsKey( player.getUniqueId() ) ) {
-            mMain.playerList.remove( player.getUniqueId() );
-            uBroadcast.colour(sender, mCommands.getPrefix() + "You have quit the games! Thanks for playing!");
+        if( Main.playerList.containsKey( player.getUniqueId() ) ) {
+            Main.playerList.remove( player.getUniqueId() );
+            uBroadcast.colour(sender, Commands.getPrefix() + "You have quit the games! Thanks for playing!");
         } else {
-            uBroadcast.colour(sender, mCommands.getError() + "You weren't in the games anyway.");
+            uBroadcast.colour(sender, Commands.getError() + "You weren't in the games anyway.");
         }
 
     }

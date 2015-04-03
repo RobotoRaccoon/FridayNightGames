@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
-public class mMain extends JavaPlugin {
+public class Main extends JavaPlugin {
 
     private static Plugin plugin;
 
@@ -36,15 +36,15 @@ public class mMain extends JavaPlugin {
 
         // Events
         PluginManager pluginManager = plugin.getServer().getPluginManager();
-        pluginManager.registerEvents(new mEvents(), this);
+        pluginManager.registerEvents(new Events(), this);
 
         // Commands
-        getCommand( "fridaynightgames" ).setExecutor( new mCommands() );
-        getCommand( "fng"              ).setExecutor( new mCommands() );
+        getCommand( "fridaynightgames" ).setExecutor( new Commands() );
+        getCommand( "fng"              ).setExecutor( new Commands() );
 
         // Config
-        new mConfig();
-        mConfig.createAllFiles();
+        new Config();
+        Config.createAllFiles();
 
     }
 

@@ -1,7 +1,7 @@
 package org.mcau.robotoraccoon.fridaynightgames.thread;
 
 import org.bukkit.scheduler.BukkitRunnable;
-import org.mcau.robotoraccoon.fridaynightgames.mMain;
+import org.mcau.robotoraccoon.fridaynightgames.Main;
 import org.mcau.robotoraccoon.fridaynightgames.utility.uGame;
 import org.mcau.robotoraccoon.fridaynightgames.utility.uVoting;
 
@@ -14,7 +14,7 @@ public class tAutoStartRunnable extends BukkitRunnable {
     public void run() {
 
         // Cancel if FNG is no longer enabled, or the timer was stopped.
-        if( !mMain.fngEnabled || !mMain.autoStartEnabled ) {
+        if( !Main.fngEnabled || !Main.autoStartEnabled ) {
             this.cancel();
             return;
         }

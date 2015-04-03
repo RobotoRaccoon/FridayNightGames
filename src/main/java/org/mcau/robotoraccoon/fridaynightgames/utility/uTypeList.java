@@ -1,26 +1,26 @@
 package org.mcau.robotoraccoon.fridaynightgames.utility;
 
-import org.mcau.robotoraccoon.fridaynightgames.mConfig;
+import org.mcau.robotoraccoon.fridaynightgames.Config;
 
 import java.util.Set;
 
 public class uTypeList {
 
-    public static Set<String> getTypes() { return mConfig.getConfig().getConfigurationSection("types").getKeys(false); }
+    public static Set<String> getTypes() { return Config.getConfig().getConfigurationSection("types").getKeys(false); }
 
     public static String getPlugin(String type) {
 
         type = type.toLowerCase();
 
         if( getTypes().contains( type ) ) {
-            return mConfig.getConfig().getString("types." + type);
+            return Config.getConfig().getString("types." + type);
         }
         else {
-            return mConfig.getConfig().getString("types.unknown");
+            return Config.getConfig().getString("types.unknown");
         }
     }
 
-    public static Set<String> getPluginKeys() { return mConfig.getConfig().getConfigurationSection("commands").getKeys(false); }
+    public static Set<String> getPluginKeys() { return Config.getConfig().getConfigurationSection("commands").getKeys(false); }
 
     // Get the join command from a type key
     public static String getJoinCommand(String type) {
@@ -30,11 +30,11 @@ public class uTypeList {
 
         if( getPluginKeys().contains(plugin) ) {
             try {
-                return mConfig.getConfig().getString("commands." + plugin + ".join");
+                return Config.getConfig().getString("commands." + plugin + ".join");
             } catch (Exception e) {}
         }
 
-        return mConfig.getConfig().getString("commands.unknown.join");
+        return Config.getConfig().getString("commands.unknown.join");
     }
 
     // Get the quit command from a type
@@ -45,11 +45,11 @@ public class uTypeList {
 
         if( getPluginKeys().contains(plugin) ) {
             try{
-                return mConfig.getConfig().getString("commands." + plugin + ".quit");
+                return Config.getConfig().getString("commands." + plugin + ".quit");
             } catch (Exception e) {}
         }
 
-        return mConfig.getConfig().getString("commands.unknown.quit");
+        return Config.getConfig().getString("commands.unknown.quit");
     }
 
 }

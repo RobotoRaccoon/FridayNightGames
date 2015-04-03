@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 import org.mcau.robotoraccoon.fridaynightgames.command.*;
 import org.mcau.robotoraccoon.fridaynightgames.utility.uBroadcast;
 
-public class mCommands implements CommandExecutor {
+public class Commands implements CommandExecutor {
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 

@@ -1,7 +1,7 @@
 package org.mcau.robotoraccoon.fridaynightgames.utility;
 
 import org.bukkit.entity.Player;
-import org.mcau.robotoraccoon.fridaynightgames.mMain;
+import org.mcau.robotoraccoon.fridaynightgames.Main;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,10 +11,10 @@ import java.util.UUID;
 public class uPlayerList {
 
     // Array of keys
-    public static List<UUID> getKeys() { return new ArrayList<UUID>(mMain.playerList.keySet()); }
+    public static List<UUID> getKeys() { return new ArrayList<UUID>(Main.playerList.keySet()); }
 
     // Array of players
-    public static List<Player> getPlayers() { return new ArrayList<Player>(mMain.playerList.values()); }
+    public static List<Player> getPlayers() { return new ArrayList<Player>(Main.playerList.values()); }
 
     // Array of player names
     public static List<String> getPlayerNames() {
@@ -29,10 +29,10 @@ public class uPlayerList {
     }
 
     // Size of list
-    public static Integer getSize() { return mMain.playerList.size(); }
+    public static Integer getSize() { return Main.playerList.size(); }
 
     // Clear the list
-    public static void clearList() { mMain.playerList.clear(); }
+    public static void clearList() { Main.playerList.clear(); }
 
     // A single key at random
     public static UUID getRandomKey() {
@@ -43,6 +43,6 @@ public class uPlayerList {
     }
 
     // A single players at random
-    public static Player getRandomPlayer() { return mMain.playerList.get(uPlayerList.getRandomKey()); }
+    public static Player getRandomPlayer() { return Main.playerList.get(uPlayerList.getRandomKey()); }
 
 }
