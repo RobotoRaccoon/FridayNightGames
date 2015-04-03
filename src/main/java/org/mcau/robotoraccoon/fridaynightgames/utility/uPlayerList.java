@@ -12,12 +12,12 @@ public class uPlayerList {
 
     // Array of keys
     public static List<UUID> getKeys() {
-        return new ArrayList<UUID>(Main.playerList.keySet());
+        return new ArrayList<UUID>(Main.getPlayerList().keySet());
     }
 
     // Array of players
     public static List<Player> getPlayers() {
-        return new ArrayList<Player>(Main.playerList.values());
+        return new ArrayList<Player>(Main.getPlayerList().values());
     }
 
     // Array of player names
@@ -34,12 +34,12 @@ public class uPlayerList {
 
     // Size of list
     public static Integer getSize() {
-        return Main.playerList.size();
+        return Main.getPlayerList().size();
     }
 
     // Clear the list
     public static void clearList() {
-        Main.playerList.clear();
+        Main.getPlayerList().clear();
     }
 
     // A single key at random
@@ -52,7 +52,7 @@ public class uPlayerList {
 
     // A single players at random
     public static Player getRandomPlayer() {
-        return Main.playerList.get(uPlayerList.getRandomKey());
+        return Main.getPlayerList().get(uPlayerList.getRandomKey());
     }
 
 }

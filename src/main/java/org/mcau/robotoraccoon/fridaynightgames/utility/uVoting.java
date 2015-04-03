@@ -32,10 +32,10 @@ public class uVoting {
             // Get lowest value
             int maxLoops = keys.size() - mapCount;
             if (maxLoops > removeCount) maxLoops = removeCount;
-            if (maxLoops > Main.fngPlayedGames.size()) maxLoops = Main.fngPlayedGames.size();
+            if (maxLoops > Main.getPlayedGames().size()) maxLoops = Main.getPlayedGames().size();
 
             for (int i = 0; i < maxLoops; i++) {
-                keys.remove(Main.fngPlayedGames.get(i));
+                keys.remove(Main.getPlayedGames().get(i));
             }
         }
 
