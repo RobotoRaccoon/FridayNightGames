@@ -6,21 +6,24 @@ import java.util.Set;
 
 public class uTypeList {
 
-    public static Set<String> getTypes() { return Config.getConfig().getConfigurationSection("types").getKeys(false); }
+    public static Set<String> getTypes() {
+        return Config.getConfig().getConfigurationSection("types").getKeys(false);
+    }
 
     public static String getPlugin(String type) {
 
         type = type.toLowerCase();
 
-        if( getTypes().contains( type ) ) {
+        if (getTypes().contains(type)) {
             return Config.getConfig().getString("types." + type);
-        }
-        else {
+        } else {
             return Config.getConfig().getString("types.unknown");
         }
     }
 
-    public static Set<String> getPluginKeys() { return Config.getConfig().getConfigurationSection("commands").getKeys(false); }
+    public static Set<String> getPluginKeys() {
+        return Config.getConfig().getConfigurationSection("commands").getKeys(false);
+    }
 
     // Get the join command from a type key
     public static String getJoinCommand(String type) {
@@ -28,10 +31,11 @@ public class uTypeList {
         type = type.toLowerCase();
         String plugin = getPlugin(type);
 
-        if( getPluginKeys().contains(plugin) ) {
+        if (getPluginKeys().contains(plugin)) {
             try {
                 return Config.getConfig().getString("commands." + plugin + ".join");
-            } catch (Exception e) {}
+            } catch (Exception e) {
+            }
         }
 
         return Config.getConfig().getString("commands.unknown.join");
@@ -43,10 +47,11 @@ public class uTypeList {
         type = type.toLowerCase();
         String plugin = getPlugin(type);
 
-        if( getPluginKeys().contains(plugin) ) {
-            try{
+        if (getPluginKeys().contains(plugin)) {
+            try {
                 return Config.getConfig().getString("commands." + plugin + ".quit");
-            } catch (Exception e) {}
+            } catch (Exception e) {
+            }
         }
 
         return Config.getConfig().getString("commands.unknown.quit");

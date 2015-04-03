@@ -9,33 +9,33 @@ import org.mcau.robotoraccoon.fridaynightgames.utility.uVoting;
 
 public class cVote {
 
-    public static void vote( CommandSender sender, String[] args ) {
+    public static void vote(CommandSender sender, String[] args) {
 
-        if( !sender.hasPermission( getPermission() ) ) {
+        if (!sender.hasPermission(getPermission())) {
             uBroadcast.colour(sender, Commands.getDenied());
             return;
         }
 
-        if( !Main.fngEnabled ) {
+        if (!Main.fngEnabled) {
             uBroadcast.colour(sender, Commands.getDisabled());
             return;
         }
 
-        if( args.length < 2 ) {
+        if (args.length < 2) {
             uVoting.printList(sender);
             return;
         }
 
         // Only players from here onwards.
-        if( !(sender instanceof Player) ) {
+        if (!(sender instanceof Player)) {
             uBroadcast.colour(sender, Commands.getNoConsole());
             return;
         }
 
         Integer index;
         try {
-            index = Integer.valueOf( args[1] ) - 1;
-        } catch(Exception e) {
+            index = Integer.valueOf(args[1]) - 1;
+        } catch (Exception e) {
             uBroadcast.colour(sender, Commands.getError() + "You must specify a number, not the map name.");
             uVoting.printList(sender);
             return;
@@ -45,5 +45,7 @@ public class cVote {
 
     }
 
-    public static String getPermission() { return "fng.player"; }
+    public static String getPermission() {
+        return "fng.player";
+    }
 }

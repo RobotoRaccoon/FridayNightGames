@@ -19,8 +19,7 @@ public class tAutoStartText extends Thread {
 
             Thread.sleep(60000);
 
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             //uBroadcast.host(mCommands.getPrefix() + "An error occurred when trying to AutoStart FNG - please start the game manually.");
         }
 

@@ -4,34 +4,33 @@ import org.bukkit.command.CommandSender;
 import org.mcau.robotoraccoon.fridaynightgames.Commands;
 import org.mcau.robotoraccoon.fridaynightgames.Config;
 import org.mcau.robotoraccoon.fridaynightgames.Main;
-import org.mcau.robotoraccoon.fridaynightgames.utility.*;
+import org.mcau.robotoraccoon.fridaynightgames.utility.uBroadcast;
+import org.mcau.robotoraccoon.fridaynightgames.utility.uGame;
+import org.mcau.robotoraccoon.fridaynightgames.utility.uGameList;
+import org.mcau.robotoraccoon.fridaynightgames.utility.uTypeList;
 
 public class cGame {
 
-    public static void game( CommandSender sender, String[] args ) {
+    public static void game(CommandSender sender, String[] args) {
 
-        if( !sender.hasPermission( getPermission() ) ) {
+        if (!sender.hasPermission(getPermission())) {
             uBroadcast.colour(sender, Commands.getDenied());
             return;
         }
 
-        if( args.length < 2 ) {
+        if (args.length < 2) {
             playersHelp(sender);
-        }
-        else try {
-            switch( switchCommands.valueOf( args[1].toUpperCase() ) ) {
+        } else try {
+            switch (switchCommands.valueOf(args[1].toUpperCase())) {
 
                 case ADD:
-                    if( args.length < 4 ) {
+                    if (args.length < 4) {
                         uBroadcast.colour(sender, Commands.getError() + "/FNG Game Add <Name> <Type>");
-                    }
-                    else if( uGameList.gameExists(args[2].toLowerCase()) ) {
+                    } else if (uGameList.gameExists(args[2].toLowerCase())) {
                         uBroadcast.colour(sender, Commands.getError() + "This minigame already exists.");
-                    }
-                    else if( !uTypeList.getTypes().contains( args[3].toLowerCase() ) ) {
+                    } else if (!uTypeList.getTypes().contains(args[3].toLowerCase())) {
                         uBroadcast.colour(sender, Commands.getError() + "Type not defined. Available types: " + uTypeList.getTypes());
-                    }
-                    else {
+                    } else {
                         Config.getGamesConfig().set("games." + args[2].toLowerCase() + ".name", args[2]);
                         Config.getGamesConfig().set("games." + args[2].toLowerCase() + ".type", args[3].toLowerCase());
                         Config.getGamesConfig().set("games." + args[2].toLowerCase() + ".plays", 0);
@@ -41,7 +40,7 @@ public class cGame {
                     break;
 
                 case COUNT:
-                    if( !Main.fngEnabled ) {
+                    if (!Main.fngEnabled) {
                         uBroadcast.colour(sender, Commands.getDisabled());
                         return;
                     }
@@ -50,30 +49,26 @@ public class cGame {
                     break;
 
                 case END:
-                    if( !Main.fngEnabled ) {
+                    if (!Main.fngEnabled) {
                         uBroadcast.colour(sender, Commands.getDisabled());
                         return;
                     }
 
-                    if( args.length < 3 ) {
+                    if (args.length < 3) {
                         uBroadcast.colour(sender, Commands.getError() + "/FNG Game End <Name>");
-                    }
-                    else if( !uGameList.gameExists( args[2].toLowerCase() ) ) {
+                    } else if (!uGameList.gameExists(args[2].toLowerCase())) {
                         uBroadcast.colour(sender, Commands.getError() + "This minigame does not exist.");
-                    }
-                    else {
+                    } else {
                         uGame.end(args[2]);
                     }
                     break;
 
                 case REMOVE:
-                    if( args.length < 3 ) {
+                    if (args.length < 3) {
                         uBroadcast.colour(sender, Commands.getError() + "/FNG Game Remove <Name>");
-                    }
-                    else if( !uGameList.gameExists( args[2].toLowerCase() ) ) {
+                    } else if (!uGameList.gameExists(args[2].toLowerCase())) {
                         uBroadcast.colour(sender, Commands.getError() + "This minigame does not exist.");
-                    }
-                    else {
+                    } else {
                         Config.getGamesConfig().set("games." + args[2].toLowerCase(), null);
                         Config.saveConfigs();
                         uBroadcast.colour(sender, Commands.getPrefix() + "Game successfully removed.");
@@ -81,18 +76,16 @@ public class cGame {
                     break;
 
                 case START:
-                    if( !Main.fngEnabled ) {
+                    if (!Main.fngEnabled) {
                         uBroadcast.colour(sender, Commands.getDisabled());
                         return;
                     }
 
-                    if( args.length < 3 ) {
+                    if (args.length < 3) {
                         uBroadcast.colour(sender, Commands.getError() + "/FNG Game Start <Name>");
-                    }
-                    else if( !uGameList.gameExists( args[2].toLowerCase() ) ) {
+                    } else if (!uGameList.gameExists(args[2].toLowerCase())) {
                         uBroadcast.colour(sender, Commands.getError() + "This minigame does not exist.");
-                    }
-                    else {
+                    } else {
                         uGame.start(args[2]);
                     }
                     break;
@@ -114,10 +107,12 @@ public class cGame {
         uBroadcast.colour(sender, "&5Game Start &f> &dStarts the specified game.");
     }
 
+    public static String getPermission() {
+        return "fng.host";
+    }
+
     private enum switchCommands {
         ADD, COUNT, END, REMOVE, START
     }
-
-    public static String getPermission() { return "fng.host"; }
 
 }

@@ -13,14 +13,15 @@ public class uGameList {
         Set<String> keys = new HashSet<>();
         try {
             keys = Config.getGamesConfig().getConfigurationSection("games").getKeys(false);
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
 
         return keys;
     }
 
     // If the game exists in the config
     public static Boolean gameExists(String key) {
-         return( Config.getGamesConfig().contains("games." + key) );
+        return (Config.getGamesConfig().contains("games." + key));
     }
 
     // Correct capitalisation of the name
@@ -28,7 +29,7 @@ public class uGameList {
 
         key = key.toLowerCase();
 
-        if( Config.getGamesConfig().contains("games." + key + ".name") ) {
+        if (Config.getGamesConfig().contains("games." + key + ".name")) {
             return Config.getGamesConfig().getString("games." + key + ".name");
         }
 
@@ -40,7 +41,7 @@ public class uGameList {
 
         key = key.toLowerCase();
 
-        if( Config.getGamesConfig().contains("games." + key + ".type") ) {
+        if (Config.getGamesConfig().contains("games." + key + ".type")) {
             return Config.getGamesConfig().getString("games." + key + ".type");
         }
 

@@ -8,7 +8,7 @@ public class uMoney {
 
     public static void awardPrizeMoney() {
 
-        if( Main.econ == null ) {
+        if (Main.econ == null) {
             return;
         }
 
@@ -16,9 +16,9 @@ public class uMoney {
 
         Double amount = Main.fngPlayedGames.size() * 1.0;
 
-        for( Player player : uPlayerList.getPlayers() ) {
-            Main.econ.depositPlayer( player, amount );
-            uBroadcast.colour(player, Commands.getPrefix() + "An extra $" + amount + " has been added to your account for playing in FNG!" );
+        for (Player player : uPlayerList.getPlayers()) {
+            Main.econ.depositPlayer(player, amount);
+            uBroadcast.colour(player, Commands.getPrefix() + "An extra $" + amount + " has been added to your account for playing in FNG!");
         }
 
     }

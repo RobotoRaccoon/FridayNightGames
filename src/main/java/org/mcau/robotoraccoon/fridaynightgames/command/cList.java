@@ -14,14 +14,14 @@ import java.util.List;
 
 public class cList {
 
-    public static void list( CommandSender sender, String[] args ) {
+    public static void list(CommandSender sender, String[] args) {
 
-        if( !sender.hasPermission( getPermission() ) ) {
+        if (!sender.hasPermission(getPermission())) {
             uBroadcast.colour(sender, Commands.getDenied());
             return;
         }
 
-        if( args.length < 2) {
+        if (args.length < 2) {
 
             // Get games into an associative array.
             HashMap<String, List<String>> sortedGames = new HashMap<>();
@@ -42,8 +42,7 @@ public class cList {
             for (String type : sortedGames.keySet()) {
                 uBroadcast.colour(sender, "&5" + type + ": &e" + sortedGames.get(type).toString());
             }
-        }
-        else {
+        } else {
             String gameKey = args[1].toLowerCase();
 
             uBroadcast.colour(sender, "&5Name: &e" + uGameList.getGameName(gameKey));
@@ -55,6 +54,8 @@ public class cList {
 
     }
 
-    public static String getPermission() { return "fng.player"; }
+    public static String getPermission() {
+        return "fng.player";
+    }
 
 }

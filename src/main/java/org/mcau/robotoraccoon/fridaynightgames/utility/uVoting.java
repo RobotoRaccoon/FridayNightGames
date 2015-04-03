@@ -16,7 +16,7 @@ public class uVoting {
         generateList(5);
     }
 
-    public static void generateList( Integer mapCount ) {
+    public static void generateList(Integer mapCount) {
 
         voteList.clear();
         mapList.clear();
@@ -33,8 +33,8 @@ public class uVoting {
         //}
 
         // Generate list.
-        for( short i = 0; i < mapCount; i++ ) {
-            if( keys.size() != 0 ) {
+        for (short i = 0; i < mapCount; i++) {
+            if (keys.size() != 0) {
                 Random random = new Random();
                 String randomKey = keys.get(random.nextInt(keys.size()));
 
@@ -45,11 +45,11 @@ public class uVoting {
 
     }
 
-    public static void printList( CommandSender sender ) {
+    public static void printList(CommandSender sender) {
 
         uBroadcast.colour(sender, " &7======= &5Available Maps &7======= ");
 
-        for( short i = 0; i < mapList.size(); i++ ) {
+        for (short i = 0; i < mapList.size(); i++) {
             String pos = String.valueOf(i + 1);
             uBroadcast.colour(sender, "&5" + pos + ": &d" + uGameList.getGameName(mapList.get(i))
                     + " &7&o(" + uGameList.getGameType(mapList.get(i)) + ")");
@@ -60,9 +60,9 @@ public class uVoting {
     }
 
     // Handles the player voting.
-    public static void vote( CommandSender sender, Integer index ) {
+    public static void vote(CommandSender sender, Integer index) {
 
-        if( index >= mapList.size() || index < 0 ) {
+        if (index >= mapList.size() || index < 0) {
             uBroadcast.colour(sender, Commands.getError() + "This number does not exist!");
             printList(sender);
             return;
@@ -71,10 +71,9 @@ public class uVoting {
         String gameKey = mapList.get(index);
         Player player = (Player) sender;
 
-        if( voteList.containsKey(player.getUniqueId()) ) {
+        if (voteList.containsKey(player.getUniqueId())) {
             uBroadcast.colour(sender, Commands.getPrefix() + "You have changed your vote to &5" + uGameList.getGameName(gameKey));
-        }
-        else {
+        } else {
             uBroadcast.colour(sender, Commands.getPrefix() + "You have successfully voted for &5" + uGameList.getGameName(gameKey));
         }
 
@@ -87,15 +86,14 @@ public class uVoting {
 
         HashMap<String, Integer> voteTally = new HashMap<>();
 
-        for( UUID pUUID : voteList.keySet() ) {
+        for (UUID pUUID : voteList.keySet()) {
 
             String gameKey = voteList.get(pUUID);
             Integer gameScore;
 
-            if( voteTally.containsKey(gameKey) ) {
+            if (voteTally.containsKey(gameKey)) {
                 gameScore = voteTally.get(gameKey) + 1;
-            }
-            else {
+            } else {
                 gameScore = 1;
             }
 
@@ -112,14 +110,13 @@ public class uVoting {
         HashMap<String, Integer> voteTally = getVoteTally();
         Integer highestVote = 0;
 
-        for( String gameKey : voteTally.keySet() ) {
+        for (String gameKey : voteTally.keySet()) {
 
-            if( voteTally.get(gameKey) > highestVote ) {
+            if (voteTally.get(gameKey) > highestVote) {
                 highestVote = voteTally.get(gameKey);
                 mostVoted.clear();
                 mostVoted.add(gameKey);
-            }
-            else if( voteTally.get(gameKey).equals(highestVote) ) {
+            } else if (voteTally.get(gameKey).equals(highestVote)) {
                 mostVoted.add(gameKey);
             }
 

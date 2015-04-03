@@ -9,23 +9,22 @@ import org.mcau.robotoraccoon.fridaynightgames.utility.uVoting;
 
 public class cEnabled {
 
-    public static void enabled( CommandSender sender, String[] args ) {
+    public static void enabled(CommandSender sender, String[] args) {
 
-        if( !sender.hasPermission( getPermission() ) ) {
+        if (!sender.hasPermission(getPermission())) {
             sender.sendMessage(Commands.getDenied());
             return;
         }
 
-        if( args.length < 2 ) {
+        if (args.length < 2) {
 
-            if( Main.fngEnabled ) {
+            if (Main.fngEnabled) {
                 uBroadcast.colour(sender, Commands.getPrefix() + "Status: &aEnabled");
             } else {
                 uBroadcast.colour(sender, Commands.getPrefix() + "Status: &cDisabled");
             }
 
-        }
-        else if( args[1].matches("(?i)T.*") ) {
+        } else if (args[1].matches("(?i)T.*")) {
 
             Main.fngEnabled = true;
             uPlayerList.clearList();
@@ -34,8 +33,7 @@ public class cEnabled {
             uBroadcast.global(Commands.getPrefix() + "Has been &aEnabled &eby &5" + sender.getName());
             uBroadcast.global(Commands.getPrefix() + "Use &5/FNG Join&e to play in the games!");
 
-        }
-        else {
+        } else {
 
             Main.fngEnabled = false;
             uPlayerList.clearList();
@@ -45,6 +43,8 @@ public class cEnabled {
         }
     }
 
-    public static String getPermission() { return "fng.operator"; }
+    public static String getPermission() {
+        return "fng.operator";
+    }
 
 }

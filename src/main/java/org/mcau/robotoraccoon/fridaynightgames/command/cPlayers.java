@@ -10,21 +10,20 @@ public class cPlayers {
 
     public static void players(CommandSender sender, String[] args) {
 
-        if( !sender.hasPermission( getPermission() ) ) {
+        if (!sender.hasPermission(getPermission())) {
             uBroadcast.colour(sender, Commands.getDenied());
             return;
         }
 
-        if( !Main.fngEnabled ) {
+        if (!Main.fngEnabled) {
             uBroadcast.colour(sender, Commands.getDisabled());
             return;
         }
 
-        if( args.length < 2 ) {
+        if (args.length < 2) {
             playersHelp(sender);
-        }
-        else try {
-            switch( switchCommands.valueOf( args[1].toUpperCase() ) ) {
+        } else try {
+            switch (switchCommands.valueOf(args[1].toUpperCase())) {
 
                 case COUNT:
                     uBroadcast.colour(sender, Commands.getPrefix() + "Current players: &c" + uPlayerList.getSize());
@@ -32,7 +31,7 @@ public class cPlayers {
 
                 case LIST:
 
-                    if( uPlayerList.getSize() == 0 ) {
+                    if (uPlayerList.getSize() == 0) {
                         uBroadcast.colour(sender, Commands.getError() + "No one has joined FNG.");
                         break;
                     }
@@ -42,7 +41,7 @@ public class cPlayers {
 
                 case RANDOM:
 
-                    if( uPlayerList.getSize() == 0 ) {
+                    if (uPlayerList.getSize() == 0) {
                         uBroadcast.colour(sender, Commands.getError() + "No one has joined FNG.");
                         break;
                     }
@@ -63,10 +62,12 @@ public class cPlayers {
         uBroadcast.colour(sender, "&5Players Random &f> &dA random players' name.");
     }
 
+    public static String getPermission() {
+        return "fng.player";
+    }
+
     private enum switchCommands {
         COUNT, LIST, RANDOM
     }
-
-    public static String getPermission() { return "fng.player"; }
 
 }

@@ -8,26 +8,25 @@ import org.mcau.robotoraccoon.fridaynightgames.utility.uVoting;
 
 public class cResults {
 
-    public static void results( CommandSender sender, String[] args ) {
+    public static void results(CommandSender sender, String[] args) {
 
-        if( !sender.hasPermission( getPermission() ) ) {
+        if (!sender.hasPermission(getPermission())) {
             uBroadcast.colour(sender, Commands.getDenied());
             return;
         }
 
-        if( !Main.fngEnabled ) {
+        if (!Main.fngEnabled) {
             uBroadcast.colour(sender, Commands.getDisabled());
             return;
         }
 
-        if( args.length < 2 ) {
+        if (args.length < 2) {
             uBroadcast.colour(sender, Commands.getPrefix() + "The most voted maps: &c" + uVoting.getMostVoted().toString());
             return;
-        }
-        else if( args[1].equalsIgnoreCase("reset") ) {
+        } else if (args[1].equalsIgnoreCase("reset")) {
 
-            if( !sender.hasPermission("fng.host") ) {
-                uBroadcast.colour(sender, Commands.getDenied() );
+            if (!sender.hasPermission("fng.host")) {
+                uBroadcast.colour(sender, Commands.getDenied());
                 return;
             }
 
@@ -39,7 +38,9 @@ public class cResults {
 
     }
 
-    public static String getPermission() { return "fng.player"; }
+    public static String getPermission() {
+        return "fng.player";
+    }
 
 }
 

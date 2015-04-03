@@ -14,25 +14,30 @@ public class Config {
     private static FileConfiguration config;
     private static FileConfiguration gamesConfig;
 
-    public static FileConfiguration getConfig(){ return config; }
-    public static FileConfiguration getGamesConfig(){ return gamesConfig; }
+    public Config() {
 
-    public Config(){
-
-        configFile = new File( Main.getPlugin().getDataFolder(), "config.yml" );
-        gamesFile = new File( Main.getPlugin().getDataFolder(), "games.yml" );
+        configFile = new File(Main.getPlugin().getDataFolder(), "config.yml");
+        gamesFile = new File(Main.getPlugin().getDataFolder(), "games.yml");
 
         config = YamlConfiguration.loadConfiguration(configFile);
-        gamesConfig = YamlConfiguration.loadConfiguration( gamesFile );
+        gamesConfig = YamlConfiguration.loadConfiguration(gamesFile);
 
     }
 
-    public static void createAllFiles(){
+    public static FileConfiguration getConfig() {
+        return config;
+    }
 
-        if( !configFile.exists() ) {
+    public static FileConfiguration getGamesConfig() {
+        return gamesConfig;
+    }
+
+    public static void createAllFiles() {
+
+        if (!configFile.exists()) {
             Main.getPlugin().saveResource("config.yml", true);
         }
-        if( !gamesFile.exists() ) {
+        if (!gamesFile.exists()) {
             Main.getPlugin().saveResource("games.yml", true);
         }
 
@@ -40,29 +45,29 @@ public class Config {
 
     }
 
-    public static boolean loadConfigs(){
+    public static boolean loadConfigs() {
 
-        try{
+        try {
 
-            config = YamlConfiguration.loadConfiguration( new File( Main.getPlugin().getDataFolder(), "config.yml" ) );
-            gamesConfig = YamlConfiguration.loadConfiguration( new File( Main.getPlugin().getDataFolder(), "games.yml" ) );
+            config = YamlConfiguration.loadConfiguration(new File(Main.getPlugin().getDataFolder(), "config.yml"));
+            gamesConfig = YamlConfiguration.loadConfiguration(new File(Main.getPlugin().getDataFolder(), "games.yml"));
 
             Main.getPlugin().reloadConfig();
             return true;
 
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
 
     }
 
-    public static void saveConfigs(){
+    public static void saveConfigs() {
 
         try {
 
-            config.save( configFile );
-            gamesConfig.save( gamesFile );
+            config.save(configFile);
+            gamesConfig.save(gamesFile);
 
         } catch (IOException e) {
             e.printStackTrace();
