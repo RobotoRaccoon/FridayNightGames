@@ -1,4 +1,4 @@
 Manifest-Version: 1.0
 Class-Path: org.mcau.robotoraccoon.fridaynightgames
-Main-Class: mMain
+Main-Class: Main
 

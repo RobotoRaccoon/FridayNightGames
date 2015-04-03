@@ -3,6 +3,8 @@ package org.mcau.robotoraccoon.fridaynightgames.utility;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.mcau.robotoraccoon.fridaynightgames.Commands;
+import org.mcau.robotoraccoon.fridaynightgames.Config;
+import org.mcau.robotoraccoon.fridaynightgames.Main;
 
 import java.util.*;
 
@@ -24,13 +26,19 @@ public class uVoting {
         List<String> keys = new ArrayList<>();
         keys.addAll(uGameList.getKeys());
 
-        // Remove last played maps whilst not shortening the list to less than 5.
-        //if( keys.size() > 5 ) {
-        //    int maxLoops = Math.min(10, Math.min(keys.size() - 5, mMain.fngPlayedGames.size()));
-        //    for( Integer i = maxLoops - 1; i >= 0; i-- ) {
-        //        keys.remove( keys.indexOf(mMain.fngPlayedGames.get(i)) );
-        //    }
-        //}
+        // Amount of maps to remove from the list that have already been played this session
+        int removeCount = Config.getConfig().getInt("removePlayedGames");
+        if (keys.size() > mapCount) {
+            // Get lowest value
+            int maxLoops = keys.size() - mapCount;
+            if (maxLoops > removeCount) maxLoops = removeCount;
+            if (maxLoops > Main.fngPlayedGames.size()) maxLoops = Main.fngPlayedGames.size();
+
+            for (int i = 0; i < maxLoops; i++) {
+                keys.remove(Main.fngPlayedGames.get(i));
+            }
+        }
+
 
         // Generate list.
         for (short i = 0; i < mapCount; i++) {

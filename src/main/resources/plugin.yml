@@ -3,7 +3,7 @@ version: ${project.version}-b${build.number}
 description: ${project.description}
 
 author: RobotoRaccoon
-main: ${project.groupId}.${project.artifactId}.mMain
+main: ${project.groupId}.${project.artifactId}.Main
 website: ${organization.url}
 
 depend: [Minigames]

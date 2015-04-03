@@ -1,3 +1,4 @@
+removePlayedGames: 10
 types:
   unknown: mg
   bh: bh
