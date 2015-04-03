@@ -15,17 +15,17 @@ public class cJoin {
             return;
         }
 
-        if (!Main.fngEnabled) {
+        if (!Main.getFngEnabled()) {
             uBroadcast.colour(sender, Commands.getDisabled());
             return;
         }
 
         Player player = (Player) sender;
 
-        if (Main.playerList.containsKey(player.getUniqueId())) {
+        if (Main.getPlayerList().containsKey(player.getUniqueId())) {
             uBroadcast.colour(sender, Commands.getError() + "You have already joined the games.");
         } else {
-            Main.playerList.put(player.getUniqueId(), player);
+            Main.getPlayerList().put(player.getUniqueId(), player);
             uBroadcast.colour(sender, Commands.getPrefix() + "You have joined the games! You'll join with the next available lobby!");
         }
 

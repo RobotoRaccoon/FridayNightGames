@@ -14,13 +14,13 @@ import java.util.UUID;
 
 public class Main extends JavaPlugin {
 
-    public static final List<String> fngPlayedGames = new ArrayList<>();
-    public static final HashMap<UUID, Player> playerList = new HashMap<>();
+    private static final List<String> playedGames = new ArrayList<>();
+    private static final HashMap<UUID, Player> playerList = new HashMap<>();
     // FNG
-    public static Boolean fngEnabled = false;
-    public static Boolean autoStartEnabled = false;
+    private static Boolean fngEnabled = false;
+    private static Boolean autoStartEnabled = false;
     // Vault
-    public static Economy econ = null;
+    private static Economy econ = null;
     private static Plugin plugin;
 
     public static Plugin getPlugin() {
@@ -29,7 +29,6 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
-
         plugin = this;
 
         // Vault
@@ -64,6 +63,34 @@ public class Main extends JavaPlugin {
         }
         econ = rsp.getProvider();
         return econ != null;
+    }
+
+    public static HashMap<UUID, Player> getPlayerList() {
+        return playerList;
+    }
+
+    public static List<String> getPlayedGames() {
+        return playedGames;
+    }
+
+    public static Boolean getFngEnabled() {
+        return fngEnabled;
+    }
+
+    public static void setFngEnabled(Boolean fngEnabled) {
+        Main.fngEnabled = fngEnabled;
+    }
+
+    public static Boolean getAutoStartEnabled() {
+        return autoStartEnabled;
+    }
+
+    public static void setAutoStartEnabled(Boolean autoStartEnabled) {
+        Main.autoStartEnabled = autoStartEnabled;
+    }
+
+    public static Economy getEcon() {
+        return econ;
     }
 
 }

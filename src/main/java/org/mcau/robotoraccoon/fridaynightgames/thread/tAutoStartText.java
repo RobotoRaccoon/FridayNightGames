@@ -8,7 +8,7 @@ public class tAutoStartText extends Thread {
 
     public void run() {
 
-        Main.autoStartEnabled = true;
+        Main.setAutoStartEnabled(true);
         try {
 
             Thread.sleep(1000);

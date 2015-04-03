@@ -15,14 +15,14 @@ public class cQuit {
             return;
         }
 
-        if (!Main.fngEnabled) {
+        if (!Main.getFngEnabled()) {
             uBroadcast.colour(sender, Commands.getDisabled());
             return;
         }
 
         Player player = (Player) sender;
-        if (Main.playerList.containsKey(player.getUniqueId())) {
-            Main.playerList.remove(player.getUniqueId());
+        if (Main.getPlayerList().containsKey(player.getUniqueId())) {
+            Main.getPlayerList().remove(player.getUniqueId());
             uBroadcast.colour(sender, Commands.getPrefix() + "You have quit the games! Thanks for playing!");
         } else {
             uBroadcast.colour(sender, Commands.getError() + "You weren't in the games anyway.");

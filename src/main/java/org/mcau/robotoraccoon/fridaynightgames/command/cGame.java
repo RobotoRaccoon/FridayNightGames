@@ -40,16 +40,16 @@ public class cGame {
                     break;
 
                 case COUNT:
-                    if (!Main.fngEnabled) {
+                    if (!Main.getFngEnabled()) {
                         uBroadcast.colour(sender, Commands.getDisabled());
                         return;
                     }
 
-                    uBroadcast.colour(sender, Commands.getPrefix() + "Amount of games started in this session: &c" + Main.fngPlayedGames.size());
+                    uBroadcast.colour(sender, Commands.getPrefix() + "Amount of games started in this session: &c" + Main.getPlayedGames().size());
                     break;
 
                 case END:
-                    if (!Main.fngEnabled) {
+                    if (!Main.getFngEnabled()) {
                         uBroadcast.colour(sender, Commands.getDisabled());
                         return;
                     }
@@ -76,7 +76,7 @@ public class cGame {
                     break;
 
                 case START:
-                    if (!Main.fngEnabled) {
+                    if (!Main.getFngEnabled()) {
                         uBroadcast.colour(sender, Commands.getDisabled());
                         return;
                     }

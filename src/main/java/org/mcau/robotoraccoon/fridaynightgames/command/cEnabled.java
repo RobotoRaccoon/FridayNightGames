@@ -18,7 +18,7 @@ public class cEnabled {
 
         if (args.length < 2) {
 
-            if (Main.fngEnabled) {
+            if (Main.getFngEnabled()) {
                 uBroadcast.colour(sender, Commands.getPrefix() + "Status: &aEnabled");
             } else {
                 uBroadcast.colour(sender, Commands.getPrefix() + "Status: &cDisabled");
@@ -26,7 +26,7 @@ public class cEnabled {
 
         } else if (args[1].matches("(?i)T.*")) {
 
-            Main.fngEnabled = true;
+            Main.setFngEnabled(true);
             uPlayerList.clearList();
             uVoting.generateList();
 
@@ -35,7 +35,7 @@ public class cEnabled {
 
         } else {
 
-            Main.fngEnabled = false;
+            Main.setFngEnabled(false);
             uPlayerList.clearList();
 
             uBroadcast.global(Commands.getPrefix() + "Has been &cDisabled &eby &5" + sender.getName());

@@ -8,16 +8,16 @@ public class uMoney {
 
     public static void awardPrizeMoney() {
 
-        if (Main.econ == null) {
+        if (Main.getEcon() == null) {
             return;
         }
 
         // Maybe add config option to select one of three modes.
 
-        Double amount = Main.fngPlayedGames.size() * 1.0;
+        Double amount = Main.getPlayedGames().size() * 1.0;
 
         for (Player player : uPlayerList.getPlayers()) {
-            Main.econ.depositPlayer(player, amount);
+            Main.getEcon().depositPlayer(player, amount);
             uBroadcast.colour(player, Commands.getPrefix() + "An extra $" + amount + " has been added to your account for playing in FNG!");
         }
 

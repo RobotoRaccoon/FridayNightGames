@@ -19,8 +19,8 @@ public class uGame {
             uRunAs.asPlayer(command, pUUID);
         }
 
-        Main.autoStartEnabled = false;
-        Main.fngPlayedGames.add(0, gameKey);
+        Main.setAutoStartEnabled(false);
+        Main.getPlayedGames().add(0, gameKey);
         uVoting.generateList();
         addPlayCount(gameKey);
 

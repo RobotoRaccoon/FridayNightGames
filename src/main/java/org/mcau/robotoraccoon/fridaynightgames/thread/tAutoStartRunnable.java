@@ -14,7 +14,7 @@ public class tAutoStartRunnable extends BukkitRunnable {
     public void run() {
 
         // Cancel if FNG is no longer enabled, or the timer was stopped.
-        if (!Main.fngEnabled || !Main.autoStartEnabled) {
+        if (!Main.getFngEnabled() || !Main.getAutoStartEnabled()) {
             this.cancel();
             return;
         }

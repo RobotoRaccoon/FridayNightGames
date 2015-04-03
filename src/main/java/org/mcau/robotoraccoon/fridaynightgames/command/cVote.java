@@ -16,7 +16,7 @@ public class cVote {
             return;
         }
 
-        if (!Main.fngEnabled) {
+        if (!Main.getFngEnabled()) {
             uBroadcast.colour(sender, Commands.getDisabled());
             return;
         }

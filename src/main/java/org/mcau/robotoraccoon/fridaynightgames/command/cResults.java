@@ -15,7 +15,7 @@ public class cResults {
             return;
         }
 
-        if (!Main.fngEnabled) {
+        if (!Main.getFngEnabled()) {
             uBroadcast.colour(sender, Commands.getDisabled());
             return;
         }
