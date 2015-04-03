@@ -9,7 +9,7 @@ public class cReload {
 
     public static void reload(CommandSender sender, String[] args) {
 
-        if( !sender.hasPermission( getPermission() ) ) {
+        if (!sender.hasPermission(getPermission())) {
             uBroadcast.colour(sender, Commands.getDenied());
             return;
         }
@@ -19,6 +19,8 @@ public class cReload {
 
     }
 
-    public static String getPermission() { return "fng.operator"; }
+    public static String getPermission() {
+        return "fng.operator";
+    }
 
 }
