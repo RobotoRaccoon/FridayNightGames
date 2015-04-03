@@ -8,7 +8,7 @@ import org.mcau.robotoraccoon.fridaynightgames.utility.uBroadcast;
 
 public class cJoin {
 
-    public static void join(CommandSender sender, String[] args) {
+    public static void run(CommandSender sender, String[] args) {
 
         if (!sender.hasPermission(getPermission())) {
             uBroadcast.colour(sender, Commands.getDenied());

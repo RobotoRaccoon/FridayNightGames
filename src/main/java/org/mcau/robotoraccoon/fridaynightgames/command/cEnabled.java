@@ -9,7 +9,7 @@ import org.mcau.robotoraccoon.fridaynightgames.utility.uVoting;
 
 public class cEnabled {
 
-    public static void enabled(CommandSender sender, String[] args) {
+    public static void run(CommandSender sender, String[] args) {
 
         if (!sender.hasPermission(getPermission())) {
             sender.sendMessage(Commands.getDenied());

@@ -71,51 +71,51 @@ public class Commands implements CommandExecutor {
                 switch (switchCommands.valueOf(args[0].toUpperCase())) {
 
                     case ENABLED:
-                        cEnabled.enabled(sender, args);
+                        cEnabled.run(sender, args);
                         break;
 
                     case GAME:
-                        cGame.game(sender, args);
+                        cGame.run(sender, args);
                         break;
 
                     case JOIN:
                         if (!(sender instanceof Player)) {
                             sender.sendMessage(commandNoConsole);
                         } else {
-                            cJoin.join(sender, args);
+                            cJoin.run(sender, args);
                         }
                         break;
 
                     case LIST:
-                        cList.list(sender, args);
+                        cList.run(sender, args);
                         break;
 
                     case PLAYERS:
-                        cPlayers.players(sender, args);
+                        cPlayers.run(sender, args);
                         break;
 
                     case QUIT:
                         if (!(sender instanceof Player)) {
                             sender.sendMessage(commandNoConsole);
                         } else {
-                            cQuit.quit(sender, args);
+                            cQuit.run(sender, args);
                         }
                         break;
 
                     case RELOAD:
-                        cReload.reload(sender, args);
+                        cReload.run(sender, args);
                         break;
 
                     case RESULTS:
-                        cResults.results(sender, args);
+                        cResults.run(sender, args);
                         break;
 
                     case TYPE:
-                        cType.type(sender, args);
+                        cType.run(sender, args);
                         break;
 
                     case VOTE:
-                        cVote.vote(sender, args);
+                        cVote.run(sender, args);
                         break;
                 }
 
