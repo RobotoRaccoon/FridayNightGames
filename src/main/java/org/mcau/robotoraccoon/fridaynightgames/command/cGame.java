@@ -82,7 +82,9 @@ public class cGame {
                     }
 
                     if (args.length < 3) {
-                        uBroadcast.colour(sender, Commands.getError() + "/FNG Game Start <Name>");
+                        uBroadcast.colour(sender, Commands.getError() + "/FNG Game Start <Name|Results>");
+                    } else if (args[2].toLowerCase().equals("results")) {
+                        uGame.startResults();
                     } else if (!uGameList.gameExists(args[2].toLowerCase())) {
                         uBroadcast.colour(sender, Commands.getError() + "This minigame does not exist.");
                     } else {
