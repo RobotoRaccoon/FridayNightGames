@@ -5,22 +5,21 @@ import org.mcau.robotoraccoon.fridaynightgames.Commands;
 import org.mcau.robotoraccoon.fridaynightgames.Config;
 import org.mcau.robotoraccoon.fridaynightgames.utility.uBroadcast;
 
-public class cReload {
+import java.util.List;
 
-    public static void run(CommandSender sender, String[] args) {
+public class cReload extends SubCommand {
 
-        if (!sender.hasPermission(getPermission())) {
-            uBroadcast.colour(sender, Commands.getDenied());
-            return;
-        }
-
-        Config.loadConfigs();
-        uBroadcast.colour(sender, Commands.getPrefix() + "&aSuccessfully reloaded the config file!");
-
+    public String getPermission() {
+        return "fng.operator";
     }
 
-    public static String getPermission() {
-        return "fng.operator";
+    public String getUsage() {
+        return "reload";
+    }
+
+    public void run(CommandSender sender, List<String> args) {
+        Config.loadConfigs();
+        uBroadcast.colour(sender, Commands.getPrefix() + "&aSuccessfully reloaded the config file!");
     }
 
 }

@@ -6,14 +6,23 @@ import org.mcau.robotoraccoon.fridaynightgames.Commands;
 import org.mcau.robotoraccoon.fridaynightgames.Main;
 import org.mcau.robotoraccoon.fridaynightgames.utility.uBroadcast;
 
-public class cJoin {
+import java.util.List;
 
-    public static void run(CommandSender sender, String[] args) {
+public class cJoin extends SubCommand {
 
-        if (!sender.hasPermission(getPermission())) {
-            uBroadcast.colour(sender, Commands.getDenied());
-            return;
-        }
+    public boolean isConsoleAllowed() {
+        return false;
+    }
+
+    public String getPermission() {
+        return "fng.player";
+    }
+
+    public String getUsage() {
+        return "join";
+    }
+
+    public void run(CommandSender sender, List<String> args) {
 
         if (!Main.getFngEnabled()) {
             uBroadcast.colour(sender, Commands.getDisabled());
@@ -21,7 +30,6 @@ public class cJoin {
         }
 
         Player player = (Player) sender;
-
         if (Main.getPlayerList().containsKey(player.getUniqueId())) {
             uBroadcast.colour(sender, Commands.getError() + "You have already joined the games.");
         } else {
@@ -29,10 +37,6 @@ public class cJoin {
             uBroadcast.colour(sender, Commands.getPrefix() + "You have joined the games! You'll join with the next available lobby!");
         }
 
-    }
-
-    public static String getPermission() {
-        return "fng.player";
     }
 
 }

@@ -8,13 +8,17 @@ import org.bukkit.entity.Player;
 import org.mcau.robotoraccoon.fridaynightgames.command.*;
 import org.mcau.robotoraccoon.fridaynightgames.utility.uBroadcast;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Commands implements CommandExecutor {
 
     private static String commandPrefix = ChatColor.DARK_PURPLE + "[FNG] " + ChatColor.YELLOW;
-    private static String commandError = commandPrefix + ChatColor.DARK_RED + "Error: " + ChatColor.RED;
+    private static String commandError = getPrefix() + ChatColor.DARK_RED + "Error: " + ChatColor.RED;
     private static String commandDenied = getError() + "You do not have permission to run this command.";
-    private static String commandDisabled = commandError + "FNG is not running at this time.";
-    private static String commandNoConsole = commandError + "You may not run this command from console.";
+    private static String commandDisabled = getPrefix() + "FNG is not running at this time.";
+    private static String commandNoConsole = getPrefix() + "You may not run this command from console.";
 
     public static String getPrefix() {
         return commandPrefix;
@@ -38,25 +42,25 @@ public class Commands implements CommandExecutor {
 
     public static void playersHelp(CommandSender sender) {
         uBroadcast.colour(sender, " &7===== &5Options &7=====");
-        if (sender.hasPermission(cEnabled.getPermission()))
+        //if (sender.hasPermission(cEnabled.getPermission()))
             uBroadcast.colour(sender, "&5Enabled [T|F] &f> &dLook at or change the status.");
-        if (sender.hasPermission(cGame.getPermission()))
+        //if (sender.hasPermission(cGame.getPermission()))
             uBroadcast.colour(sender, "&5Game &f> &dStart, End, Add, and Remove games.");
-        if (sender.hasPermission(cJoin.getPermission()))
+        //if (sender.hasPermission(cJoin.getPermission()))
             uBroadcast.colour(sender, "&5Join &f> &dJoin in on the fun.");
-        if (sender.hasPermission(cList.getPermission()))
+        //if (sender.hasPermission(cList.getPermission()))
             uBroadcast.colour(sender, "&5List &f> &dLook at the available maps.");
-        if (sender.hasPermission(cPlayers.getPermission()))
+        //if (sender.hasPermission(cPlayers.getPermission()))
             uBroadcast.colour(sender, "&5Players &f> &dSee who's joined.");
-        if (sender.hasPermission(cQuit.getPermission()))
+        //if (sender.hasPermission(cQuit.getPermission()))
             uBroadcast.colour(sender, "&5Quit &f> &dQuit having fun.");
-        if (sender.hasPermission(cReload.getPermission()))
+        //if (sender.hasPermission(cReload.getPermission()))
             uBroadcast.colour(sender, "&5Reload &f> &dReload the config.");
-        if (sender.hasPermission(cResults.getPermission()))
+        //if (sender.hasPermission(cResults.getPermission()))
             uBroadcast.colour(sender, "&5Results &f> &dView the vote results.");
         //if( sender.hasPermission( cType.getPermission() ))
         //    uBroadcast.colour(sender, "&5Type" &f> &dList, Add, and Remove types.");
-        if (sender.hasPermission(cVote.getPermission()))
+        //if (sender.hasPermission(cVote.getPermission()))
             uBroadcast.colour(sender, "&5Vote &f> &dVote for a map.");
     }
 
@@ -68,56 +72,70 @@ public class Commands implements CommandExecutor {
 
                 playersHelp(sender);
             } else try {
+                SubCommand command;
+
                 switch (switchCommands.valueOf(args[0].toUpperCase())) {
 
                     case ENABLED:
-                        cEnabled.run(sender, args);
+                        command = new cEnabled();
                         break;
 
                     case GAME:
-                        cGame.run(sender, args);
+                        command = new cGame();
                         break;
 
                     case JOIN:
-                        if (!(sender instanceof Player)) {
-                            sender.sendMessage(commandNoConsole);
-                        } else {
-                            cJoin.run(sender, args);
-                        }
+                        command = new cJoin();
                         break;
 
                     case LIST:
-                        cList.run(sender, args);
+                        command = new cList();
                         break;
 
                     case PLAYERS:
-                        cPlayers.run(sender, args);
+                        command = new cPlayers();
                         break;
 
                     case QUIT:
-                        if (!(sender instanceof Player)) {
-                            sender.sendMessage(commandNoConsole);
-                        } else {
-                            cQuit.run(sender, args);
-                        }
+                        command = new cQuit();
                         break;
 
                     case RELOAD:
-                        cReload.run(sender, args);
+                        command = new cReload();
                         break;
 
                     case RESULTS:
-                        cResults.run(sender, args);
+                        command = new cResults();
                         break;
 
                     case TYPE:
-                        cType.run(sender, args);
+                        command = new cType();
                         break;
 
                     case VOTE:
-                        cVote.run(sender, args);
+                        command = new cVote();
                         break;
+
+                    default:
+                        throw new IllegalArgumentException();
                 }
+
+                // If command does not support console usage
+                if (!(sender instanceof Player) && !command.isConsoleAllowed()) {
+                    sender.sendMessage(commandNoConsole);
+                    return true;
+                }
+
+                // No permission
+                if (!sender.hasPermission(command.getPermission())) {
+                    uBroadcast.colour(sender, Commands.getDenied());
+                    return true;
+                }
+
+                // Convert String[] to List<String>, removing first argument.
+                List<String> argsList = new ArrayList<>(Arrays.asList(args));
+                argsList.remove(0);
+                command.run(sender, argsList);
 
             } catch (IllegalArgumentException e) {
 

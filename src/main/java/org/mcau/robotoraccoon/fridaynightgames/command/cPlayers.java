@@ -6,24 +6,29 @@ import org.mcau.robotoraccoon.fridaynightgames.Main;
 import org.mcau.robotoraccoon.fridaynightgames.utility.uBroadcast;
 import org.mcau.robotoraccoon.fridaynightgames.utility.uPlayerList;
 
-public class cPlayers {
+import java.util.List;
 
-    public static void run(CommandSender sender, String[] args) {
+public class cPlayers extends SubCommand {
 
-        if (!sender.hasPermission(getPermission())) {
-            uBroadcast.colour(sender, Commands.getDenied());
-            return;
-        }
+    public String getPermission() {
+        return "fng.player";
+    }
+
+    public String getUsage() {
+        return "players <count|list|random>";
+    }
+
+    public void run(CommandSender sender, List<String> args) {
 
         if (!Main.getFngEnabled()) {
             uBroadcast.colour(sender, Commands.getDisabled());
             return;
         }
 
-        if (args.length < 2) {
+        if (args.size() < 1) {
             playersHelp(sender);
         } else try {
-            switch (switchCommands.valueOf(args[1].toUpperCase())) {
+            switch (switchCommands.valueOf(args.get(0).toUpperCase())) {
 
                 case COUNT:
                     uBroadcast.colour(sender, Commands.getPrefix() + "Current players: &c" + uPlayerList.getSize());
@@ -60,10 +65,6 @@ public class cPlayers {
         uBroadcast.colour(sender, "&5Players Count &f> &dAmount of joined players.");
         uBroadcast.colour(sender, "&5Players List &f> &dNames of joined players.");
         uBroadcast.colour(sender, "&5Players Random &f> &dA random players' name.");
-    }
-
-    public static String getPermission() {
-        return "fng.player";
     }
 
     private enum switchCommands {

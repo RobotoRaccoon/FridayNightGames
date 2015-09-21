@@ -6,31 +6,40 @@ import org.mcau.robotoraccoon.fridaynightgames.Config;
 import org.mcau.robotoraccoon.fridaynightgames.utility.uBroadcast;
 import org.mcau.robotoraccoon.fridaynightgames.utility.uTypeList;
 
-public class cType {
+import java.util.List;
 
-    public static void run(CommandSender sender, String[] args) {
+public class cType extends SubCommand {
 
-        if (!sender.hasPermission(getPermission())) {
-            uBroadcast.colour(sender, Commands.getDenied());
-            return;
-        }
+    public boolean isConsoleAllowed() {
+        return true;
+    }
 
-        if (args.length < 2) {
+    public String getPermission() {
+        return "fng.operator";
+    }
+
+    public String getUsage() {
+        return "type <list|add|remove>";
+    }
+
+    public void run(CommandSender sender, List<String> args) {
+
+        if (args.size() < 1) {
             playersHelp(sender);
         } else try {
-            switch (switchCommands.valueOf(args[1].toUpperCase())) {
+            switch (switchCommands.valueOf(args.get(0).toUpperCase())) {
 
                 case ADD:
-                    if (args.length < 4) {
+                    if (args.size() < 3) {
                         uBroadcast.colour(sender, Commands.getError() + "/FNG Type Add <Type> <Plugin>");
-                    } else if (uTypeList.getTypes().contains(args[2].toLowerCase())) {
+                    } else if (uTypeList.getTypes().contains(args.get(1).toLowerCase())) {
                         uBroadcast.colour(sender, Commands.getError() + "This type already exists.");
-                    } else if (!uTypeList.getPluginKeys().contains(args[3].toLowerCase())) {
+                    } else if (!uTypeList.getPluginKeys().contains(args.get(2).toLowerCase())) {
                         uBroadcast.colour(sender, Commands.getError() + "Plugin not defined. Available plugins: " + uTypeList.getPluginKeys());
                     } else {
-                        Config.getConfig().set("types." + args[2].toLowerCase(), args[3].toLowerCase());
+                        Config.getConfig().set("types." + args.get(1).toLowerCase(), args.get(2).toLowerCase());
                         Config.saveConfigs();
-                        uBroadcast.colour(sender, Commands.getPrefix() + "Successfully added: &c" + args[2].toLowerCase() + "|" + args[3].toLowerCase());
+                        uBroadcast.colour(sender, Commands.getPrefix() + "Successfully added: &c" + args.get(1).toLowerCase() + "|" + args.get(2).toLowerCase());
                     }
                     break;
 
@@ -39,14 +48,14 @@ public class cType {
                     break;
 
                 case REMOVE:
-                    if (args.length < 3) {
+                    if (args.size() < 2) {
                         uBroadcast.colour(sender, Commands.getError() + "/FNG Type Remove <Type>");
-                    } else if (!uTypeList.getTypes().contains(args[2].toLowerCase())) {
+                    } else if (!uTypeList.getTypes().contains(args.get(1).toLowerCase())) {
                         uBroadcast.colour(sender, Commands.getError() + "This type does not exist.");
                     } else {
-                        Config.getConfig().set("types." + args[2].toLowerCase(), null);
+                        Config.getConfig().set("types." + args.get(1).toLowerCase(), null);
                         Config.saveConfigs();
-                        uBroadcast.colour(sender, Commands.getPrefix() + "Successfully removed: &c" + args[2].toLowerCase());
+                        uBroadcast.colour(sender, Commands.getPrefix() + "Successfully removed: &c" + args.get(1).toLowerCase());
                     }
                     break;
 
@@ -62,10 +71,6 @@ public class cType {
         uBroadcast.colour(sender, "&5Type List &f> &dList all available types.");
         uBroadcast.colour(sender, "&5Type Add &f> &dAdds a new type with join command.");
         uBroadcast.colour(sender, "&5Type Remove &f> &dRemoves an added type.");
-    }
-
-    public static String getPermission() {
-        return "fng.operator";
     }
 
     private enum switchCommands {

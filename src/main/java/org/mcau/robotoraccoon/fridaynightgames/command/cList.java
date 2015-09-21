@@ -12,16 +12,19 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-public class cList {
+public class cList extends SubCommand {
 
-    public static void run(CommandSender sender, String[] args) {
+    public String getPermission() {
+        return "fng.player";
+    }
 
-        if (!sender.hasPermission(getPermission())) {
-            uBroadcast.colour(sender, Commands.getDenied());
-            return;
-        }
+    public String getUsage() {
+        return "list [game]";
+    }
 
-        if (args.length < 2) {
+    public void run(CommandSender sender, List<String> args) {
+
+        if (args.size() < 1) {
 
             // Get games into an associative array.
             HashMap<String, List<String>> sortedGames = new HashMap<>();
@@ -43,7 +46,7 @@ public class cList {
                 uBroadcast.colour(sender, "&5" + type + ": &e" + sortedGames.get(type).toString());
             }
         } else {
-            String gameKey = args[1].toLowerCase();
+            String gameKey = args.get(0).toLowerCase();
 
             uBroadcast.colour(sender, "&5Name: &e" + uGameList.getGameName(gameKey));
             uBroadcast.colour(sender, "&5Type: &e" + uGameList.getGameType(gameKey));
@@ -52,10 +55,6 @@ public class cList {
             uBroadcast.colour(sender, "&5Total Plays: &e" + Config.getGamesConfig().getInt("games." + gameKey + ".plays"));
         }
 
-    }
-
-    public static String getPermission() {
-        return "fng.player";
     }
 
 }

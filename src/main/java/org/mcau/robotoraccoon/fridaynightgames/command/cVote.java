@@ -7,21 +7,27 @@ import org.mcau.robotoraccoon.fridaynightgames.Main;
 import org.mcau.robotoraccoon.fridaynightgames.utility.uBroadcast;
 import org.mcau.robotoraccoon.fridaynightgames.utility.uVoting;
 
-public class cVote {
+import java.util.List;
 
-    public static void run(CommandSender sender, String[] args) {
+public class cVote extends SubCommand {
 
-        if (!sender.hasPermission(getPermission())) {
-            uBroadcast.colour(sender, Commands.getDenied());
-            return;
-        }
+    public String getPermission() {
+        return "fng.player";
+    }
+
+    public String getUsage() {
+        return "vote [number]";
+    }
+
+    public void run(CommandSender sender, List<String> args) {
 
         if (!Main.getFngEnabled()) {
             uBroadcast.colour(sender, Commands.getDisabled());
             return;
         }
 
-        if (args.length < 2) {
+        // No number supplied, display the candidates.
+        if (args.size() < 1) {
             uVoting.printList(sender);
             return;
         }
@@ -32,11 +38,11 @@ public class cVote {
             return;
         }
 
-        Integer index;
+        Integer index = 0;
         try {
-            index = Integer.valueOf(args[1]) - 1;
+            index = Integer.valueOf(args.get(0)) - 1;
         } catch (Exception e) {
-            uBroadcast.colour(sender, Commands.getError() + "You must specify a number, not the map name.");
+            uBroadcast.colour(sender, Commands.getError() + "You must specify the number, not the map name.");
             uVoting.printList(sender);
             return;
         }
@@ -45,7 +51,4 @@ public class cVote {
 
     }
 
-    public static String getPermission() {
-        return "fng.player";
-    }
 }
