@@ -1,9 +1,8 @@
 package org.mcau.robotoraccoon.fridaynightgames.command;
 
 import org.bukkit.command.CommandSender;
-import org.mcau.robotoraccoon.fridaynightgames.Commands;
 import org.mcau.robotoraccoon.fridaynightgames.Main;
-import org.mcau.robotoraccoon.fridaynightgames.utility.uBroadcast;
+import org.mcau.robotoraccoon.fridaynightgames.utility.uMessage;
 import org.mcau.robotoraccoon.fridaynightgames.utility.uPlayerList;
 
 import java.util.List;
@@ -21,7 +20,7 @@ public class cPlayers extends SubCommand {
     public void run(CommandSender sender, List<String> args) {
 
         if (!Main.getFngEnabled()) {
-            uBroadcast.colour(sender, Commands.getDisabled());
+            uMessage.colour(sender, uMessage.getDisabled());
             return;
         }
 
@@ -31,27 +30,27 @@ public class cPlayers extends SubCommand {
             switch (switchCommands.valueOf(args.get(0).toUpperCase())) {
 
                 case COUNT:
-                    uBroadcast.colour(sender, Commands.getPrefix() + "Current players: &c" + uPlayerList.getSize());
+                    uMessage.colour(sender, uMessage.getPrefix() + "Current players: &c" + uPlayerList.getSize());
                     break;
 
                 case LIST:
 
                     if (uPlayerList.getSize() == 0) {
-                        uBroadcast.colour(sender, Commands.getError() + "No one has joined FNG.");
+                        uMessage.colour(sender, uMessage.getError() + "No one has joined FNG.");
                         break;
                     }
 
-                    uBroadcast.colour(sender, Commands.getPrefix() + "Current players: &c" + uPlayerList.getPlayerNames());
+                    uMessage.colour(sender, uMessage.getPrefix() + "Current players: &c" + uPlayerList.getPlayerNames());
                     break;
 
                 case RANDOM:
 
                     if (uPlayerList.getSize() == 0) {
-                        uBroadcast.colour(sender, Commands.getError() + "No one has joined FNG.");
+                        uMessage.colour(sender, uMessage.getError() + "No one has joined FNG.");
                         break;
                     }
 
-                    uBroadcast.colour(sender, Commands.getPrefix() + "Random player: &c" + uPlayerList.getRandomPlayer().getName());
+                    uMessage.colour(sender, uMessage.getPrefix() + "Random player: &c" + uPlayerList.getRandomPlayer().getName());
                     break;
             }
 
@@ -62,9 +61,9 @@ public class cPlayers extends SubCommand {
     }
 
     public static void playersHelp(CommandSender sender) {
-        uBroadcast.colour(sender, "&5Players Count &f> &dAmount of joined players.");
-        uBroadcast.colour(sender, "&5Players List &f> &dNames of joined players.");
-        uBroadcast.colour(sender, "&5Players Random &f> &dA random players' name.");
+        uMessage.colour(sender, "&5Players Count &f> &dAmount of joined players.");
+        uMessage.colour(sender, "&5Players List &f> &dNames of joined players.");
+        uMessage.colour(sender, "&5Players Random &f> &dA random players' name.");
     }
 
     private enum switchCommands {

@@ -2,7 +2,6 @@ package org.mcau.robotoraccoon.fridaynightgames.utility;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.mcau.robotoraccoon.fridaynightgames.Commands;
 import org.mcau.robotoraccoon.fridaynightgames.Config;
 import org.mcau.robotoraccoon.fridaynightgames.Main;
 
@@ -55,15 +54,15 @@ public class uVoting {
 
     public static void printList(CommandSender sender) {
 
-        uBroadcast.colour(sender, " &7======= &5Available Maps &7======= ");
+        uMessage.colour(sender, " &7======= &5Available Maps &7======= ");
 
         for (short i = 0; i < mapList.size(); i++) {
             String pos = String.valueOf(i + 1);
-            uBroadcast.colour(sender, "&5" + pos + ": &d" + uGameList.getGameName(mapList.get(i))
+            uMessage.colour(sender, "&5" + pos + ": &d" + uGameList.getGameName(mapList.get(i))
                     + " &7&o(" + uGameList.getGameType(mapList.get(i)) + ")");
         }
 
-        uBroadcast.colour(sender, Commands.getPrefix() + "To vote for a map, do: &5/FNG Vote <Number>");
+        uMessage.colour(sender, uMessage.getPrefix() + "To vote for a map, do: &5/FNG Vote <Number>");
 
     }
 
@@ -71,7 +70,7 @@ public class uVoting {
     public static void vote(CommandSender sender, Integer index) {
 
         if (index >= mapList.size() || index < 0) {
-            uBroadcast.colour(sender, Commands.getError() + "This number does not exist!");
+            uMessage.colour(sender, uMessage.getError() + "This number does not exist!");
             printList(sender);
             return;
         }
@@ -80,9 +79,9 @@ public class uVoting {
         Player player = (Player) sender;
 
         if (voteList.containsKey(player.getUniqueId())) {
-            uBroadcast.colour(sender, Commands.getPrefix() + "You have changed your vote to &5" + uGameList.getGameName(gameKey));
+            uMessage.colour(sender, uMessage.getPrefix() + "You have changed your vote to &5" + uGameList.getGameName(gameKey));
         } else {
-            uBroadcast.colour(sender, Commands.getPrefix() + "You have successfully voted for &5" + uGameList.getGameName(gameKey));
+            uMessage.colour(sender, uMessage.getPrefix() + "You have successfully voted for &5" + uGameList.getGameName(gameKey));
         }
 
         voteList.put(player.getUniqueId(), gameKey);

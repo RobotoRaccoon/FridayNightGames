@@ -1,9 +1,8 @@
 package org.mcau.robotoraccoon.fridaynightgames.command;
 
 import org.bukkit.command.CommandSender;
-import org.mcau.robotoraccoon.fridaynightgames.Commands;
 import org.mcau.robotoraccoon.fridaynightgames.Config;
-import org.mcau.robotoraccoon.fridaynightgames.utility.uBroadcast;
+import org.mcau.robotoraccoon.fridaynightgames.utility.uMessage;
 import org.mcau.robotoraccoon.fridaynightgames.utility.uTypeList;
 
 import java.util.List;
@@ -31,31 +30,31 @@ public class cType extends SubCommand {
 
                 case ADD:
                     if (args.size() < 3) {
-                        uBroadcast.colour(sender, Commands.getError() + "/FNG Type Add <Type> <Plugin>");
+                        uMessage.colour(sender, uMessage.getError() + "/FNG Type Add <Type> <Plugin>");
                     } else if (uTypeList.getTypes().contains(args.get(1).toLowerCase())) {
-                        uBroadcast.colour(sender, Commands.getError() + "This type already exists.");
+                        uMessage.colour(sender, uMessage.getError() + "This type already exists.");
                     } else if (!uTypeList.getPluginKeys().contains(args.get(2).toLowerCase())) {
-                        uBroadcast.colour(sender, Commands.getError() + "Plugin not defined. Available plugins: " + uTypeList.getPluginKeys());
+                        uMessage.colour(sender, uMessage.getError() + "Plugin not defined. Available plugins: " + uTypeList.getPluginKeys());
                     } else {
                         Config.getConfig().set("types." + args.get(1).toLowerCase(), args.get(2).toLowerCase());
                         Config.saveConfigs();
-                        uBroadcast.colour(sender, Commands.getPrefix() + "Successfully added: &c" + args.get(1).toLowerCase() + "|" + args.get(2).toLowerCase());
+                        uMessage.colour(sender, uMessage.getPrefix() + "Successfully added: &c" + args.get(1).toLowerCase() + "|" + args.get(2).toLowerCase());
                     }
                     break;
 
                 case LIST:
-                    uBroadcast.colour(sender, Commands.getPrefix() + "Available types: &c" + uTypeList.getTypes());
+                    uMessage.colour(sender, uMessage.getPrefix() + "Available types: &c" + uTypeList.getTypes());
                     break;
 
                 case REMOVE:
                     if (args.size() < 2) {
-                        uBroadcast.colour(sender, Commands.getError() + "/FNG Type Remove <Type>");
+                        uMessage.colour(sender, uMessage.getError() + "/FNG Type Remove <Type>");
                     } else if (!uTypeList.getTypes().contains(args.get(1).toLowerCase())) {
-                        uBroadcast.colour(sender, Commands.getError() + "This type does not exist.");
+                        uMessage.colour(sender, uMessage.getError() + "This type does not exist.");
                     } else {
                         Config.getConfig().set("types." + args.get(1).toLowerCase(), null);
                         Config.saveConfigs();
-                        uBroadcast.colour(sender, Commands.getPrefix() + "Successfully removed: &c" + args.get(1).toLowerCase());
+                        uMessage.colour(sender, uMessage.getPrefix() + "Successfully removed: &c" + args.get(1).toLowerCase());
                     }
                     break;
 
@@ -68,9 +67,9 @@ public class cType extends SubCommand {
     }
 
     public static void playersHelp(CommandSender sender) {
-        uBroadcast.colour(sender, "&5Type List &f> &dList all available types.");
-        uBroadcast.colour(sender, "&5Type Add &f> &dAdds a new type with join command.");
-        uBroadcast.colour(sender, "&5Type Remove &f> &dRemoves an added type.");
+        uMessage.colour(sender, "&5Type List &f> &dList all available types.");
+        uMessage.colour(sender, "&5Type Add &f> &dAdds a new type with join command.");
+        uMessage.colour(sender, "&5Type Remove &f> &dRemoves an added type.");
     }
 
     private enum switchCommands {

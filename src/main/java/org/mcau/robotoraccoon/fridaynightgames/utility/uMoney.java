@@ -1,7 +1,6 @@
 package org.mcau.robotoraccoon.fridaynightgames.utility;
 
 import org.bukkit.entity.Player;
-import org.mcau.robotoraccoon.fridaynightgames.Commands;
 import org.mcau.robotoraccoon.fridaynightgames.Main;
 
 public class uMoney {
@@ -18,7 +17,7 @@ public class uMoney {
 
         for (Player player : uPlayerList.getPlayers()) {
             Main.getEcon().depositPlayer(player, amount);
-            uBroadcast.colour(player, Commands.getPrefix() + "An extra $" + amount + " has been added to your account for playing in FNG!");
+            uMessage.colour(player, uMessage.getPrefix() + "An extra $" + amount + " has been added to your account for playing in FNG!");
         }
 
     }

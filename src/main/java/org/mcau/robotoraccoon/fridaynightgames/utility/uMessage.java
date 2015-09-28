@@ -5,7 +5,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class uBroadcast {
+public class uMessage {
 
     public static void global(String message) {
         Bukkit.broadcast(ChatColor.translateAlternateColorCodes('&', message), "fng.player");
@@ -15,7 +15,7 @@ public class uBroadcast {
 
         for (Player player : Bukkit.getOnlinePlayers()) {
             if (uPlayerList.getKeys().contains(player.getUniqueId())) {
-                uBroadcast.colour(player, message);
+                uMessage.colour(player, message);
             }
         }
     }
@@ -24,7 +24,7 @@ public class uBroadcast {
 
         for (Player player : Bukkit.getOnlinePlayers()) {
             if (!uPlayerList.getKeys().contains(player.getUniqueId())) {
-                uBroadcast.colour(player, message);
+                uMessage.colour(player, message);
             }
         }
     }
@@ -34,7 +34,7 @@ public class uBroadcast {
         Bukkit.getLogger().info(ChatColor.translateAlternateColorCodes('&', message));
         for (Player player : Bukkit.getOnlinePlayers()) {
             if (player.hasPermission("fng.host")) {
-                uBroadcast.colour(player, message);
+                uMessage.colour(player, message);
             }
         }
     }
@@ -47,4 +47,29 @@ public class uBroadcast {
         player.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
     }
 
+    private static String commandPrefix = ChatColor.DARK_PURPLE + "[FNG] " + ChatColor.YELLOW;
+    private static String commandError = getPrefix() + ChatColor.DARK_RED + "Error: " + ChatColor.RED;
+    private static String commandDenied = getError() + "You do not have permission to run this command.";
+    private static String commandDisabled = getError() + "FNG is not running at this time.";
+    public static String commandNoConsole = getError() + "You may not run this command from console.";
+
+    public static String getPrefix() {
+        return commandPrefix;
+    }
+
+    public static String getError() {
+        return commandError;
+    }
+
+    public static String getDenied() {
+        return commandDenied;
+    }
+
+    public static String getDisabled() {
+        return commandDisabled;
+    }
+
+    public static String getNoConsole() {
+        return commandNoConsole;
+    }
 }

@@ -2,9 +2,8 @@ package org.mcau.robotoraccoon.fridaynightgames.command;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.mcau.robotoraccoon.fridaynightgames.Commands;
 import org.mcau.robotoraccoon.fridaynightgames.Main;
-import org.mcau.robotoraccoon.fridaynightgames.utility.uBroadcast;
+import org.mcau.robotoraccoon.fridaynightgames.utility.uMessage;
 import org.mcau.robotoraccoon.fridaynightgames.utility.uVoting;
 
 import java.util.List;
@@ -22,7 +21,7 @@ public class cVote extends SubCommand {
     public void run(CommandSender sender, List<String> args) {
 
         if (!Main.getFngEnabled()) {
-            uBroadcast.colour(sender, Commands.getDisabled());
+            uMessage.colour(sender, uMessage.getDisabled());
             return;
         }
 
@@ -34,7 +33,7 @@ public class cVote extends SubCommand {
 
         // Only players from here onwards.
         if (!(sender instanceof Player)) {
-            uBroadcast.colour(sender, Commands.getNoConsole());
+            uMessage.colour(sender, uMessage.getNoConsole());
             return;
         }
 
@@ -42,7 +41,7 @@ public class cVote extends SubCommand {
         try {
             index = Integer.valueOf(args.get(0)) - 1;
         } catch (Exception e) {
-            uBroadcast.colour(sender, Commands.getError() + "You must specify the number, not the map name.");
+            uMessage.colour(sender, uMessage.getError() + "You must specify the number, not the map name.");
             uVoting.printList(sender);
             return;
         }

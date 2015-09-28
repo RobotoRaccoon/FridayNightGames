@@ -1,7 +1,6 @@
 package org.mcau.robotoraccoon.fridaynightgames.utility;
 
 import org.bukkit.ChatColor;
-import org.mcau.robotoraccoon.fridaynightgames.Commands;
 import org.mcau.robotoraccoon.fridaynightgames.Config;
 import org.mcau.robotoraccoon.fridaynightgames.Main;
 
@@ -27,7 +26,7 @@ public class uGame {
         uVoting.generateList();
         addPlayCount(gameKey);
 
-        uBroadcast.global(Commands.getPrefix() + "Starting Game: " + ChatColor.RED + gameKey.toUpperCase());
+        uMessage.global(uMessage.getPrefix() + "Starting Game: " + ChatColor.RED + gameKey.toUpperCase());
     }
 
     // Starts the highest rated game.
@@ -58,7 +57,7 @@ public class uGame {
             uRunAs.asPlayer(command, pUUID);
         }
 
-        uBroadcast.global(Commands.getPrefix() + "Ending Game: " + ChatColor.RED + gameKey.toUpperCase());
+        uMessage.global(uMessage.getPrefix() + "Ending Game: " + ChatColor.RED + gameKey.toUpperCase());
     }
 
     //Add plays to the games total play count for every FNG
