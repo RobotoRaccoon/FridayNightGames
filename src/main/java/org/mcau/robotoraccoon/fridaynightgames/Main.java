@@ -39,6 +39,7 @@ public class Main extends JavaPlugin {
         pluginManager.registerEvents(new Events(), this);
 
         // Commands
+        Commands.generateCommands();
         getCommand("fridaynightgames").setExecutor(new Commands());
         getCommand("fng").setExecutor(new Commands());
 
