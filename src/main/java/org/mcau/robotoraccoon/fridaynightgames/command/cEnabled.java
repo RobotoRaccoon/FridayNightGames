@@ -18,6 +18,10 @@ public class cEnabled extends SubCommand {
         return "enabled [T|F]";
     }
 
+    public String getDescription() {
+        return "&5Enabled &f> &dLook at or change the status.";
+    }
+
     public void run(CommandSender sender, List<String> args) {
 
         if (args.size() < 1) {
@@ -27,10 +31,12 @@ public class cEnabled extends SubCommand {
             else
                 uMessage.colour(sender, uMessage.getPrefix() + "Status: &cDisabled");
 
-        } else if (args.get(0).matches("(?i)T.*")) {
+            uMessage.colour(sender, uMessage.getPrefix() + "To change the status, run &6/fng " + getUsage());
+
+        } else if (args.get(0).startsWith("T") || args.get(0).startsWith("t")) {
 
             Main.setFngEnabled(true);
-            uPlayerList.clearList();
+            //uPlayerList.clearList(); // Disabled clearing of the list, forces disabling FNG first.
             uVoting.generateList();
 
             uMessage.global(uMessage.getPrefix() + "Has been &aEnabled &eby &5" + sender.getName());
@@ -42,6 +48,7 @@ public class cEnabled extends SubCommand {
             uPlayerList.clearList();
 
             uMessage.global(uMessage.getPrefix() + "Has been &cDisabled &eby &5" + sender.getName());
+            uMessage.global(uMessage.getPrefix() + "We hope you all had fun!");
 
         }
     }

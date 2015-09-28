@@ -7,10 +7,7 @@ import org.bukkit.entity.Player;
 import org.mcau.robotoraccoon.fridaynightgames.command.*;
 import org.mcau.robotoraccoon.fridaynightgames.utility.uMessage;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class Commands implements CommandExecutor {
 
@@ -32,8 +29,17 @@ public class Commands implements CommandExecutor {
 
     public static void playersHelp(CommandSender sender) {
         uMessage.colour(sender, " &7===== &5Options &7=====");
-        if (sender.hasPermission(commands.get("enabled").getPermission()))
-            uMessage.colour(sender, "&5Enabled [T|F] &f> &dLook at or change the status.");
+
+        for(Map.Entry<String, SubCommand> entry : commands.entrySet()) {
+            String key = entry.getKey();
+            SubCommand command = entry.getValue();
+
+            if (sender.hasPermission(command.getPermission()))
+                uMessage.colour(sender, command.getDescription());
+        }
+
+        /*if (sender.hasPermission(commands.get("enabled").getPermission()))
+            uMessage.colour(sender, "&5Enabled &f> &dLook at or change the status.");
         if (sender.hasPermission(commands.get("game").getPermission()))
             uMessage.colour(sender, "&5Game &f> &dStart, End, Add, and Remove games.");
         if (sender.hasPermission(commands.get("join").getPermission()))
@@ -51,7 +57,7 @@ public class Commands implements CommandExecutor {
         //if( sender.hasPermission(commands.get("type").getPermission()))
         //    uBroadcast.colour(sender, "&5Type" &f> &dList, Add, and Remove types.");
         if (sender.hasPermission(commands.get("vote").getPermission()))
-            uMessage.colour(sender, "&5Vote &f> &dVote for a map.");
+            uMessage.colour(sender, "&5Vote &f> &dVote for a map.");*/
     }
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {

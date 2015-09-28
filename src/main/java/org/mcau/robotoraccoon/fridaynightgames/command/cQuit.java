@@ -21,6 +21,10 @@ public class cQuit extends SubCommand {
         return "quit";
     }
 
+    public String getDescription() {
+        return "&5Quit &f> &dQuit having fun.";
+    }
+
     public void run(CommandSender sender, List<String> args) {
 
         if (!Main.getFngEnabled()) {

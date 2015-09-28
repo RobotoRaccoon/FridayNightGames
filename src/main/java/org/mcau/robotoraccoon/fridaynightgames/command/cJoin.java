@@ -21,6 +21,10 @@ public class cJoin extends SubCommand {
         return "join";
     }
 
+    public String getDescription() {
+        return "&5Join &f> &dJoin in on the fun.";
+    }
+
     public void run(CommandSender sender, List<String> args) {
 
         if (!Main.getFngEnabled()) {

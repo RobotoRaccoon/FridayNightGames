@@ -20,6 +20,10 @@ public class cGame extends SubCommand {
         return "game <add|count|end|remove|start>";
     }
 
+    public String getDescription() {
+        return "&5Game &f> &dStart, End, Add, and Remove games.";
+    }
+
     public void run(CommandSender sender, List<String> args) {
 
         if (args.size() < 1) {

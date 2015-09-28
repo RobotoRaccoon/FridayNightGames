@@ -21,6 +21,10 @@ public class cType extends SubCommand {
         return "type <list|add|remove>";
     }
 
+    public String getDescription() {
+        return "&5Type &f> &dList, Add, and Remove types.";
+    }
+
     public void run(CommandSender sender, List<String> args) {
 
         if (args.size() < 1) {

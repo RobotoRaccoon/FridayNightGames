@@ -18,6 +18,10 @@ public class cVote extends SubCommand {
         return "vote [number]";
     }
 
+    public String getDescription() {
+        return "&5Vote &f> &dVote for a map.";
+    }
+
     public void run(CommandSender sender, List<String> args) {
 
         if (!Main.getFngEnabled()) {

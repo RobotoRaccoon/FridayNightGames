@@ -21,6 +21,10 @@ public class cList extends SubCommand {
         return "list [game]";
     }
 
+    public String getDescription() {
+        return "&5List &f> &dLook at the available maps.";
+    }
+
     public void run(CommandSender sender, List<String> args) {
 
         if (args.size() < 1) {

@@ -16,6 +16,10 @@ public class cReload extends SubCommand {
         return "reload";
     }
 
+    public String getDescription() {
+        return "&5Reload &f> &dReload the config.";
+    }
+
     public void run(CommandSender sender, List<String> args) {
         Config.loadConfigs();
         uMessage.colour(sender, uMessage.getPrefix() + "&aSuccessfully reloaded the config file!");

@@ -17,6 +17,10 @@ public class cResults extends SubCommand {
         return "results";
     }
 
+    public String getDescription() {
+        return "&5Results &f> &dView the vote results.";
+    }
+
     public void run(CommandSender sender, List<String> args) {
 
         if (!Main.getFngEnabled()) {

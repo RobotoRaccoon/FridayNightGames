@@ -17,6 +17,7 @@ public abstract class SubCommand {
     public abstract String getPermission();
 
     public abstract String getUsage();
+    public abstract String getDescription();
     public abstract void run(CommandSender sender, List<String> args);
 
 }

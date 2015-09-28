@@ -17,6 +17,10 @@ public class cPlayers extends SubCommand {
         return "players <count|list|random>";
     }
 
+    public String getDescription() {
+        return "&5Players &f> &dSee who's joined.";
+    }
+
     public void run(CommandSender sender, List<String> args) {
 
         if (!Main.getFngEnabled()) {
