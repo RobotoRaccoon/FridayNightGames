@@ -95,7 +95,7 @@ public class Commands implements CommandExecutor {
 
                 // If command does not support console usage
                 if (!(sender instanceof Player) && !command.isConsoleAllowed()) {
-                    sender.sendMessage(uMessage.commandNoConsole);
+                    sender.sendMessage(uMessage.getNoConsole());
                     return true;
                 }
 

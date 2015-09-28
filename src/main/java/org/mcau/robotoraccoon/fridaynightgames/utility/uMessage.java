@@ -51,7 +51,7 @@ public class uMessage {
     private static String commandError = getPrefix() + ChatColor.DARK_RED + "Error: " + ChatColor.RED;
     private static String commandDenied = getError() + "You do not have permission to run this command.";
     private static String commandDisabled = getError() + "FNG is not running at this time.";
-    public static String commandNoConsole = getError() + "You may not run this command from console.";
+    private static String commandNoConsole = getError() + "You may not run this command from console.";
 
     public static String getPrefix() {
         return commandPrefix;
