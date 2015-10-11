@@ -17,7 +17,7 @@ public class GameUtil {
         gameKey = gameKey.toLowerCase();
         String command = TypeUtil.getJoinCommand(GameListUtil.getGameType(gameKey)) + " " + gameKey;
 
-        for (final UUID pUUID : ListUtil.getKeys()) {
+        for (final UUID pUUID : PlayerListUtil.getKeys()) {
             RunAsUtil.asPlayer(command, pUUID);
         }
 
@@ -53,7 +53,7 @@ public class GameUtil {
         gameKey = gameKey.toLowerCase();
         String command = TypeUtil.getQuitCommand(GameListUtil.getGameType(gameKey));
 
-        for (final UUID pUUID : ListUtil.getKeys()) {
+        for (final UUID pUUID : PlayerListUtil.getKeys()) {
             RunAsUtil.asPlayer(command, pUUID);
         }
 

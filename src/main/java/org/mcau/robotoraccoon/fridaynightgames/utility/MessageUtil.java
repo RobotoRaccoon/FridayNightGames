@@ -14,7 +14,7 @@ public class MessageUtil {
     public static void joined(String message) {
 
         for (Player player : Bukkit.getOnlinePlayers()) {
-            if (ListUtil.getKeys().contains(player.getUniqueId())) {
+            if (PlayerListUtil.getKeys().contains(player.getUniqueId())) {
                 MessageUtil.colour(player, message);
             }
         }
@@ -23,7 +23,7 @@ public class MessageUtil {
     public static void notJoined(String message) {
 
         for (Player player : Bukkit.getOnlinePlayers()) {
-            if (!ListUtil.getKeys().contains(player.getUniqueId())) {
+            if (!PlayerListUtil.getKeys().contains(player.getUniqueId())) {
                 MessageUtil.colour(player, message);
             }
         }

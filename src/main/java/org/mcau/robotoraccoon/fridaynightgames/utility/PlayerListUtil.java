@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
-public class ListUtil {
+public class PlayerListUtil {
 
     // Array of keys
     public static List<UUID> getKeys() {
@@ -46,13 +46,13 @@ public class ListUtil {
     public static UUID getRandomKey() {
 
         Random random = new Random();
-        List<UUID> keys = ListUtil.getKeys();
+        List<UUID> keys = PlayerListUtil.getKeys();
         return keys.get(random.nextInt(keys.size()));
     }
 
     // A single players at random
     public static Player getRandomPlayer() {
-        return Main.getPlayerList().get(ListUtil.getRandomKey());
+        return Main.getPlayerList().get(PlayerListUtil.getRandomKey());
     }
 
 }

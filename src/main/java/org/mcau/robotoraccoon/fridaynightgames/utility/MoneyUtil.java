@@ -15,7 +15,7 @@ public class MoneyUtil {
 
         Double amount = Main.getPlayedGames().size() * 1.0;
 
-        for (Player player : ListUtil.getPlayers()) {
+        for (Player player : PlayerListUtil.getPlayers()) {
             Main.getEcon().depositPlayer(player, amount);
             MessageUtil.colour(player, MessageUtil.getPrefix() + "An extra $" + amount + " has been added to your account for playing in FNG!");
         }

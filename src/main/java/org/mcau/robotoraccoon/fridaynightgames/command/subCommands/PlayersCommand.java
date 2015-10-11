@@ -4,7 +4,7 @@ import org.bukkit.command.CommandSender;
 import org.mcau.robotoraccoon.fridaynightgames.Main;
 import org.mcau.robotoraccoon.fridaynightgames.command.SubCommand;
 import org.mcau.robotoraccoon.fridaynightgames.utility.MessageUtil;
-import org.mcau.robotoraccoon.fridaynightgames.utility.ListUtil;
+import org.mcau.robotoraccoon.fridaynightgames.utility.PlayerListUtil;
 
 import java.util.List;
 
@@ -35,27 +35,27 @@ public class PlayersCommand extends SubCommand {
             switch (switchCommands.valueOf(args.get(0).toUpperCase())) {
 
                 case COUNT:
-                    MessageUtil.colour(sender, MessageUtil.getPrefix() + "Current players: &c" + ListUtil.getSize());
+                    MessageUtil.colour(sender, MessageUtil.getPrefix() + "Current players: &c" + PlayerListUtil.getSize());
                     break;
 
                 case LIST:
 
-                    if (ListUtil.getSize() == 0) {
+                    if (PlayerListUtil.getSize() == 0) {
                         MessageUtil.colour(sender, MessageUtil.getError() + "No one has joined FNG.");
                         break;
                     }
 
-                    MessageUtil.colour(sender, MessageUtil.getPrefix() + "Current players: &c" + ListUtil.getPlayerNames());
+                    MessageUtil.colour(sender, MessageUtil.getPrefix() + "Current players: &c" + PlayerListUtil.getPlayerNames());
                     break;
 
                 case RANDOM:
 
-                    if (ListUtil.getSize() == 0) {
+                    if (PlayerListUtil.getSize() == 0) {
                         MessageUtil.colour(sender, MessageUtil.getError() + "No one has joined FNG.");
                         break;
                     }
 
-                    MessageUtil.colour(sender, MessageUtil.getPrefix() + "Random player: &c" + ListUtil.getRandomPlayer().getName());
+                    MessageUtil.colour(sender, MessageUtil.getPrefix() + "Random player: &c" + PlayerListUtil.getRandomPlayer().getName());
                     break;
             }
 
