@@ -68,13 +68,13 @@ public class Commands implements CommandExecutor {
             List<String> argsList = new ArrayList<>(Arrays.asList(args));
 
             // No sub-command supplied.
-            if (args.length == 0) {
+            if (argsList.size() == 0) {
                 playersHelp(sender);
                 return true;
             }
 
             // Check for valid sub-command.
-            String key = args[0].toLowerCase();
+            String key = argsList.get(0).toLowerCase();
             if (!commands.containsKey(key)) {
                 playersHelp(sender);
                 return true;

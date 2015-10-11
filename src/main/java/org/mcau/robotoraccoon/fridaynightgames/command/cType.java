@@ -9,10 +9,6 @@ import java.util.List;
 
 public class cType extends SubCommand {
 
-    public boolean isConsoleAllowed() {
-        return true;
-    }
-
     public String getPermission() {
         return "fng.operator";
     }
