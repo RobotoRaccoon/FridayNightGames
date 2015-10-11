@@ -6,6 +6,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.mcau.robotoraccoon.fridaynightgames.command.Commands;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,9 +15,9 @@ import java.util.UUID;
 
 public class Main extends JavaPlugin {
 
+    // FNG
     private static final List<String> playedGames = new ArrayList<>();
     private static final HashMap<UUID, Player> playerList = new HashMap<>();
-    // FNG
     private static Boolean fngEnabled = false;
     private static Boolean autoStartEnabled = false;
     // Vault

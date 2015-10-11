@@ -2,9 +2,9 @@ package org.mcau.robotoraccoon.fridaynightgames.thread;
 
 import org.bukkit.scheduler.BukkitRunnable;
 import org.mcau.robotoraccoon.fridaynightgames.Main;
-import org.mcau.robotoraccoon.fridaynightgames.utility.uGame;
+import org.mcau.robotoraccoon.fridaynightgames.utility.GameUtil;
 
-public class tAutoStartRunnable extends BukkitRunnable {
+public class AutoStartRunnable extends BukkitRunnable {
 
     public void run() {
 
@@ -14,7 +14,7 @@ public class tAutoStartRunnable extends BukkitRunnable {
             return;
         }
 
-        uGame.startResults();
+        GameUtil.startResults();
     }
 
 }

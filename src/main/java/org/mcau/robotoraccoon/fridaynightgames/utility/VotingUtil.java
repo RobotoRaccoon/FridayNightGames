@@ -7,7 +7,7 @@ import org.mcau.robotoraccoon.fridaynightgames.Main;
 
 import java.util.*;
 
-public class uVoting {
+public class VotingUtil {
 
     public static final HashMap<UUID, String> voteList = new HashMap<>();
     public static final List<String> mapList = new ArrayList<>();
@@ -23,7 +23,7 @@ public class uVoting {
         mapList.clear();
 
         List<String> keys = new ArrayList<>();
-        keys.addAll(uGameList.getKeys());
+        keys.addAll(GameListUtil.getKeys());
 
         // Amount of maps to remove from the list that have already been played this session
         int removeCount = Config.getConfig().getInt("removePlayedGames");
@@ -54,15 +54,15 @@ public class uVoting {
 
     public static void printList(CommandSender sender) {
 
-        uMessage.colour(sender, " &7======= &5Available Maps &7======= ");
+        MessageUtil.colour(sender, " &7======= &5Available Maps &7======= ");
 
         for (short i = 0; i < mapList.size(); i++) {
             String pos = String.valueOf(i + 1);
-            uMessage.colour(sender, "&5" + pos + ": &d" + uGameList.getGameName(mapList.get(i))
-                    + " &7&o(" + uGameList.getGameType(mapList.get(i)) + ")");
+            MessageUtil.colour(sender, "&5" + pos + ": &d" + GameListUtil.getGameName(mapList.get(i))
+                    + " &7&o(" + GameListUtil.getGameType(mapList.get(i)) + ")");
         }
 
-        uMessage.colour(sender, uMessage.getPrefix() + "To vote for a map, do: &5/FNG Vote <Number>");
+        MessageUtil.colour(sender, MessageUtil.getPrefix() + "To vote for a map, do: &5/FNG Vote <Number>");
 
     }
 
@@ -70,7 +70,7 @@ public class uVoting {
     public static void vote(CommandSender sender, Integer index) {
 
         if (index >= mapList.size() || index < 0) {
-            uMessage.colour(sender, uMessage.getError() + "This number does not exist!");
+            MessageUtil.colour(sender, MessageUtil.getError() + "This number does not exist!");
             printList(sender);
             return;
         }
@@ -79,9 +79,9 @@ public class uVoting {
         Player player = (Player) sender;
 
         if (voteList.containsKey(player.getUniqueId())) {
-            uMessage.colour(sender, uMessage.getPrefix() + "You have changed your vote to &5" + uGameList.getGameName(gameKey));
+            MessageUtil.colour(sender, MessageUtil.getPrefix() + "You have changed your vote to &5" + GameListUtil.getGameName(gameKey));
         } else {
-            uMessage.colour(sender, uMessage.getPrefix() + "You have successfully voted for &5" + uGameList.getGameName(gameKey));
+            MessageUtil.colour(sender, MessageUtil.getPrefix() + "You have successfully voted for &5" + GameListUtil.getGameName(gameKey));
         }
 
         voteList.put(player.getUniqueId(), gameKey);

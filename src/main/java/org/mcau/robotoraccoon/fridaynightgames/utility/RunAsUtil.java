@@ -4,7 +4,7 @@ import org.bukkit.Bukkit;
 
 import java.util.UUID;
 
-public class uRunAs {
+public class RunAsUtil {
 
     public static void asConsole(String command) {
         Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), command);

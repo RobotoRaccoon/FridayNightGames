@@ -9,55 +9,55 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
-public class uGame {
+public class GameUtil {
 
     //Start a specified game
     public static void start(String gameKey) {
 
         gameKey = gameKey.toLowerCase();
-        String command = uTypeList.getJoinCommand(uGameList.getGameType(gameKey)) + " " + gameKey;
+        String command = TypeUtil.getJoinCommand(GameListUtil.getGameType(gameKey)) + " " + gameKey;
 
-        for (final UUID pUUID : uPlayerList.getKeys()) {
-            uRunAs.asPlayer(command, pUUID);
+        for (final UUID pUUID : ListUtil.getKeys()) {
+            RunAsUtil.asPlayer(command, pUUID);
         }
 
         Main.setAutoStartEnabled(false);
         Main.getPlayedGames().add(0, gameKey);
-        uVoting.generateList();
+        VotingUtil.generateList();
         addPlayCount(gameKey);
 
-        uMessage.global(uMessage.getPrefix() + "Starting Game: " + ChatColor.RED + gameKey.toUpperCase());
+        MessageUtil.global(MessageUtil.getPrefix() + "Starting Game: " + ChatColor.RED + gameKey.toUpperCase());
     }
 
     // Starts the highest rated game.
     public static void startResults() {
-        List<String> mostVoted = uVoting.getMostVoted();
+        List<String> mostVoted = VotingUtil.getMostVoted();
         String gameName;
         Random random = new Random();
 
         if (mostVoted.size() < 1) {
             // No votes, pick a completely random map.
-            List<String> keys = new ArrayList<>(uVoting.mapList);
+            List<String> keys = new ArrayList<>(VotingUtil.mapList);
             gameName = keys.get(random.nextInt(keys.size()));
         } else {
             // Pick highest rated, or random of those if results are tied.
             gameName = mostVoted.get(random.nextInt(mostVoted.size()));
         }
 
-        uGame.start(gameName);
+        GameUtil.start(gameName);
     }
 
     //Forces all users to quit their game
     public static void end(String gameKey) {
 
         gameKey = gameKey.toLowerCase();
-        String command = uTypeList.getQuitCommand(uGameList.getGameType(gameKey));
+        String command = TypeUtil.getQuitCommand(GameListUtil.getGameType(gameKey));
 
-        for (final UUID pUUID : uPlayerList.getKeys()) {
-            uRunAs.asPlayer(command, pUUID);
+        for (final UUID pUUID : ListUtil.getKeys()) {
+            RunAsUtil.asPlayer(command, pUUID);
         }
 
-        uMessage.global(uMessage.getPrefix() + "Ending Game: " + ChatColor.RED + gameKey.toUpperCase());
+        MessageUtil.global(MessageUtil.getPrefix() + "Ending Game: " + ChatColor.RED + gameKey.toUpperCase());
     }
 
     //Add plays to the games total play count for every FNG

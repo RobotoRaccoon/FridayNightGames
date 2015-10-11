@@ -5,7 +5,7 @@ import org.mcau.robotoraccoon.fridaynightgames.Config;
 import java.util.HashSet;
 import java.util.Set;
 
-public class uGameList {
+public class GameListUtil {
 
     // All game names in lowercase
     public static Set<String> getKeys() {

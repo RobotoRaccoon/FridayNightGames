@@ -4,7 +4,7 @@ import org.mcau.robotoraccoon.fridaynightgames.Config;
 
 import java.util.Set;
 
-public class uTypeList {
+public class TypeUtil {
 
     public static Set<String> getTypes() {
         return Config.getConfig().getConfigurationSection("types").getKeys(false);

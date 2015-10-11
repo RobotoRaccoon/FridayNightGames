@@ -1,13 +1,14 @@
-package org.mcau.robotoraccoon.fridaynightgames.command;
+package org.mcau.robotoraccoon.fridaynightgames.command.subCommands;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.mcau.robotoraccoon.fridaynightgames.Main;
-import org.mcau.robotoraccoon.fridaynightgames.utility.uMessage;
+import org.mcau.robotoraccoon.fridaynightgames.command.SubCommand;
+import org.mcau.robotoraccoon.fridaynightgames.utility.MessageUtil;
 
 import java.util.List;
 
-public class cQuit extends SubCommand {
+public class QuitCommand extends SubCommand {
 
     public boolean isConsoleAllowed() {
         return false;
@@ -28,16 +29,16 @@ public class cQuit extends SubCommand {
     public void run(CommandSender sender, List<String> args) {
 
         if (!Main.getFngEnabled()) {
-            uMessage.colour(sender, uMessage.getDisabled());
+            MessageUtil.colour(sender, MessageUtil.getDisabled());
             return;
         }
 
         Player player = (Player) sender;
         if (Main.getPlayerList().containsKey(player.getUniqueId())) {
             Main.getPlayerList().remove(player.getUniqueId());
-            uMessage.colour(sender, uMessage.getPrefix() + "You have quit the games! Thanks for playing!");
+            MessageUtil.colour(sender, MessageUtil.getPrefix() + "You have quit the games! Thanks for playing!");
         } else {
-            uMessage.colour(sender, uMessage.getError() + "You weren't in the games anyway.");
+            MessageUtil.colour(sender, MessageUtil.getError() + "You weren't in the games anyway.");
         }
 
     }
