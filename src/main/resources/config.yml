@@ -1,13 +1,44 @@
 removePlayedGames: 10
 types:
-  unknown: mg
-  bh: bh
-  ctf: mg
-  ffa: mg
-  infect: mg
-  lms: mg
-  lts: mg
-  tdm: mg
+  unknown:
+    name: Unknown
+    plugin: unknown
+  bh:
+    name: BlockHunt
+    plugin: bh
+  ctf:
+    name: Capture the Flag
+    plugin: mg
+  ffa:
+    name: Free For All
+    plugin: mg
+  infect:
+    name: Infection
+    plugin: mg
+  juggernaut:
+    name: Juggernaut
+    plugin: mg
+  koth:
+    name: King of the Hill
+    plugin: mg
+  lms:
+    name: Last Man Standing
+    plugin: mg
+  lts:
+    name: Last Team Standing
+    plugin: mg
+  race:
+    name: Race
+    plugin: mg
+  tdm:
+    name: Team Deathmatch
+    plugin: mg
+  spleef:
+    name: Spleef
+    plugin: mg
+  other:
+    name: Other
+    plugin: mg
 commands:
   unknown:
     join: mg join
