@@ -8,15 +8,19 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.mcau.robotoraccoon.fridaynightgames.command.Commands;
 import org.mcau.robotoraccoon.fridaynightgames.games.MinigameMap;
+import org.mcau.robotoraccoon.fridaynightgames.games.MinigameType;
 import org.mcau.robotoraccoon.fridaynightgames.utility.GameUtil;
+import org.mcau.robotoraccoon.fridaynightgames.utility.TypeUtil;
 
 import java.util.*;
 
 public class Main extends JavaPlugin {
 
     // FNG
-    private static final List<MinigameMap> playedGames = new ArrayList<>();
     private static final HashMap<String, MinigameMap> minigames = new HashMap<>();
+    private static final HashMap<String, MinigameType> gameTypes = new HashMap<>();
+
+    private static final List<MinigameMap> playedGames = new ArrayList<>();
     private static final HashMap<UUID, Player> playerList = new HashMap<>();
     private static Boolean fngEnabled = false;
     private static Boolean autoStartEnabled = false;
@@ -50,11 +54,13 @@ public class Main extends JavaPlugin {
         Config.createAllFiles();
 
         // Load minigames
+        TypeUtil.loadTypesFromConfig();
         GameUtil.loadMinigamesFromConfig();
     }
 
     @Override
     public void onDisable() {
+        TypeUtil.saveTypesToConfig();
         GameUtil.saveMinigamesToConfig();
     }
 
@@ -71,16 +77,20 @@ public class Main extends JavaPlugin {
     }
 
     // FNG
+    public static HashMap<String, MinigameMap> getMinigames() {
+        return minigames;
+    }
+
+    public static HashMap<String, MinigameType> getGameTypes() {
+        return gameTypes;
+    }
+
     public static HashMap<UUID, Player> getPlayerList() {
         return playerList;
     }
 
     public static List<MinigameMap> getPlayedGames() {
         return playedGames;
-    }
-
-    public static HashMap<String, MinigameMap> getMiniames() {
-        return minigames;
     }
 
     public static Boolean getFngEnabled() {

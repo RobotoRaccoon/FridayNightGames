@@ -4,6 +4,7 @@ import org.bukkit.command.CommandSender;
 import org.mcau.robotoraccoon.fridaynightgames.Main;
 import org.mcau.robotoraccoon.fridaynightgames.command.SubCommand;
 import org.mcau.robotoraccoon.fridaynightgames.games.MinigameMap;
+import org.mcau.robotoraccoon.fridaynightgames.games.MinigameType;
 import org.mcau.robotoraccoon.fridaynightgames.utility.MessageUtil;
 import org.mcau.robotoraccoon.fridaynightgames.utility.TypeUtil;
 
@@ -31,9 +32,9 @@ public class ListCommand extends SubCommand {
         if (args.size() < 1) {
 
             // Get games into an associative array.
-            HashMap<String, List<String>> sortedGames = new HashMap<>();
-            for (MinigameMap map : Main.getMiniames().values()) {
-                String type = map.getType();
+            HashMap<MinigameType, List<String>> sortedGames = new HashMap<>();
+            for (MinigameMap map : Main.getMinigames().values()) {
+                MinigameType type = map.getType();
 
                 List<String> nameList = new ArrayList<>();
                 if (sortedGames.containsKey(type)) {
@@ -46,12 +47,12 @@ public class ListCommand extends SubCommand {
             }
 
             // Print the games under their respective heading
-            for (String type : sortedGames.keySet()) {
+            for (MinigameType type : sortedGames.keySet()) {
                 MessageUtil.colour(sender, "&5" + type + ": &e" + sortedGames.get(type).toString());
             }
         } else {
             String key = args.get(0).toLowerCase();
-            MinigameMap map = Main.getMiniames().get(key);
+            MinigameMap map = Main.getMinigames().get(key);
 
             if (map == null) {
                 MessageUtil.colour(sender, MessageUtil.getError() + "This minigame does not exist.");
@@ -60,8 +61,8 @@ public class ListCommand extends SubCommand {
 
             MessageUtil.colour(sender, "&5Name: &e" + map.getName());
             MessageUtil.colour(sender, "&5Type: &e" + map.getType());
-            MessageUtil.colour(sender, "&5Join Command: &e" + TypeUtil.getJoinCommand(key));
-            MessageUtil.colour(sender, "&5Quit Command: &e" + TypeUtil.getQuitCommand(key));
+            MessageUtil.colour(sender, "&5Join Command: &e" + TypeUtil.getJoinCommand(map.getType()));
+            MessageUtil.colour(sender, "&5Quit Command: &e" + TypeUtil.getQuitCommand(map.getType()));
             MessageUtil.colour(sender, "&5Total Plays: &e" + map.getPlayCount());
         }
 

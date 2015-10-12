@@ -9,10 +9,10 @@
 
     <name>FridayNightGames</name>
     <description>Minigames Wrapper for Minecraft Australia</description>
-    <version>2.0.7</version>
+    <version>2.0.8</version>
 
     <properties>
-        <build.number>23</build.number>
+        <build.number>24</build.number>
     </properties>
 
     <organization>

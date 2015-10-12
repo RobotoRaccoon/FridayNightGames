@@ -1,17 +1,18 @@
 package org.mcau.robotoraccoon.fridaynightgames.games;
 
 import org.mcau.robotoraccoon.fridaynightgames.Config;
+import org.mcau.robotoraccoon.fridaynightgames.Main;
 
 public class MinigameMap {
 
     private String name;
-    private String type;
+    private MinigameType type;
     private Integer playCount;
 
-    public MinigameMap(String name, String type) {
+    public MinigameMap(String name, MinigameType type) {
         this(name, type, 0);
     }
-    public MinigameMap(String name, String type, Integer playCount) {
+    public MinigameMap(String name, MinigameType type, Integer playCount) {
         this.name = name;
         this.type = type;
         this.playCount = playCount;
@@ -35,14 +36,14 @@ public class MinigameMap {
             return false;
 
         name = Config.getGamesConfig().getString("games." + key + ".name");
-        type = Config.getGamesConfig().getString("games." + key + ".type");
+        type = Main.getGameTypes().get(Config.getGamesConfig().getString("games." + key + ".type"));
         playCount = Config.getGamesConfig().getInt("games." + key + ".plays");
         return true;
     }
 
     public void saveToConfig() {
         Config.getGamesConfig().set("games." + getKey() + ".name", name);
-        Config.getGamesConfig().set("games." + getKey() + ".type", type);
+        Config.getGamesConfig().set("games." + getKey() + ".type", type.getKey());
         Config.getGamesConfig().set("games." + getKey() + ".plays", playCount);
         Config.saveConfigs();
     }
@@ -52,11 +53,16 @@ public class MinigameMap {
         return name;
     }
 
-    public String getType() {
+    public MinigameType getType() {
         return type;
     }
 
     public Integer getPlayCount() {
         return playCount;
+    }
+
+    // Overridden methods
+    public String toString() {
+        return name;
     }
 }

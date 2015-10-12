@@ -1,35 +1,21 @@
 package org.mcau.robotoraccoon.fridaynightgames.utility;
 
 import org.mcau.robotoraccoon.fridaynightgames.Config;
+import org.mcau.robotoraccoon.fridaynightgames.Main;
+import org.mcau.robotoraccoon.fridaynightgames.games.MinigameType;
 
 import java.util.Set;
 
 public class TypeUtil {
-
-    public static Set<String> getTypes() {
-        return Config.getConfig().getConfigurationSection("types").getKeys(false);
-    }
-
-    public static String getPlugin(String type) {
-
-        type = type.toLowerCase();
-
-        if (getTypes().contains(type)) {
-            return Config.getConfig().getString("types." + type);
-        } else {
-            return Config.getConfig().getString("types.unknown");
-        }
-    }
 
     public static Set<String> getPluginKeys() {
         return Config.getConfig().getConfigurationSection("commands").getKeys(false);
     }
 
     // Get the join command from a type key
-    public static String getJoinCommand(String type) {
+    public static String getJoinCommand(MinigameType type) {
 
-        type = type.toLowerCase();
-        String plugin = getPlugin(type);
+        String plugin = type.getPlugin();
 
         if (getPluginKeys().contains(plugin)) {
             try {
@@ -42,10 +28,9 @@ public class TypeUtil {
     }
 
     // Get the quit command from a type
-    public static String getQuitCommand(String type) {
+    public static String getQuitCommand(MinigameType type) {
 
-        type = type.toLowerCase();
-        String plugin = getPlugin(type);
+        String plugin = type.getPlugin();
 
         if (getPluginKeys().contains(plugin)) {
             try {
@@ -55,6 +40,21 @@ public class TypeUtil {
         }
 
         return Config.getConfig().getString("commands.unknown.quit");
+    }
+
+    public static void loadTypesFromConfig() {
+        Main.getMinigames().clear();
+        Set<String> keys = Config.getConfig().getConfigurationSection("types").getKeys(false);
+        for (String key : keys) {
+            MinigameType type = new MinigameType(key);
+            Main.getGameTypes().put(key, type);
+            System.out.println("Loaded: " + key + " - " + type.getPlugin());
+        }
+    }
+
+    public static void saveTypesToConfig() {
+        for (MinigameType type : Main.getGameTypes().values())
+            type.saveToConfig();
     }
 
 }

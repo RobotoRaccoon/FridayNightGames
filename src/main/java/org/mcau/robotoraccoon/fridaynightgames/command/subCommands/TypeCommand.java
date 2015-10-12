@@ -1,8 +1,11 @@
 package org.mcau.robotoraccoon.fridaynightgames.command.subCommands;
 
+import org.apache.commons.lang.StringUtils;
 import org.bukkit.command.CommandSender;
 import org.mcau.robotoraccoon.fridaynightgames.Config;
+import org.mcau.robotoraccoon.fridaynightgames.Main;
 import org.mcau.robotoraccoon.fridaynightgames.command.SubCommand;
+import org.mcau.robotoraccoon.fridaynightgames.games.MinigameType;
 import org.mcau.robotoraccoon.fridaynightgames.utility.MessageUtil;
 import org.mcau.robotoraccoon.fridaynightgames.utility.TypeUtil;
 
@@ -27,35 +30,70 @@ public class TypeCommand extends SubCommand {
         if (args.size() < 1) {
             playersHelp(sender);
         } else try {
+            String typeKey;
+            MinigameType type;
+
             switch (switchCommands.valueOf(args.get(0).toUpperCase())) {
 
                 case ADD:
                     if (args.size() < 3) {
                         MessageUtil.colour(sender, MessageUtil.getError() + "/FNG Type Add <Type> <Plugin>");
-                    } else if (TypeUtil.getTypes().contains(args.get(1).toLowerCase())) {
+                        return;
+                    }
+
+                    typeKey = args.get(1).toLowerCase();
+                    type = Main.getGameTypes().get(typeKey);
+                    String plugin = args.get(2).toLowerCase();
+
+                    if (type != null) {
                         MessageUtil.colour(sender, MessageUtil.getError() + "This type already exists.");
-                    } else if (!TypeUtil.getPluginKeys().contains(args.get(2).toLowerCase())) {
+                    } else if (!TypeUtil.getPluginKeys().contains(plugin)) {
                         MessageUtil.colour(sender, MessageUtil.getError() + "Plugin not defined. Available plugins: " + TypeUtil.getPluginKeys());
                     } else {
-                        Config.getConfig().set("types." + args.get(1).toLowerCase(), args.get(2).toLowerCase());
-                        Config.saveConfigs();
+                        type = new MinigameType(typeKey, plugin, args.get(1));
+                        Main.getGameTypes().put(typeKey, type);
                         MessageUtil.colour(sender, MessageUtil.getPrefix() + "Successfully added: &c" + args.get(1).toLowerCase() + "|" + args.get(2).toLowerCase());
                     }
                     break;
 
                 case LIST:
-                    MessageUtil.colour(sender, MessageUtil.getPrefix() + "Available types: &c" + TypeUtil.getTypes());
+                    MessageUtil.colour(sender, MessageUtil.getPrefix() + "Available types: &c" + Main.getGameTypes().values());
                     break;
 
                 case REMOVE:
                     if (args.size() < 2) {
                         MessageUtil.colour(sender, MessageUtil.getError() + "/FNG Type Remove <Type>");
-                    } else if (!TypeUtil.getTypes().contains(args.get(1).toLowerCase())) {
+                        return;
+                    }
+
+                    typeKey = args.get(1).toLowerCase();
+                    type = Main.getGameTypes().get(typeKey);
+
+                    if (type == null || !Main.getGameTypes().containsValue(type)) {
                         MessageUtil.colour(sender, MessageUtil.getError() + "This type does not exist.");
                     } else {
-                        Config.getConfig().set("types." + args.get(1).toLowerCase(), null);
+                        Config.getConfig().set("types." + type.getKey(), null);
+                        Main.getGameTypes().remove(type);
                         Config.saveConfigs();
                         MessageUtil.colour(sender, MessageUtil.getPrefix() + "Successfully removed: &c" + args.get(1).toLowerCase());
+                    }
+                    break;
+
+                case SETNAME:
+                    if (args.size() < 2) {
+                        MessageUtil.colour(sender, MessageUtil.getError() + "/FNG Type SetName <Type> <Name...>");
+                        return;
+                    }
+
+                    typeKey = args.get(1).toLowerCase();
+                    type = Main.getGameTypes().get(typeKey);
+
+                    if (type == null || !Main.getGameTypes().containsValue(type)) {
+                        MessageUtil.colour(sender, MessageUtil.getError() + "This type does not exist.");
+                    } else {
+                        args.remove(0);
+                        args.remove(0);
+                        type.setName(StringUtils.join(args, " "));
                     }
                     break;
 
@@ -71,10 +109,11 @@ public class TypeCommand extends SubCommand {
         MessageUtil.colour(sender, "&5Type List &f> &dList all available types.");
         MessageUtil.colour(sender, "&5Type Add &f> &dAdds a new type with join command.");
         MessageUtil.colour(sender, "&5Type Remove &f> &dRemoves an added type.");
+        MessageUtil.colour(sender, "&5Type SetName &f> &dSets the display name for a type.");
     }
 
     private enum switchCommands {
-        ADD, LIST, REMOVE
+        ADD, LIST, REMOVE, SETNAME
     }
 
 }

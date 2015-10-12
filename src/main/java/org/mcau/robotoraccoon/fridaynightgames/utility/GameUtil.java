@@ -46,7 +46,7 @@ public class GameUtil {
 
     //Forces all users to quit their game
     public static void end(MinigameMap map) {
-        String command = TypeUtil.getQuitCommand(map.getKey());
+        String command = TypeUtil.getQuitCommand(map.getType());
 
         for (final UUID pUUID : PlayerListUtil.getKeys()) {
             RunAsUtil.asPlayer(command, pUUID);
@@ -56,16 +56,16 @@ public class GameUtil {
     }
 
     public static void loadMinigamesFromConfig() {
-        Main.getMiniames().clear();
+        Main.getMinigames().clear();
         Set<String> keys = Config.getGamesConfig().getConfigurationSection("games").getKeys(false);
         for (String key : keys) {
             MinigameMap map = new MinigameMap(key);
-            Main.getMiniames().put(key, map);
+            Main.getMinigames().put(key, map);
         }
     }
 
     public static void saveMinigamesToConfig() {
-        for (MinigameMap map : Main.getMiniames().values())
+        for (MinigameMap map : Main.getMinigames().values())
             map.saveToConfig();
     }
 }

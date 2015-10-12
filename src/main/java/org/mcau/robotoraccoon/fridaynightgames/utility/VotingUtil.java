@@ -24,7 +24,7 @@ public class VotingUtil {
         mapList.clear();
 
         List<MinigameMap> maps = new ArrayList<>();
-        maps.addAll(Main.getMiniames().values());
+        maps.addAll(Main.getMinigames().values());
 
         // Amount of maps to remove from the list that have already been played this session
         int removeCount = Config.getConfig().getInt("removePlayedGames");
