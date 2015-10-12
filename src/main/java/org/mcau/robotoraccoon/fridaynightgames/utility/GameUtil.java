@@ -3,7 +3,7 @@ package org.mcau.robotoraccoon.fridaynightgames.utility;
 import org.bukkit.ChatColor;
 import org.mcau.robotoraccoon.fridaynightgames.Config;
 import org.mcau.robotoraccoon.fridaynightgames.Main;
-import org.mcau.robotoraccoon.fridaynightgames.command.games.MinigameMap;
+import org.mcau.robotoraccoon.fridaynightgames.games.MinigameMap;
 
 import java.util.*;
 
@@ -55,24 +55,17 @@ public class GameUtil {
         MessageUtil.global(MessageUtil.getPrefix() + "Ending Game: " + ChatColor.RED + map.getName());
     }
 
-    public static MinigameMap getMapFromKey(String key) {
-        for (MinigameMap map : Main.getMiniames())
-            if (map.getKey().equals(key))
-                return map;
-        return null;
-    }
-
     public static void loadMinigamesFromConfig() {
         Main.getMiniames().clear();
         Set<String> keys = Config.getGamesConfig().getConfigurationSection("games").getKeys(false);
         for (String key : keys) {
             MinigameMap map = new MinigameMap(key);
-            Main.getMiniames().add(map);
+            Main.getMiniames().put(key, map);
         }
     }
 
     public static void saveMinigamesToConfig() {
-        for (MinigameMap map : Main.getMiniames())
+        for (MinigameMap map : Main.getMiniames().values())
             map.saveToConfig();
     }
 }

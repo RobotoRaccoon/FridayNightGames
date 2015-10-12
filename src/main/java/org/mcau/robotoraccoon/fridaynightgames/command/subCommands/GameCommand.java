@@ -4,7 +4,7 @@ import org.bukkit.command.CommandSender;
 import org.mcau.robotoraccoon.fridaynightgames.Config;
 import org.mcau.robotoraccoon.fridaynightgames.Main;
 import org.mcau.robotoraccoon.fridaynightgames.command.SubCommand;
-import org.mcau.robotoraccoon.fridaynightgames.command.games.MinigameMap;
+import org.mcau.robotoraccoon.fridaynightgames.games.MinigameMap;
 import org.mcau.robotoraccoon.fridaynightgames.utility.MessageUtil;
 import org.mcau.robotoraccoon.fridaynightgames.utility.GameUtil;
 import org.mcau.robotoraccoon.fridaynightgames.utility.TypeUtil;
@@ -42,14 +42,14 @@ public class GameCommand extends SubCommand {
                     }
 
                     key = args.get(1).toLowerCase();
-                    map = GameUtil.getMapFromKey(key);
+                    map = Main.getMiniames().get(key);
                     if (map != null) {
                         MessageUtil.colour(sender, MessageUtil.getError() + "This minigame already exists.");
                     } else if (!TypeUtil.getTypes().contains(args.get(2).toLowerCase())) {
                         MessageUtil.colour(sender, MessageUtil.getError() + "Type not defined. Available types: " + TypeUtil.getTypes());
                     } else {
                         map = new MinigameMap(args.get(1), args.get(2).toLowerCase());
-                        Main.getMiniames().add(map);
+                        Main.getMiniames().put(key, map);
                         MessageUtil.colour(sender, MessageUtil.getPrefix() + "Added the minigame: &c" + args.get(1) + "|" + args.get(2).toLowerCase());
                     }
                     break;
@@ -75,7 +75,7 @@ public class GameCommand extends SubCommand {
                     }
 
                     key = args.get(1).toLowerCase();
-                    map = GameUtil.getMapFromKey(key);
+                    map = Main.getMiniames().get(key);
                     if (map == null) {
                         MessageUtil.colour(sender, MessageUtil.getError() + "This minigame does not exist.");
                     } else {
@@ -90,7 +90,7 @@ public class GameCommand extends SubCommand {
                     }
 
                     key = args.get(1).toLowerCase();
-                    map = GameUtil.getMapFromKey(key);
+                    map = Main.getMiniames().get(key);
                     if (map == null) {
                         MessageUtil.colour(sender, MessageUtil.getError() + "This minigame does not exist.");
                     } else {
@@ -112,7 +112,7 @@ public class GameCommand extends SubCommand {
                     }
 
                     key = args.get(1).toLowerCase();
-                    map = GameUtil.getMapFromKey(key);
+                    map = Main.getMiniames().get(key);
                     if (args.get(1).toLowerCase().equals("results")) {
                         GameUtil.startResults();
                     } else if (map == null) {

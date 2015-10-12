@@ -4,7 +4,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.mcau.robotoraccoon.fridaynightgames.Config;
 import org.mcau.robotoraccoon.fridaynightgames.Main;
-import org.mcau.robotoraccoon.fridaynightgames.command.games.MinigameMap;
+import org.mcau.robotoraccoon.fridaynightgames.games.MinigameMap;
 
 import java.util.*;
 
@@ -24,7 +24,7 @@ public class VotingUtil {
         mapList.clear();
 
         List<MinigameMap> maps = new ArrayList<>();
-        maps.addAll(Main.getMiniames());
+        maps.addAll(Main.getMiniames().values());
 
         // Amount of maps to remove from the list that have already been played this session
         int removeCount = Config.getConfig().getInt("removePlayedGames");

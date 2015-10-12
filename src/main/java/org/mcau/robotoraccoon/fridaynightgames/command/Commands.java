@@ -30,12 +30,9 @@ public class Commands implements CommandExecutor {
     public static void playersHelp(CommandSender sender) {
         MessageUtil.colour(sender, " &7===== &5Options &7=====");
 
-        for(Map.Entry<String, SubCommand> entry : commands.entrySet()) {
-            SubCommand command = entry.getValue();
-
+        for(SubCommand command : commands.values())
             if (sender.hasPermission(command.getPermission()))
                 MessageUtil.colour(sender, command.getDescription());
-        }
     }
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {

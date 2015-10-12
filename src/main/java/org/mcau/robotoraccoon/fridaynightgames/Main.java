@@ -7,7 +7,7 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.mcau.robotoraccoon.fridaynightgames.command.Commands;
-import org.mcau.robotoraccoon.fridaynightgames.command.games.MinigameMap;
+import org.mcau.robotoraccoon.fridaynightgames.games.MinigameMap;
 import org.mcau.robotoraccoon.fridaynightgames.utility.GameUtil;
 
 import java.util.*;
@@ -16,7 +16,7 @@ public class Main extends JavaPlugin {
 
     // FNG
     private static final List<MinigameMap> playedGames = new ArrayList<>();
-    private static final List<MinigameMap> minigames = new ArrayList<>();
+    private static final HashMap<String, MinigameMap> minigames = new HashMap<>();
     private static final HashMap<UUID, Player> playerList = new HashMap<>();
     private static Boolean fngEnabled = false;
     private static Boolean autoStartEnabled = false;
@@ -79,7 +79,7 @@ public class Main extends JavaPlugin {
         return playedGames;
     }
 
-    public static List<MinigameMap> getMiniames() {
+    public static HashMap<String, MinigameMap> getMiniames() {
         return minigames;
     }
 

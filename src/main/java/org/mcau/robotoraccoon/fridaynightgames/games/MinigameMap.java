@@ -1,4 +1,4 @@
-package org.mcau.robotoraccoon.fridaynightgames.command.games;
+package org.mcau.robotoraccoon.fridaynightgames.games;
 
 import org.mcau.robotoraccoon.fridaynightgames.Config;
 

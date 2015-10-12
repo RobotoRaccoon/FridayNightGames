@@ -1,11 +1,9 @@
 package org.mcau.robotoraccoon.fridaynightgames.command.subCommands;
 
 import org.bukkit.command.CommandSender;
-import org.mcau.robotoraccoon.fridaynightgames.Config;
 import org.mcau.robotoraccoon.fridaynightgames.Main;
 import org.mcau.robotoraccoon.fridaynightgames.command.SubCommand;
-import org.mcau.robotoraccoon.fridaynightgames.command.games.MinigameMap;
-import org.mcau.robotoraccoon.fridaynightgames.utility.GameUtil;
+import org.mcau.robotoraccoon.fridaynightgames.games.MinigameMap;
 import org.mcau.robotoraccoon.fridaynightgames.utility.MessageUtil;
 import org.mcau.robotoraccoon.fridaynightgames.utility.TypeUtil;
 
@@ -34,7 +32,7 @@ public class ListCommand extends SubCommand {
 
             // Get games into an associative array.
             HashMap<String, List<String>> sortedGames = new HashMap<>();
-            for (MinigameMap map : Main.getMiniames()) {
+            for (MinigameMap map : Main.getMiniames().values()) {
                 String type = map.getType();
 
                 List<String> nameList = new ArrayList<>();
@@ -53,7 +51,7 @@ public class ListCommand extends SubCommand {
             }
         } else {
             String key = args.get(0).toLowerCase();
-            MinigameMap map = GameUtil.getMapFromKey(key);
+            MinigameMap map = Main.getMiniames().get(key);
 
             if (map == null) {
                 MessageUtil.colour(sender, MessageUtil.getError() + "This minigame does not exist.");
