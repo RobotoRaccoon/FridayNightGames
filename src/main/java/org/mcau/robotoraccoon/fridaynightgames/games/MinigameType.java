@@ -63,7 +63,7 @@ public class MinigameType {
 
     // Overridden methods
     public String toString() {
-        return name;
+        return key;
     }
 
 }

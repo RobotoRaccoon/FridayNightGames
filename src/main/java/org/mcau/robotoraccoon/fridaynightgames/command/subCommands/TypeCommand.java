@@ -57,7 +57,8 @@ public class TypeCommand extends SubCommand {
                     break;
 
                 case LIST:
-                    MessageUtil.colour(sender, MessageUtil.getPrefix() + "Available types: &c" + Main.getGameTypes().values());
+                    MessageUtil.colour(sender, MessageUtil.getPrefix() + "Available types: &c" +
+                            StringUtils.join(Main.getGameTypes().values(), ", "));
                     break;
 
                 case REMOVE:

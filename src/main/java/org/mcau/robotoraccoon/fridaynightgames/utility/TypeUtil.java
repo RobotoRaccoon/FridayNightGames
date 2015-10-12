@@ -48,7 +48,6 @@ public class TypeUtil {
         for (String key : keys) {
             MinigameType type = new MinigameType(key);
             Main.getGameTypes().put(key, type);
-            System.out.println("Loaded: " + key + " - " + type.getPlugin());
         }
     }
 

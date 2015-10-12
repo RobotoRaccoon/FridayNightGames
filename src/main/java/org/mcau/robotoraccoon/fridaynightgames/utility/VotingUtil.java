@@ -60,7 +60,7 @@ public class VotingUtil {
         for (short i = 0; i < mapList.size(); i++) {
             String pos = String.valueOf(i + 1);
             MessageUtil.colour(sender, "&5" + pos + ": &d" + mapList.get(i).getName()
-                    + " &7&o(" + mapList.get(i).getType() + ")");
+                    + " &7&o(" + mapList.get(i).getType().getName() + ")");
         }
 
         MessageUtil.colour(sender, MessageUtil.getPrefix() + "To vote for a map, do: &5/FNG Vote <Number>");

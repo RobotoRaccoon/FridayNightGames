@@ -1,5 +1,6 @@
 package org.mcau.robotoraccoon.fridaynightgames.command.subCommands;
 
+import org.apache.commons.lang.StringUtils;
 import org.bukkit.command.CommandSender;
 import org.mcau.robotoraccoon.fridaynightgames.Main;
 import org.mcau.robotoraccoon.fridaynightgames.command.SubCommand;
@@ -48,7 +49,7 @@ public class ListCommand extends SubCommand {
 
             // Print the games under their respective heading
             for (MinigameType type : sortedGames.keySet()) {
-                MessageUtil.colour(sender, "&5" + type + ": &e" + sortedGames.get(type).toString());
+                MessageUtil.colour(sender, "&5" + type.getName() + ": &e" + StringUtils.join(sortedGames.get(type), ", "));
             }
         } else {
             String key = args.get(0).toLowerCase();
