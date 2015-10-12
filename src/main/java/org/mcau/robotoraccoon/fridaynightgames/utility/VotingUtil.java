@@ -4,13 +4,14 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.mcau.robotoraccoon.fridaynightgames.Config;
 import org.mcau.robotoraccoon.fridaynightgames.Main;
+import org.mcau.robotoraccoon.fridaynightgames.command.games.MinigameMap;
 
 import java.util.*;
 
 public class VotingUtil {
 
-    public static final HashMap<UUID, String> voteList = new HashMap<>();
-    public static final List<String> mapList = new ArrayList<>();
+    public static final HashMap<UUID, MinigameMap> voteList = new HashMap<>();
+    public static final List<MinigameMap> mapList = new ArrayList<>();
 
     // Picks an amount of random maps to let people vote for.
     public static void generateList() {
@@ -22,31 +23,31 @@ public class VotingUtil {
         voteList.clear();
         mapList.clear();
 
-        List<String> keys = new ArrayList<>();
-        keys.addAll(GameListUtil.getKeys());
+        List<MinigameMap> maps = new ArrayList<>();
+        maps.addAll(Main.getMiniames());
 
         // Amount of maps to remove from the list that have already been played this session
         int removeCount = Config.getConfig().getInt("removePlayedGames");
-        if (keys.size() > mapCount) {
+        if (maps.size() > mapCount) {
             // Get lowest value
-            int maxLoops = keys.size() - mapCount;
+            int maxLoops = maps.size() - mapCount;
             if (maxLoops > removeCount) maxLoops = removeCount;
             if (maxLoops > Main.getPlayedGames().size()) maxLoops = Main.getPlayedGames().size();
 
             for (int i = 0; i < maxLoops; i++) {
-                keys.remove(Main.getPlayedGames().get(i));
+                maps.remove(Main.getPlayedGames().get(i));
             }
         }
 
 
         // Generate list.
         for (short i = 0; i < mapCount; i++) {
-            if (keys.size() != 0) {
+            if (maps.size() != 0) {
                 Random random = new Random();
-                String randomKey = keys.get(random.nextInt(keys.size()));
+                MinigameMap randomMap = maps.get(random.nextInt(maps.size()));
 
-                mapList.add(randomKey);
-                keys.remove(randomKey);
+                mapList.add(randomMap);
+                maps.remove(randomMap);
             }
         }
 
@@ -58,8 +59,8 @@ public class VotingUtil {
 
         for (short i = 0; i < mapList.size(); i++) {
             String pos = String.valueOf(i + 1);
-            MessageUtil.colour(sender, "&5" + pos + ": &d" + GameListUtil.getGameName(mapList.get(i))
-                    + " &7&o(" + GameListUtil.getGameType(mapList.get(i)) + ")");
+            MessageUtil.colour(sender, "&5" + pos + ": &d" + mapList.get(i).getName()
+                    + " &7&o(" + mapList.get(i).getType() + ")");
         }
 
         MessageUtil.colour(sender, MessageUtil.getPrefix() + "To vote for a map, do: &5/FNG Vote <Number>");
@@ -75,56 +76,56 @@ public class VotingUtil {
             return;
         }
 
-        String gameKey = mapList.get(index);
+        MinigameMap map = mapList.get(index);
         Player player = (Player) sender;
 
         if (voteList.containsKey(player.getUniqueId())) {
-            MessageUtil.colour(sender, MessageUtil.getPrefix() + "You have changed your vote to &5" + GameListUtil.getGameName(gameKey));
+            MessageUtil.colour(sender, MessageUtil.getPrefix() + "You have changed your vote to &5" + map.getName());
         } else {
-            MessageUtil.colour(sender, MessageUtil.getPrefix() + "You have successfully voted for &5" + GameListUtil.getGameName(gameKey));
+            MessageUtil.colour(sender, MessageUtil.getPrefix() + "You have successfully voted for &5" + map.getName());
         }
 
-        voteList.put(player.getUniqueId(), gameKey);
+        voteList.put(player.getUniqueId(), map);
 
     }
 
     // Get the votes from <pUUID,gameKey> into <gameKey,Score>
-    public static HashMap<String, Integer> getVoteTally() {
+    public static HashMap<MinigameMap, Integer> getVoteTally() {
 
-        HashMap<String, Integer> voteTally = new HashMap<>();
+        HashMap<MinigameMap, Integer> voteTally = new HashMap<>();
 
         for (UUID pUUID : voteList.keySet()) {
 
-            String gameKey = voteList.get(pUUID);
+            MinigameMap map = voteList.get(pUUID);
             Integer gameScore;
 
-            if (voteTally.containsKey(gameKey)) {
-                gameScore = voteTally.get(gameKey) + 1;
+            if (voteTally.containsKey(map)) {
+                gameScore = voteTally.get(map) + 1;
             } else {
                 gameScore = 1;
             }
 
-            voteTally.put(gameKey, gameScore);
+            voteTally.put(map, gameScore);
 
         }
 
         return voteTally;
     }
 
-    public static List<String> getMostVoted() {
+    public static List<MinigameMap> getMostVoted() {
 
-        List<String> mostVoted = new ArrayList<>();
-        HashMap<String, Integer> voteTally = getVoteTally();
+        List<MinigameMap> mostVoted = new ArrayList<>();
+        HashMap<MinigameMap, Integer> voteTally = getVoteTally();
         Integer highestVote = 0;
 
-        for (String gameKey : voteTally.keySet()) {
+        for (MinigameMap map : voteTally.keySet()) {
 
-            if (voteTally.get(gameKey) > highestVote) {
-                highestVote = voteTally.get(gameKey);
+            if (voteTally.get(map) > highestVote) {
+                highestVote = voteTally.get(map);
                 mostVoted.clear();
-                mostVoted.add(gameKey);
-            } else if (voteTally.get(gameKey).equals(highestVote)) {
-                mostVoted.add(gameKey);
+                mostVoted.add(map);
+            } else if (voteTally.get(map).equals(highestVote)) {
+                mostVoted.add(map);
             }
 
         }

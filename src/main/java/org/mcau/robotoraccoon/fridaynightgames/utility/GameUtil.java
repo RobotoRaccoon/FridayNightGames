@@ -3,74 +3,76 @@ package org.mcau.robotoraccoon.fridaynightgames.utility;
 import org.bukkit.ChatColor;
 import org.mcau.robotoraccoon.fridaynightgames.Config;
 import org.mcau.robotoraccoon.fridaynightgames.Main;
+import org.mcau.robotoraccoon.fridaynightgames.command.games.MinigameMap;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 
 public class GameUtil {
 
     //Start a specified game
-    public static void start(String gameKey) {
+    public static void start(MinigameMap map) {
 
-        gameKey = gameKey.toLowerCase();
-        String command = TypeUtil.getJoinCommand(GameListUtil.getGameType(gameKey)) + " " + gameKey;
+        String command = TypeUtil.getJoinCommand(map.getType()) + " " + map.getKey();
 
         for (final UUID pUUID : PlayerListUtil.getKeys()) {
             RunAsUtil.asPlayer(command, pUUID);
         }
 
         Main.setAutoStartEnabled(false);
-        Main.getPlayedGames().add(0, gameKey);
+        Main.getPlayedGames().add(0, map);
         VotingUtil.generateList();
-        addPlayCount(gameKey);
+        map.incrementPlayCount();
 
-        MessageUtil.global(MessageUtil.getPrefix() + "Starting Game: " + ChatColor.RED + gameKey.toUpperCase());
+        MessageUtil.global(MessageUtil.getPrefix() + "Starting Game: " + ChatColor.RED + map.getName());
     }
 
     // Starts the highest rated game.
     public static void startResults() {
-        List<String> mostVoted = VotingUtil.getMostVoted();
-        String gameName;
+        List<MinigameMap> mostVoted = VotingUtil.getMostVoted();
+        MinigameMap map;
         Random random = new Random();
 
         if (mostVoted.size() < 1) {
             // No votes, pick a completely random map.
-            List<String> keys = new ArrayList<>(VotingUtil.mapList);
-            gameName = keys.get(random.nextInt(keys.size()));
+            List<MinigameMap> maps = new ArrayList<>(VotingUtil.mapList);
+            map = maps.get(random.nextInt(maps.size()));
         } else {
             // Pick highest rated, or random of those if results are tied.
-            gameName = mostVoted.get(random.nextInt(mostVoted.size()));
+            map = mostVoted.get(random.nextInt(mostVoted.size()));
         }
 
-        GameUtil.start(gameName);
+        GameUtil.start(map);
     }
 
     //Forces all users to quit their game
-    public static void end(String gameKey) {
-
-        gameKey = gameKey.toLowerCase();
-        String command = TypeUtil.getQuitCommand(GameListUtil.getGameType(gameKey));
+    public static void end(MinigameMap map) {
+        String command = TypeUtil.getQuitCommand(map.getKey());
 
         for (final UUID pUUID : PlayerListUtil.getKeys()) {
             RunAsUtil.asPlayer(command, pUUID);
         }
 
-        MessageUtil.global(MessageUtil.getPrefix() + "Ending Game: " + ChatColor.RED + gameKey.toUpperCase());
+        MessageUtil.global(MessageUtil.getPrefix() + "Ending Game: " + ChatColor.RED + map.getName());
     }
 
-    //Add plays to the games total play count for every FNG
-    public static void addPlayCount(String gameKey) { addPlayCount(gameKey, 1); }
-    public static void addPlayCount(String gameKey, Integer amount) {
-        gameKey = gameKey.toLowerCase();
-        Integer gamePlays = 0;
+    public static MinigameMap getMapFromKey(String key) {
+        for (MinigameMap map : Main.getMiniames())
+            if (map.getKey().equals(key))
+                return map;
+        return null;
+    }
 
-        if (Config.getGamesConfig().contains("games." + gameKey + ".plays")) {
-            gamePlays = Config.getGamesConfig().getInt("games." + gameKey + ".plays");
+    public static void loadMinigamesFromConfig() {
+        Main.getMiniames().clear();
+        Set<String> keys = Config.getGamesConfig().getConfigurationSection("games").getKeys(false);
+        for (String key : keys) {
+            MinigameMap map = new MinigameMap(key);
+            Main.getMiniames().add(map);
         }
+    }
 
-        Config.getGamesConfig().set("games." + gameKey + ".plays", gamePlays + amount);
-        Config.saveConfigs();
+    public static void saveMinigamesToConfig() {
+        for (MinigameMap map : Main.getMiniames())
+            map.saveToConfig();
     }
 }

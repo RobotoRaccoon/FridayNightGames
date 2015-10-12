@@ -3,6 +3,7 @@ package org.mcau.robotoraccoon.fridaynightgames.command.subCommands;
 import org.bukkit.command.CommandSender;
 import org.mcau.robotoraccoon.fridaynightgames.Main;
 import org.mcau.robotoraccoon.fridaynightgames.command.SubCommand;
+import org.mcau.robotoraccoon.fridaynightgames.utility.GameUtil;
 import org.mcau.robotoraccoon.fridaynightgames.utility.MessageUtil;
 import org.mcau.robotoraccoon.fridaynightgames.utility.PlayerListUtil;
 import org.mcau.robotoraccoon.fridaynightgames.utility.VotingUtil;
@@ -46,7 +47,9 @@ public class EnabledCommand extends SubCommand {
         } else {
 
             Main.setFngEnabled(false);
+            GameUtil.saveMinigamesToConfig();
             PlayerListUtil.clearList();
+            Main.getPlayedGames().clear();
 
             MessageUtil.global(MessageUtil.getPrefix() + "Has been &cDisabled &eby &5" + sender.getName());
             MessageUtil.global(MessageUtil.getPrefix() + "We hope you all had fun!");

@@ -7,19 +7,20 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.mcau.robotoraccoon.fridaynightgames.command.Commands;
+import org.mcau.robotoraccoon.fridaynightgames.command.games.MinigameMap;
+import org.mcau.robotoraccoon.fridaynightgames.utility.GameUtil;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public class Main extends JavaPlugin {
 
     // FNG
-    private static final List<String> playedGames = new ArrayList<>();
+    private static final List<MinigameMap> playedGames = new ArrayList<>();
+    private static final List<MinigameMap> minigames = new ArrayList<>();
     private static final HashMap<UUID, Player> playerList = new HashMap<>();
     private static Boolean fngEnabled = false;
     private static Boolean autoStartEnabled = false;
+
     // Vault
     private static Economy econ = null;
     private static Plugin plugin;
@@ -48,11 +49,13 @@ public class Main extends JavaPlugin {
         new Config();
         Config.createAllFiles();
 
+        // Load minigames
+        GameUtil.loadMinigamesFromConfig();
     }
 
     @Override
     public void onDisable() {
-
+        GameUtil.saveMinigamesToConfig();
     }
 
     private boolean setupEconomy() {
@@ -67,12 +70,17 @@ public class Main extends JavaPlugin {
         return econ != null;
     }
 
+    // FNG
     public static HashMap<UUID, Player> getPlayerList() {
         return playerList;
     }
 
-    public static List<String> getPlayedGames() {
+    public static List<MinigameMap> getPlayedGames() {
         return playedGames;
+    }
+
+    public static List<MinigameMap> getMiniames() {
+        return minigames;
     }
 
     public static Boolean getFngEnabled() {
@@ -91,6 +99,7 @@ public class Main extends JavaPlugin {
         Main.autoStartEnabled = autoStartEnabled;
     }
 
+    // Vault
     public static Economy getEcon() {
         return econ;
     }

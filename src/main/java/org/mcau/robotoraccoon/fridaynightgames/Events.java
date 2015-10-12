@@ -17,7 +17,7 @@ public class Events implements Listener {
     public void onMinigameEnd(final EndMinigameEvent event) {
 
         try {
-            if (event.getMinigame().getName(false).equalsIgnoreCase(Main.getPlayedGames().get(0)) && Main.getFngEnabled()) {
+            if (event.getMinigame().getName(false).equalsIgnoreCase(Main.getPlayedGames().get(0).getKey()) && Main.getFngEnabled()) {
 
                 new AutoStartTextThread().start();
                 new AutoStartRunnable().runTaskLater(Main.getPlugin(), 1220); //61 seconds
@@ -31,7 +31,7 @@ public class Events implements Listener {
     public void onBlockHuntArenaEnd(final EndArenaEvent event) {
 
         try {
-            if (event.getArena().arenaName.equalsIgnoreCase(Main.getPlayedGames().get(0)) && Main.getFngEnabled()) {
+            if (event.getArena().arenaName.equalsIgnoreCase(Main.getPlayedGames().get(0).getKey()) && Main.getFngEnabled()) {
 
                 new AutoStartTextThread().start();
                 new AutoStartRunnable().runTaskLater(Main.getPlugin(), 1220); //61 seconds
