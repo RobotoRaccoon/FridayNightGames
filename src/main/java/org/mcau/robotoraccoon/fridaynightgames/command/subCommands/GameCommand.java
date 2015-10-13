@@ -97,7 +97,7 @@ public class GameCommand extends SubCommand {
                         MessageUtil.colour(sender, MessageUtil.getError() + "This minigame does not exist.");
                     } else {
                         Config.getGamesConfig().set("games." + key, null);
-                        Main.getMinigames().remove(map);
+                        Main.getMinigames().remove(key);
                         MessageUtil.colour(sender, MessageUtil.getPrefix() + "Game successfully removed.");
                     }
                     break;

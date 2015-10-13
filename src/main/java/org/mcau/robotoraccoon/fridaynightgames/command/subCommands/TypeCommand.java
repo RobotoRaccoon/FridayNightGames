@@ -1,6 +1,7 @@
 package org.mcau.robotoraccoon.fridaynightgames.command.subCommands;
 
 import org.apache.commons.lang.StringUtils;
+import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.mcau.robotoraccoon.fridaynightgames.Config;
 import org.mcau.robotoraccoon.fridaynightgames.Main;
@@ -18,7 +19,7 @@ public class TypeCommand extends SubCommand {
     }
 
     public String getUsage() {
-        return "type <list|add|remove>";
+        return "type <list|add|remove|setname>";
     }
 
     public String getDescription() {
@@ -52,13 +53,28 @@ public class TypeCommand extends SubCommand {
                     } else {
                         type = new MinigameType(typeKey, plugin, args.get(1));
                         Main.getGameTypes().put(typeKey, type);
-                        MessageUtil.colour(sender, MessageUtil.getPrefix() + "Successfully added: &c" + args.get(1).toLowerCase() + "|" + args.get(2).toLowerCase());
+                        MessageUtil.colour(sender, MessageUtil.getPrefix() +
+                                "Successfully added game type: &c" + args.get(1).toLowerCase() + "|" + args.get(2).toLowerCase());
                     }
                     break;
 
                 case LIST:
-                    MessageUtil.colour(sender, MessageUtil.getPrefix() + "Available types: &c" +
-                            StringUtils.join(Main.getGameTypes().values(), ", "));
+                    if (args.size() < 2) {
+                        MessageUtil.colour(sender, MessageUtil.getPrefix() + "Available types: &c" +
+                                StringUtils.join(Main.getGameTypes().values(), ", "));
+                    } else {
+                        typeKey = args.get(1).toLowerCase();
+                        type = Main.getGameTypes().get(typeKey);
+
+                        if (type == null) {
+                            MessageUtil.colour(sender, MessageUtil.getError() + "This type does not exist.");
+                            return;
+                        }
+
+                        MessageUtil.colour(sender, "&5Name: &e" + type.getName());
+                        MessageUtil.colour(sender, "&5Short-hand: &e" + type.getKey());
+                        MessageUtil.colour(sender, "&5Plugin: &e" + type.getPlugin());
+                    }
                     break;
 
                 case REMOVE:
@@ -74,9 +90,9 @@ public class TypeCommand extends SubCommand {
                         MessageUtil.colour(sender, MessageUtil.getError() + "This type does not exist.");
                     } else {
                         Config.getConfig().set("types." + type.getKey(), null);
-                        Main.getGameTypes().remove(type);
-                        Config.saveConfigs();
-                        MessageUtil.colour(sender, MessageUtil.getPrefix() + "Successfully removed: &c" + args.get(1).toLowerCase());
+                        Main.getGameTypes().remove(typeKey);
+                        MessageUtil.colour(sender, MessageUtil.getPrefix() +
+                                "Successfully removed game type: &c" + args.get(1).toLowerCase());
                     }
                     break;
 
@@ -94,7 +110,10 @@ public class TypeCommand extends SubCommand {
                     } else {
                         args.remove(0);
                         args.remove(0);
-                        type.setName(StringUtils.join(args, " "));
+                        String newName = StringUtils.join(args, " ");
+                        type.setName(newName);
+                        MessageUtil.colour(sender, MessageUtil.getPrefix() +
+                                "Successfully set the display name to: &c" + newName);
                     }
                     break;
 
