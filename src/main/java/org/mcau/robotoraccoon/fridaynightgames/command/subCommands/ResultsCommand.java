@@ -1,5 +1,6 @@
 package org.mcau.robotoraccoon.fridaynightgames.command.subCommands;
 
+import org.apache.commons.lang.StringUtils;
 import org.bukkit.command.CommandSender;
 import org.mcau.robotoraccoon.fridaynightgames.Main;
 import org.mcau.robotoraccoon.fridaynightgames.command.SubCommand;
@@ -30,7 +31,8 @@ public class ResultsCommand extends SubCommand {
         }
 
         if (args.size() < 1) {
-            MessageUtil.colour(sender, MessageUtil.getPrefix() + "The most voted maps: &c" + VotingUtil.getMostVoted().toString());
+            String maps = "" + StringUtils.join(VotingUtil.getMostVoted(), ", ");
+            MessageUtil.colour(sender, MessageUtil.getPrefix() + "The most voted maps: &c" + (maps.isEmpty() ? "N/A" : maps));
             return;
         }
 
