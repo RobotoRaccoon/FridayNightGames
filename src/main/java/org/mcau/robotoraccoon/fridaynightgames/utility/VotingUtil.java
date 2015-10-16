@@ -23,8 +23,11 @@ public class VotingUtil {
         voteList.clear();
         mapList.clear();
 
+        // Add all the enabled maps into the pool.
         List<MinigameMap> maps = new ArrayList<>();
-        maps.addAll(Main.getMinigames().values());
+        for (MinigameMap map : Main.getMinigames().values())
+            if (map.getEnabled())
+                maps.add(map);
 
         // Amount of maps to remove from the list that have already been played this session
         int removeCount = Config.getConfig().getInt("removePlayedGames");

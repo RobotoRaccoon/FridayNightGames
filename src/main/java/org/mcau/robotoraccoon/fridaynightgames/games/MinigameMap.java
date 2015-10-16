@@ -5,6 +5,7 @@ import org.mcau.robotoraccoon.fridaynightgames.Main;
 
 public class MinigameMap {
 
+    private Boolean enabled;
     private String name;
     private MinigameType type;
     private Integer playCount;
@@ -13,6 +14,7 @@ public class MinigameMap {
         this(name, type, 0);
     }
     public MinigameMap(String name, MinigameType type, Integer playCount) {
+        this.enabled = true;
         this.name = name;
         this.type = type;
         this.playCount = playCount;
@@ -35,6 +37,7 @@ public class MinigameMap {
         if (!Config.getGamesConfig().contains("games." + key))
             return false;
 
+        enabled = Config.getGamesConfig().getBoolean("games." + key + ".enabled", true);
         name = Config.getGamesConfig().getString("games." + key + ".name");
         type = Main.getGameTypes().get(Config.getGamesConfig().getString("games." + key + ".type"));
         playCount = Config.getGamesConfig().getInt("games." + key + ".plays");
@@ -42,6 +45,7 @@ public class MinigameMap {
     }
 
     public void saveToConfig() {
+        Config.getGamesConfig().set("games." + getKey() + ".enabled", enabled);
         Config.getGamesConfig().set("games." + getKey() + ".name", name);
         Config.getGamesConfig().set("games." + getKey() + ".type", type.getKey());
         Config.getGamesConfig().set("games." + getKey() + ".plays", playCount);
@@ -49,6 +53,14 @@ public class MinigameMap {
     }
 
     // Variable accessors //
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
     public String getName() {
         return name;
     }
@@ -63,6 +75,6 @@ public class MinigameMap {
 
     // Overridden methods
     public String toString() {
-        return name;
+        return getKey();
     }
 }

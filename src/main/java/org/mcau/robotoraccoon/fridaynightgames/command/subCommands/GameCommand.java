@@ -65,6 +65,35 @@ public class GameCommand extends SubCommand {
                     MessageUtil.colour(sender, MessageUtil.getPrefix() + "Amount of games started in this session: &c" + Main.getPlayedGames().size());
                     break;
 
+                case ENABLED:
+                    if (args.size() < 2) {
+                        MessageUtil.colour(sender, MessageUtil.getError() + "/FNG Game Enabled <Name> [T|F]");
+                        return;
+                    }
+
+                    key = args.get(1).toLowerCase();
+                    map = Main.getMinigames().get(key);
+                    if (map == null) {
+                        MessageUtil.colour(sender, MessageUtil.getError() + "This minigame does not exist.");
+                        return;
+                    }
+
+                    if (args.size() < 3) {
+
+                        if (map.getEnabled())
+                            MessageUtil.colour(sender, MessageUtil.getPrefix() + map.getName() + " is &aEnabled");
+                        else
+                            MessageUtil.colour(sender, MessageUtil.getPrefix() + map.getName() + " is &cDisabled");
+
+                    } else if (args.get(2).startsWith("T") || args.get(2).startsWith("t")) {
+                        map.setEnabled(true);
+                        MessageUtil.colour(sender, MessageUtil.getPrefix() + map.getName() + " has been &aEnabled");
+                    } else {
+                        map.setEnabled(false);
+                        MessageUtil.colour(sender, MessageUtil.getPrefix() + map.getName() + " has been &cDisabled");
+                    }
+                    break;
+
                 case END:
                     if (!Main.getFngEnabled()) {
                         MessageUtil.colour(sender, MessageUtil.getDisabled());
@@ -119,6 +148,8 @@ public class GameCommand extends SubCommand {
                         GameUtil.startResults();
                     } else if (map == null) {
                         MessageUtil.colour(sender, MessageUtil.getError() + "This minigame does not exist.");
+                    } else if (!map.getEnabled()) {
+                        MessageUtil.colour(sender, MessageUtil.getError() + "This minigame is currently disabled.");
                     } else {
                         GameUtil.start(map);
                     }
@@ -136,13 +167,14 @@ public class GameCommand extends SubCommand {
         MessageUtil.colour(sender, " &7===== &5Options &7=====");
         MessageUtil.colour(sender, "&5Game Add &f> &dAdds a new game.");
         MessageUtil.colour(sender, "&5Game Count &f> &dView how many games have been played.");
+        MessageUtil.colour(sender, "&5Game Enabled &f> &dToggle if a game can be started.");
         MessageUtil.colour(sender, "&5Game End &f> &dForces everyone to quit.");
         MessageUtil.colour(sender, "&5Game Remove &f> &dRemoves an added game.");
         MessageUtil.colour(sender, "&5Game Start &f> &dStarts the specified game.");
     }
 
     private enum switchCommands {
-        ADD, COUNT, END, REMOVE, START
+        ADD, COUNT, ENABLED, END, REMOVE, START
     }
 
 }

@@ -42,14 +42,19 @@ public class ListCommand extends SubCommand {
                     nameList = sortedGames.get(type);
                 }
 
-                nameList.add(map.getName());
+                // Display disabled games as red, if the sender is a host.
+                if (map.getEnabled())
+                    nameList.add(map.getName());
+                else if (sender.hasPermission("fng.host"))
+                    nameList.add("&c" + map.getName());
+
                 Collections.sort(nameList);
                 sortedGames.put(type, nameList);
             }
 
             // Print the games under their respective heading
             for (MinigameType type : sortedGames.keySet()) {
-                MessageUtil.colour(sender, "&5" + type.getName() + ": &e" + StringUtils.join(sortedGames.get(type), ", "));
+                MessageUtil.colour(sender, "&5" + type.getName() + ": &e" + StringUtils.join(sortedGames.get(type), "&e, "));
             }
         } else {
             String key = args.get(0).toLowerCase();
@@ -60,7 +65,8 @@ public class ListCommand extends SubCommand {
                 return;
             }
 
-            MessageUtil.colour(sender, "&5Name: &e" + map.getName());
+            MessageUtil.colour(sender, "&7 ===== &5" + map.getName() + "&7 ======");
+            MessageUtil.colour(sender, "&5Status: " + (map.getEnabled() ? "&aEnabled" : "&cDisabled") );
             MessageUtil.colour(sender, "&5Type: &e" + map.getType());
             MessageUtil.colour(sender, "&5Join Command: &e" + TypeUtil.getJoinCommand(map.getType()));
             MessageUtil.colour(sender, "&5Quit Command: &e" + TypeUtil.getQuitCommand(map.getType()));
