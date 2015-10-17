@@ -1,12 +1,12 @@
 package org.mcau.robotoraccoon.fridaynightgames.command.subCommands;
 
 import org.apache.commons.lang.StringUtils;
-import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.mcau.robotoraccoon.fridaynightgames.Config;
 import org.mcau.robotoraccoon.fridaynightgames.Main;
 import org.mcau.robotoraccoon.fridaynightgames.command.SubCommand;
 import org.mcau.robotoraccoon.fridaynightgames.games.MinigameType;
+import org.mcau.robotoraccoon.fridaynightgames.utility.LangUtil;
 import org.mcau.robotoraccoon.fridaynightgames.utility.MessageUtil;
 import org.mcau.robotoraccoon.fridaynightgames.utility.TypeUtil;
 
@@ -38,7 +38,7 @@ public class TypeCommand extends SubCommand {
 
                 case ADD:
                     if (args.size() < 3) {
-                        MessageUtil.colour(sender, MessageUtil.getError() + "/FNG Type Add <Type> <Plugin>");
+                        MessageUtil.colour(sender, LangUtil.formatError("/FNG Type Add <Type> <Plugin>"));
                         return;
                     }
 
@@ -47,27 +47,27 @@ public class TypeCommand extends SubCommand {
                     String plugin = args.get(2).toLowerCase();
 
                     if (type != null) {
-                        MessageUtil.colour(sender, MessageUtil.getError() + "This type already exists.");
+                        MessageUtil.colour(sender, LangUtil.formatError("This type already exists."));
                     } else if (!TypeUtil.getPluginKeys().contains(plugin)) {
-                        MessageUtil.colour(sender, MessageUtil.getError() + "Plugin not defined. Available plugins: " + TypeUtil.getPluginKeys());
+                        MessageUtil.colour(sender, LangUtil.formatError("Plugin not defined. Available plugins: " + TypeUtil.getPluginKeys()));
                     } else {
                         type = new MinigameType(typeKey, plugin, args.get(1));
                         Main.getGameTypes().put(typeKey, type);
-                        MessageUtil.colour(sender, MessageUtil.getPrefix() +
-                                "Successfully added game type: &c" + args.get(1).toLowerCase() + "|" + args.get(2).toLowerCase());
+                        MessageUtil.colour(sender, LangUtil.formatPrefix(
+                                "Successfully added game type: &c" + args.get(1).toLowerCase() + "|" + args.get(2).toLowerCase()));
                     }
                     break;
 
                 case LIST:
                     if (args.size() < 2) {
-                        MessageUtil.colour(sender, MessageUtil.getPrefix() + "Available types: &c" +
-                                StringUtils.join(Main.getGameTypes().values(), ", "));
+                        MessageUtil.colour(sender, LangUtil.formatPrefix("Available types: &c" +
+                                StringUtils.join(Main.getGameTypes().values(), ", ")));
                     } else {
                         typeKey = args.get(1).toLowerCase();
                         type = Main.getGameTypes().get(typeKey);
 
                         if (type == null) {
-                            MessageUtil.colour(sender, MessageUtil.getError() + "This type does not exist.");
+                            MessageUtil.colour(sender, LangUtil.formatError( "This type does not exist."));
                             return;
                         }
 
@@ -79,7 +79,7 @@ public class TypeCommand extends SubCommand {
 
                 case REMOVE:
                     if (args.size() < 2) {
-                        MessageUtil.colour(sender, MessageUtil.getError() + "/FNG Type Remove <Type>");
+                        MessageUtil.colour(sender, LangUtil.formatError("/FNG Type Remove <Type>"));
                         return;
                     }
 
@@ -87,18 +87,18 @@ public class TypeCommand extends SubCommand {
                     type = Main.getGameTypes().get(typeKey);
 
                     if (type == null || !Main.getGameTypes().containsValue(type)) {
-                        MessageUtil.colour(sender, MessageUtil.getError() + "This type does not exist.");
+                        MessageUtil.colour(sender, LangUtil.formatError("This type does not exist."));
                     } else {
                         Config.getConfig().set("types." + type.getKey(), null);
                         Main.getGameTypes().remove(typeKey);
-                        MessageUtil.colour(sender, MessageUtil.getPrefix() +
-                                "Successfully removed game type: &c" + args.get(1).toLowerCase());
+                        MessageUtil.colour(sender, LangUtil.formatPrefix(
+                                "Successfully removed game type: &c" + args.get(1).toLowerCase()));
                     }
                     break;
 
                 case SETNAME:
                     if (args.size() < 2) {
-                        MessageUtil.colour(sender, MessageUtil.getError() + "/FNG Type SetName <Type> <Name...>");
+                        MessageUtil.colour(sender, LangUtil.formatError("/FNG Type SetName <Type> <Name...>"));
                         return;
                     }
 
@@ -106,14 +106,14 @@ public class TypeCommand extends SubCommand {
                     type = Main.getGameTypes().get(typeKey);
 
                     if (type == null || !Main.getGameTypes().containsValue(type)) {
-                        MessageUtil.colour(sender, MessageUtil.getError() + "This type does not exist.");
+                        MessageUtil.colour(sender, LangUtil.formatError("This type does not exist."));
                     } else {
                         args.remove(0);
                         args.remove(0);
                         String newName = StringUtils.join(args, " ");
                         type.setName(newName);
-                        MessageUtil.colour(sender, MessageUtil.getPrefix() +
-                                "Successfully set the display name to: &c" + newName);
+                        MessageUtil.colour(sender, LangUtil.formatPrefix(
+                                "Successfully set the display name to: &c" + newName));
                     }
                     break;
 

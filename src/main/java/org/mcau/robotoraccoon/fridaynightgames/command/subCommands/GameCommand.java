@@ -6,6 +6,7 @@ import org.mcau.robotoraccoon.fridaynightgames.Main;
 import org.mcau.robotoraccoon.fridaynightgames.command.SubCommand;
 import org.mcau.robotoraccoon.fridaynightgames.games.MinigameMap;
 import org.mcau.robotoraccoon.fridaynightgames.games.MinigameType;
+import org.mcau.robotoraccoon.fridaynightgames.utility.LangUtil;
 import org.mcau.robotoraccoon.fridaynightgames.utility.MessageUtil;
 import org.mcau.robotoraccoon.fridaynightgames.utility.GameUtil;
 
@@ -37,7 +38,7 @@ public class GameCommand extends SubCommand {
 
                 case ADD:
                     if (args.size() < 3) {
-                        MessageUtil.colour(sender, MessageUtil.getError() + "/FNG Game Add <Name> <Type>");
+                        MessageUtil.colour(sender, LangUtil.formatError("/FNG Game Add <Name> <Type>"));
                         return;
                     }
 
@@ -46,69 +47,69 @@ public class GameCommand extends SubCommand {
                     MinigameType type = Main.getGameTypes().get(args.get(2).toLowerCase());
 
                     if (map != null) {
-                        MessageUtil.colour(sender, MessageUtil.getError() + "This minigame already exists.");
+                        MessageUtil.colour(sender, LangUtil.formatErrorKey("minigame.found"));
                     } else if (type == null) {
-                        MessageUtil.colour(sender, MessageUtil.getError() + "Type not defined. Available types: " + Main.getGameTypes().values());
+                        MessageUtil.colour(sender, LangUtil.formatError("Type not defined. Available types: " + Main.getGameTypes().values()));
                     } else {
                         map = new MinigameMap(args.get(1), type);
                         Main.getMinigames().put(key, map);
-                        MessageUtil.colour(sender, MessageUtil.getPrefix() + "Added the minigame: &c" + args.get(1) + "|" + args.get(2).toLowerCase());
+                        MessageUtil.colour(sender, LangUtil.formatPrefix("Added the minigame: &c" + args.get(1) + "|" + args.get(2).toLowerCase()));
                     }
                     break;
 
                 case COUNT:
                     if (!Main.getFngEnabled()) {
-                        MessageUtil.colour(sender, MessageUtil.getDisabled());
+                        MessageUtil.colour(sender, LangUtil.formatErrorKey("error.fngDisabled"));
                         return;
                     }
 
-                    MessageUtil.colour(sender, MessageUtil.getPrefix() + "Amount of games started in this session: &c" + Main.getPlayedGames().size());
+                    MessageUtil.colour(sender, LangUtil.formatPrefix("Amount of games started in this session: &c" + Main.getPlayedGames().size()));
                     break;
 
                 case ENABLED:
                     if (args.size() < 2) {
-                        MessageUtil.colour(sender, MessageUtil.getError() + "/FNG Game Enabled <Name> [T|F]");
+                        MessageUtil.colour(sender, LangUtil.formatError("/FNG Game Enabled <Name> [T|F]"));
                         return;
                     }
 
                     key = args.get(1).toLowerCase();
                     map = Main.getMinigames().get(key);
                     if (map == null) {
-                        MessageUtil.colour(sender, MessageUtil.getError() + "This minigame does not exist.");
+                        MessageUtil.colour(sender, LangUtil.formatErrorKey("minigame.notFound"));
                         return;
                     }
 
                     if (args.size() < 3) {
 
                         if (map.getEnabled())
-                            MessageUtil.colour(sender, MessageUtil.getPrefix() + map.getName() + " is &aEnabled");
+                            MessageUtil.colour(sender, LangUtil.formatPrefix(map.getName() + " is &aEnabled"));
                         else
-                            MessageUtil.colour(sender, MessageUtil.getPrefix() + map.getName() + " is &cDisabled");
+                            MessageUtil.colour(sender, LangUtil.formatPrefix(map.getName() + " is &cDisabled"));
 
                     } else if (args.get(2).startsWith("T") || args.get(2).startsWith("t")) {
                         map.setEnabled(true);
-                        MessageUtil.colour(sender, MessageUtil.getPrefix() + map.getName() + " has been &aEnabled");
+                        MessageUtil.colour(sender, LangUtil.formatPrefix(map.getName() + " has been &aEnabled"));
                     } else {
                         map.setEnabled(false);
-                        MessageUtil.colour(sender, MessageUtil.getPrefix() + map.getName() + " has been &cDisabled");
+                        MessageUtil.colour(sender, LangUtil.formatPrefix(map.getName() + " has been &cDisabled"));
                     }
                     break;
 
                 case END:
                     if (!Main.getFngEnabled()) {
-                        MessageUtil.colour(sender, MessageUtil.getDisabled());
+                        MessageUtil.colour(sender, LangUtil.formatErrorKey("error.fngDisabled"));
                         return;
                     }
 
                     if (args.size() < 2) {
-                        MessageUtil.colour(sender, MessageUtil.getError() + "/FNG Game End <Name>");
+                        MessageUtil.colour(sender, LangUtil.formatError("/FNG Game End <Name>"));
                         return;
                     }
 
                     key = args.get(1).toLowerCase();
                     map = Main.getMinigames().get(key);
                     if (map == null) {
-                        MessageUtil.colour(sender, MessageUtil.getError() + "This minigame does not exist.");
+                        MessageUtil.colour(sender, LangUtil.formatErrorKey("minigame.notFound"));
                     } else {
                         GameUtil.end(map);
                     }
@@ -116,29 +117,34 @@ public class GameCommand extends SubCommand {
 
                 case REMOVE:
                     if (args.size() < 2) {
-                        MessageUtil.colour(sender, MessageUtil.getError() + "/FNG Game Remove <Name>");
+                        MessageUtil.colour(sender, LangUtil.formatError("/FNG Game Remove <Name>"));
                         return;
                     }
 
                     key = args.get(1).toLowerCase();
                     map = Main.getMinigames().get(key);
                     if (map == null) {
-                        MessageUtil.colour(sender, MessageUtil.getError() + "This minigame does not exist.");
+                        MessageUtil.colour(sender, LangUtil.formatErrorKey("minigame.notFound"));
                     } else {
                         Config.getGamesConfig().set("games." + key, null);
                         Main.getMinigames().remove(key);
-                        MessageUtil.colour(sender, MessageUtil.getPrefix() + "Game successfully removed.");
+                        MessageUtil.colour(sender, LangUtil.formatPrefix("Game successfully removed."));
                     }
                     break;
 
                 case START:
                     if (!Main.getFngEnabled()) {
-                        MessageUtil.colour(sender, MessageUtil.getDisabled());
+                        MessageUtil.colour(sender, LangUtil.formatErrorKey("error.fngDisabled"));
+                        return;
+                    }
+
+                    if (Main.getPlayerList().size() == 0) {
+                        MessageUtil.colour(sender, LangUtil.formatError("No one has joined FNG yet"));
                         return;
                     }
 
                     if (args.size() < 2) {
-                        MessageUtil.colour(sender, MessageUtil.getError() + "/FNG Game Start <Name|Results>");
+                        MessageUtil.colour(sender, LangUtil.formatError("/FNG Game Start <Name|Results>"));
                         return;
                     }
 
@@ -147,9 +153,9 @@ public class GameCommand extends SubCommand {
                     if (args.get(1).toLowerCase().equals("results")) {
                         GameUtil.startResults();
                     } else if (map == null) {
-                        MessageUtil.colour(sender, MessageUtil.getError() + "This minigame does not exist.");
+                        MessageUtil.colour(sender, LangUtil.formatErrorKey("minigame.notFound"));
                     } else if (!map.getEnabled()) {
-                        MessageUtil.colour(sender, MessageUtil.getError() + "This minigame is currently disabled.");
+                        MessageUtil.colour(sender, LangUtil.formatErrorKey("minigame.disabled"));
                     } else {
                         GameUtil.start(map);
                     }

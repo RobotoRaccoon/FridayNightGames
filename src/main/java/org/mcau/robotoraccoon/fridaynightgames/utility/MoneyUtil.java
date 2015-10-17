@@ -20,7 +20,7 @@ public class MoneyUtil {
 
         for (Player player : PlayerListUtil.getPlayers()) {
             Main.getEcon().depositPlayer(player, amount);
-            MessageUtil.colour(player, MessageUtil.getPrefix() + "You have been given an extra &5$" + amount + "&e for playing in FNG!");
+            MessageUtil.colour(player, LangUtil.formatPrefix("You have been given an extra &5$" + amount + "&e for playing in FNG!"));
         }
 
     }

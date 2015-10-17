@@ -29,10 +29,6 @@ public class Main extends JavaPlugin {
     private static Economy econ = null;
     private static Plugin plugin;
 
-    public static Plugin getPlugin() {
-        return plugin;
-    }
-
     @Override
     public void onEnable() {
         plugin = this;
@@ -74,6 +70,10 @@ public class Main extends JavaPlugin {
         }
         econ = rsp.getProvider();
         return econ != null;
+    }
+
+    public static Plugin getPlugin() {
+        return plugin;
     }
 
     // FNG

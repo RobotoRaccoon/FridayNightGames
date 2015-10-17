@@ -3,10 +3,7 @@ package org.mcau.robotoraccoon.fridaynightgames.command.subCommands;
 import org.bukkit.command.CommandSender;
 import org.mcau.robotoraccoon.fridaynightgames.Main;
 import org.mcau.robotoraccoon.fridaynightgames.command.SubCommand;
-import org.mcau.robotoraccoon.fridaynightgames.utility.GameUtil;
-import org.mcau.robotoraccoon.fridaynightgames.utility.MessageUtil;
-import org.mcau.robotoraccoon.fridaynightgames.utility.PlayerListUtil;
-import org.mcau.robotoraccoon.fridaynightgames.utility.VotingUtil;
+import org.mcau.robotoraccoon.fridaynightgames.utility.*;
 
 import java.util.List;
 
@@ -29,11 +26,11 @@ public class EnabledCommand extends SubCommand {
         if (args.size() < 1) {
 
             if (Main.getFngEnabled())
-                MessageUtil.colour(sender, MessageUtil.getPrefix() + "Status: &aEnabled");
+                MessageUtil.colour(sender, LangUtil.formatPrefix("Status: &aEnabled"));
             else
-                MessageUtil.colour(sender, MessageUtil.getPrefix() + "Status: &cDisabled");
+                MessageUtil.colour(sender, LangUtil.formatPrefix("Status: &cDisabled"));
 
-            MessageUtil.colour(sender, MessageUtil.getPrefix() + "To change the status, run &6/fng " + getUsage());
+            MessageUtil.colour(sender, LangUtil.formatPrefix("To change the status, run &6/fng " + getUsage()));
 
         } else if (args.get(0).startsWith("T") || args.get(0).startsWith("t")) {
 
@@ -41,8 +38,8 @@ public class EnabledCommand extends SubCommand {
             //uPlayerList.clearList(); // Disabled clearing of the list, forces disabling FNG first.
             VotingUtil.generateList();
 
-            MessageUtil.global(MessageUtil.getPrefix() + "Has been &aEnabled &eby &5" + sender.getName());
-            MessageUtil.global(MessageUtil.getPrefix() + "Use &5/FNG Join&e to play in the games!");
+            MessageUtil.global(LangUtil.formatPrefix("Has been &aEnabled &eby &5" + sender.getName()));
+            MessageUtil.global(LangUtil.formatPrefix("Use &5/FNG Join&e to play in the games!"));
 
         } else {
 
@@ -51,8 +48,8 @@ public class EnabledCommand extends SubCommand {
             PlayerListUtil.clearList();
             Main.getPlayedGames().clear();
 
-            MessageUtil.global(MessageUtil.getPrefix() + "Has been &cDisabled &eby &5" + sender.getName());
-            MessageUtil.global(MessageUtil.getPrefix() + "We hope you all had fun!");
+            MessageUtil.global(LangUtil.formatPrefix("Has been &cDisabled &eby &5" + sender.getName()));
+            MessageUtil.global(LangUtil.formatPrefix("We hope you all had fun!"));
 
         }
     }

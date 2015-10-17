@@ -5,6 +5,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.mcau.robotoraccoon.fridaynightgames.command.subCommands.*;
+import org.mcau.robotoraccoon.fridaynightgames.utility.LangUtil;
 import org.mcau.robotoraccoon.fridaynightgames.utility.MessageUtil;
 
 import java.util.*;
@@ -55,27 +56,30 @@ public class Commands implements CommandExecutor {
                 return true;
             }
 
-            // Get command from the HashMap.
+            // Get command from the HashMap, and run it.
             command = commands.get(key);
-
-            // If command does not support console usage
-            if (!(sender instanceof Player) && !command.isConsoleAllowed()) {
-                sender.sendMessage(MessageUtil.getNoConsole());
-                return true;
-            }
-
-            // No permission
-            if (!sender.hasPermission(command.getPermission())) {
-                MessageUtil.colour(sender, MessageUtil.getDenied());
-                return true;
-            }
-
-            // Remove first argument from the list before calling run.
-            argsList.remove(0);
-            command.run(sender, argsList);
+            runCommand(sender, command, argsList);
         }
 
         return true;
+    }
+
+    public void runCommand(CommandSender sender, SubCommand command, List<String> argsList) {
+        // If command does not support console usage
+        if (!(sender instanceof Player) && !command.isConsoleAllowed()) {
+            MessageUtil.colour(sender, LangUtil.formatErrorKey("error.noConsole"));
+            return;
+        }
+
+        // No permission
+        if (!sender.hasPermission(command.getPermission())) {
+            MessageUtil.colour(sender, LangUtil.formatErrorKey("error.noPermission"));
+            return;
+        }
+
+        // Remove first argument from the list before calling run.
+        argsList.remove(0);
+        command.run(sender, argsList);
     }
 
 }

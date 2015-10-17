@@ -44,32 +44,7 @@ public class MessageUtil {
     }
 
     public static void colour(Player player, String message) {
-        player.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
+        colour((CommandSender) player, message);
     }
 
-    private static String commandPrefix = ChatColor.DARK_PURPLE + "[FNG] " + ChatColor.YELLOW;
-    private static String commandError = getPrefix() + ChatColor.DARK_RED + "Error: " + ChatColor.RED;
-    private static String commandDenied = getError() + "You do not have permission to run this command.";
-    private static String commandDisabled = getError() + "FNG is not running at this time.";
-    private static String commandNoConsole = getError() + "You may not run this command from console.";
-
-    public static String getPrefix() {
-        return commandPrefix;
-    }
-
-    public static String getError() {
-        return commandError;
-    }
-
-    public static String getDenied() {
-        return commandDenied;
-    }
-
-    public static String getDisabled() {
-        return commandDisabled;
-    }
-
-    public static String getNoConsole() {
-        return commandNoConsole;
-    }
 }

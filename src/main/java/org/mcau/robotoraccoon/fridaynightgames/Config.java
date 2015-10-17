@@ -10,18 +10,59 @@ public class Config {
 
     private static File configFile;
     private static File gamesFile;
+    private static File langFile;
 
     private static FileConfiguration config;
     private static FileConfiguration gamesConfig;
+    private static FileConfiguration lang;
 
     public Config() {
-
         configFile = new File(Main.getPlugin().getDataFolder(), "config.yml");
         gamesFile = new File(Main.getPlugin().getDataFolder(), "games.yml");
+        langFile = new File(Main.getPlugin().getDataFolder(), "lang.yml");
 
         config = YamlConfiguration.loadConfiguration(configFile);
         gamesConfig = YamlConfiguration.loadConfiguration(gamesFile);
+        lang = YamlConfiguration.loadConfiguration(langFile);
+    }
 
+    public static void createAllFiles() {
+        if (!configFile.exists())
+            Main.getPlugin().saveResource(configFile.getName(), true);
+
+        if (!gamesFile.exists())
+            Main.getPlugin().saveResource(gamesFile.getName(), true);
+
+        if (!langFile.exists())
+            Main.getPlugin().saveResource(langFile.getName(), true);
+
+        loadConfigs();
+    }
+
+    public static boolean loadConfigs() {
+        try {
+            config      = YamlConfiguration.loadConfiguration(new File(Main.getPlugin().getDataFolder(), configFile.getName()));
+            gamesConfig = YamlConfiguration.loadConfiguration(new File(Main.getPlugin().getDataFolder(), gamesFile.getName()));
+            lang        = YamlConfiguration.loadConfiguration(new File(Main.getPlugin().getDataFolder(), langFile.getName()));
+
+            Main.getPlugin().reloadConfig();
+            return true;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static void saveConfigs() {
+        try {
+            config.save(configFile);
+            gamesConfig.save(gamesFile);
+            lang.save(langFile);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static FileConfiguration getConfig() {
@@ -32,47 +73,7 @@ public class Config {
         return gamesConfig;
     }
 
-    public static void createAllFiles() {
-
-        if (!configFile.exists()) {
-            Main.getPlugin().saveResource("config.yml", true);
-        }
-        if (!gamesFile.exists()) {
-            Main.getPlugin().saveResource("games.yml", true);
-        }
-
-        loadConfigs();
-
+    public static FileConfiguration getLang() {
+        return lang;
     }
-
-    public static boolean loadConfigs() {
-
-        try {
-
-            config = YamlConfiguration.loadConfiguration(new File(Main.getPlugin().getDataFolder(), "config.yml"));
-            gamesConfig = YamlConfiguration.loadConfiguration(new File(Main.getPlugin().getDataFolder(), "games.yml"));
-
-            Main.getPlugin().reloadConfig();
-            return true;
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-
-    }
-
-    public static void saveConfigs() {
-
-        try {
-
-            config.save(configFile);
-            gamesConfig.save(gamesFile);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-
 }

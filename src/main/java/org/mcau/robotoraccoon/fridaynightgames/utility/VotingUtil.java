@@ -66,7 +66,7 @@ public class VotingUtil {
                     + " &7&o(" + mapList.get(i).getType().getName() + ")");
         }
 
-        MessageUtil.colour(sender, MessageUtil.getPrefix() + "To vote for a map, do: &5/FNG Vote <Number>");
+        MessageUtil.colour(sender, LangUtil.formatPrefix("To vote for a map, do: &5/FNG Vote <Number>"));
 
     }
 
@@ -74,7 +74,7 @@ public class VotingUtil {
     public static void vote(CommandSender sender, Integer index) {
 
         if (index >= mapList.size() || index < 0) {
-            MessageUtil.colour(sender, MessageUtil.getError() + "This number does not exist!");
+            MessageUtil.colour(sender, LangUtil.formatError("This number does not exist!"));
             printList(sender);
             return;
         }
@@ -83,9 +83,9 @@ public class VotingUtil {
         Player player = (Player) sender;
 
         if (voteList.containsKey(player.getUniqueId())) {
-            MessageUtil.colour(sender, MessageUtil.getPrefix() + "You have changed your vote to &5" + map.getName());
+            MessageUtil.colour(sender, LangUtil.formatPrefix("You have changed your vote to &5" + map.getName()));
         } else {
-            MessageUtil.colour(sender, MessageUtil.getPrefix() + "You have successfully voted for &5" + map.getName());
+            MessageUtil.colour(sender, LangUtil.formatPrefix("You have successfully voted for &5" + map.getName()));
         }
 
         voteList.put(player.getUniqueId(), map);

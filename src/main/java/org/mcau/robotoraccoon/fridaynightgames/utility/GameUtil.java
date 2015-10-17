@@ -23,7 +23,7 @@ public class GameUtil {
         VotingUtil.generateList();
         map.incrementPlayCount();
 
-        MessageUtil.global(MessageUtil.getPrefix() + "Starting Game: " + ChatColor.RED + map.getName());
+        MessageUtil.global(LangUtil.formatPrefix("Starting Game: &c" + map.getName()));
     }
 
     // Starts the highest rated game.
@@ -52,7 +52,7 @@ public class GameUtil {
             RunAsUtil.asPlayer(command, pUUID);
         }
 
-        MessageUtil.global(MessageUtil.getPrefix() + "Ending Game: " + ChatColor.RED + map.getName());
+        MessageUtil.global(LangUtil.formatPrefix("Ending Game: &c" + map.getName()));
     }
 
     public static void loadMinigamesFromConfig() {

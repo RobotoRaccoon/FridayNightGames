@@ -6,6 +6,7 @@ import org.mcau.robotoraccoon.fridaynightgames.Main;
 import org.mcau.robotoraccoon.fridaynightgames.command.SubCommand;
 import org.mcau.robotoraccoon.fridaynightgames.games.MinigameMap;
 import org.mcau.robotoraccoon.fridaynightgames.games.MinigameType;
+import org.mcau.robotoraccoon.fridaynightgames.utility.LangUtil;
 import org.mcau.robotoraccoon.fridaynightgames.utility.MessageUtil;
 import org.mcau.robotoraccoon.fridaynightgames.utility.TypeUtil;
 
@@ -61,7 +62,7 @@ public class ListCommand extends SubCommand {
             MinigameMap map = Main.getMinigames().get(key);
 
             if (map == null) {
-                MessageUtil.colour(sender, MessageUtil.getError() + "This minigame does not exist.");
+                MessageUtil.colour(sender, LangUtil.formatErrorKey("minigame.notFound"));
                 return;
             }
 

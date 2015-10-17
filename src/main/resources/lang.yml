@@ -1,0 +1,10 @@
+prefix: '&5[FNG]&e'
+error:
+  prefix: '&4Error:&c'
+  noConsole: 'You may not run this command from console'
+  noPermission: 'You do not have permission to run this command'
+  fngDisabled: 'FNG is currently disabled'
+minigame:
+  disabled: 'This minigame is currently disabled'
+  notFound: 'This minigame does not exist'
+  found: 'This minigame already exists'

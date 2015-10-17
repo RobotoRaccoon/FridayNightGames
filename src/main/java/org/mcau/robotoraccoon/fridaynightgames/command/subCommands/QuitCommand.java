@@ -4,6 +4,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.mcau.robotoraccoon.fridaynightgames.Main;
 import org.mcau.robotoraccoon.fridaynightgames.command.SubCommand;
+import org.mcau.robotoraccoon.fridaynightgames.utility.LangUtil;
 import org.mcau.robotoraccoon.fridaynightgames.utility.MessageUtil;
 
 import java.util.List;
@@ -29,16 +30,16 @@ public class QuitCommand extends SubCommand {
     public void run(CommandSender sender, List<String> args) {
 
         if (!Main.getFngEnabled()) {
-            MessageUtil.colour(sender, MessageUtil.getDisabled());
+            MessageUtil.colour(sender, LangUtil.formatErrorKey("error.fngDisabled"));
             return;
         }
 
         Player player = (Player) sender;
         if (Main.getPlayerList().containsKey(player.getUniqueId())) {
             Main.getPlayerList().remove(player.getUniqueId());
-            MessageUtil.colour(sender, MessageUtil.getPrefix() + "You have quit the games! Thanks for playing!");
+            MessageUtil.colour(sender, LangUtil.formatPrefix("You have quit the games! Thanks for playing!"));
         } else {
-            MessageUtil.colour(sender, MessageUtil.getError() + "You weren't in the games anyway.");
+            MessageUtil.colour(sender, LangUtil.formatError("You weren't in the games anyway."));
         }
 
     }
