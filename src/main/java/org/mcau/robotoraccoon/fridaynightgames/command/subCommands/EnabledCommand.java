@@ -38,8 +38,8 @@ public class EnabledCommand extends SubCommand {
             //uPlayerList.clearList(); // Disabled clearing of the list, forces disabling FNG first.
             VotingUtil.generateList();
 
-            MessageUtil.global(LangUtil.formatPrefix("Has been &aEnabled &eby &5" + sender.getName()));
-            MessageUtil.global(LangUtil.formatPrefix("Use &5/FNG Join&e to play in the games!"));
+            MessageUtil.global(LangUtil.formatPrefix("FNG has been &aEnabled &eby &5" + sender.getName() +
+                    "\n&eUse &5/FNG Join&e to play in the games!"));
 
         } else {
 
@@ -48,8 +48,8 @@ public class EnabledCommand extends SubCommand {
             PlayerListUtil.clearList();
             Main.getPlayedGames().clear();
 
-            MessageUtil.global(LangUtil.formatPrefix("Has been &cDisabled &eby &5" + sender.getName()));
-            MessageUtil.global(LangUtil.formatPrefix("We hope you all had fun!"));
+            MessageUtil.global(LangUtil.formatPrefix("FNG has been &cDisabled &eby &5" + sender.getName() +
+                    "\n&eWe hope you all had fun!"));
 
         }
     }

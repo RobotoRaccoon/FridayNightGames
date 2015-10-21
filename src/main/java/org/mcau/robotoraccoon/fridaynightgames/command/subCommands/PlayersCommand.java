@@ -1,5 +1,6 @@
 package org.mcau.robotoraccoon.fridaynightgames.command.subCommands;
 
+import org.apache.commons.lang.StringUtils;
 import org.bukkit.command.CommandSender;
 import org.mcau.robotoraccoon.fridaynightgames.Main;
 import org.mcau.robotoraccoon.fridaynightgames.command.SubCommand;
@@ -7,6 +8,7 @@ import org.mcau.robotoraccoon.fridaynightgames.utility.LangUtil;
 import org.mcau.robotoraccoon.fridaynightgames.utility.MessageUtil;
 import org.mcau.robotoraccoon.fridaynightgames.utility.PlayerListUtil;
 
+import java.util.Collections;
 import java.util.List;
 
 public class PlayersCommand extends SubCommand {
@@ -42,11 +44,13 @@ public class PlayersCommand extends SubCommand {
                 case LIST:
 
                     if (PlayerListUtil.getSize() == 0) {
-                        MessageUtil.colour(sender, LangUtil.formatError("No one has join FNG yet"));
+                        MessageUtil.colour(sender, LangUtil.formatError("No one has joined FNG yet"));
                         break;
                     }
 
-                    MessageUtil.colour(sender, LangUtil.formatPrefix("Current players: &c" + PlayerListUtil.getPlayerNames()));
+                    List<String> playerNames = PlayerListUtil.getPlayerNames();
+                    Collections.sort(playerNames);
+                    MessageUtil.colour(sender, LangUtil.formatPrefix("Current players: &c" + StringUtils.join(playerNames, ", ")));
                     break;
 
                 case RANDOM:

@@ -10,10 +10,7 @@ import org.mcau.robotoraccoon.fridaynightgames.utility.LangUtil;
 import org.mcau.robotoraccoon.fridaynightgames.utility.MessageUtil;
 import org.mcau.robotoraccoon.fridaynightgames.utility.TypeUtil;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class ListCommand extends SubCommand {
 
@@ -53,8 +50,19 @@ public class ListCommand extends SubCommand {
                 sortedGames.put(type, nameList);
             }
 
+            // Get the keys in a sorted list.
+            List<MinigameType> keys = new ArrayList<>();
+            keys.addAll(sortedGames.keySet());
+            keys.sort(new Comparator<MinigameType>() {
+                @Override
+                public int compare(MinigameType t1, MinigameType t2) {
+                    return t1.getKey().compareTo(t2.getKey());
+                }
+            });
+
             // Print the games under their respective heading
-            for (MinigameType type : sortedGames.keySet()) {
+            MessageUtil.colour(sender, " &7======= &5Available Maps &7======= ");
+            for (MinigameType type : keys) {
                 MessageUtil.colour(sender, "&5" + type.getName() + ": &e" + StringUtils.join(sortedGames.get(type), "&e, "));
             }
         } else {
@@ -67,11 +75,11 @@ public class ListCommand extends SubCommand {
             }
 
             MessageUtil.colour(sender, "&7 ===== &5" + map.getName() + "&7 ======");
-            MessageUtil.colour(sender, "&5Status: " + (map.getEnabled() ? "&aEnabled" : "&cDisabled") );
-            MessageUtil.colour(sender, "&5Type: &e" + map.getType());
-            MessageUtil.colour(sender, "&5Join Command: &e" + TypeUtil.getJoinCommand(map.getType()));
-            MessageUtil.colour(sender, "&5Quit Command: &e" + TypeUtil.getQuitCommand(map.getType()));
-            MessageUtil.colour(sender, "&5Total Plays: &e" + map.getPlayCount());
+            MessageUtil.colour(sender, "&6Status: " + (map.getEnabled() ? "&aEnabled" : "&cDisabled"));
+            MessageUtil.colour(sender, "&6Type: &e" + map.getType().getName() + " (" + map.getType().getKey() + ")");
+            MessageUtil.colour(sender, "&6Join Command: &e" + TypeUtil.getJoinCommand(map.getType()));
+            MessageUtil.colour(sender, "&6Quit Command: &e" + TypeUtil.getQuitCommand(map.getType()));
+            MessageUtil.colour(sender, "&6Total Plays: &e" + map.getPlayCount());
         }
 
     }

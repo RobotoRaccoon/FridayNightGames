@@ -71,9 +71,9 @@ public class TypeCommand extends SubCommand {
                             return;
                         }
 
-                        MessageUtil.colour(sender, "&5Name: &e" + type.getName());
-                        MessageUtil.colour(sender, "&5Short-hand: &e" + type.getKey());
-                        MessageUtil.colour(sender, "&5Plugin: &e" + type.getPlugin());
+                        MessageUtil.colour(sender, "&7 ===== &5" + type.getName() + "&7 ======");
+                        MessageUtil.colour(sender, "&6Short-hand: &e" + type.getKey());
+                        MessageUtil.colour(sender, "&6Plugin: &e" + type.getPlugin());
                     }
                     break;
 
