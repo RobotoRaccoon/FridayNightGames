@@ -9,7 +9,7 @@ public class LangUtil {
     }
 
     public static String getError() {
-        return formatPrefix(Config.getLang().getString("error.prefix"));
+        return Config.getLang().getString("error.prefix");
     }
 
     public static String formatPrefixKey(String key) {
